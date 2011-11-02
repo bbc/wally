@@ -1,0 +1,19 @@
+# Our device test suite
+devices:
+    - Geoff
+    - Len
+    - Andy
+    - Kenny
+    - Roxy
+    - Kylie
+    - Bob
+    - Adrian
+    - Huey
+    - Midge
+    - Don
+
+# A list of substitutions to perform while rendering the step definitions.
+substitutions:
+    frontpage:  '<a href="https://www.int.bbc.co.uk/news">frontpage</a>'
+    'home page':  '<a href="https://www.int.bbc.co.uk/news">homepage</a>'
+    'Live Events': '<a href="https://www.int.bbc.co.uk/news/fakeLiveEvent">live event</a>' 

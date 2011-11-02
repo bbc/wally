@@ -1,0 +1,47 @@
+<% @tagcount = {} %>
+
+<h1>Tags - <%= @tag %></h1>
+
+    <% @wallies.each do |wally| %>
+        
+        <% feature = wally[0] %>
+        
+        <h2><a href="/features/<%= feature %>"><%= wally[1]['name'].to_s %></a></h2>
+
+        <ol>        
+            <% wally[1]['elements'].each do |scenario| %>
+                        <% if scenario['tags'] then %>
+                            <% scenario['tags'].each do |tag| %>
+                                <% if tag['name'] == @tag %>
+                                    <li>
+                                        <small>
+                                            <% scenario['tags'].each do |t| %>
+                                                <%= t['name'] %>
+                                                <%
+                                                 tag = t['name']
+                                                 @tagcount[tag] = (@tagcount[tag]) ? @tagcount[tag] + 1 : 1
+                                                %>
+                                            <% end %>
+                                        </small>
+                                        <a href="/features/<%= feature %>/<%= Digest::SHA1.hexdigest(scenario['name']) %>"><%= scenario['name'] %></a>
+                                    </li>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+                    </small>
+                </li>
+            <% end %>
+        </ol>
+        
+    <% end %>
+
+
+<div id="tagcount">
+	
+	<h2>Tag count</h2>
+	
+	<% @tagcount.each do |tag| %>
+		<li><%= tag[0] %> - <%= tag[1] %></li>
+	<% end %>
+
+</div>

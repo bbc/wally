@@ -1,0 +1,75 @@
+
+
+    <% @wally['elements'].each do |scenario| %>
+        
+        <% if ( Digest::SHA1.hexdigest(scenario['name']) == @scenario) %>
+        
+        <h2 id="feature"><%= scenario['name'] %></h2>
+
+            <% if scenario['tags'] then %>
+                <p id="tags" class="<%= scenario['tags'].map { |tag| tag['name'] }.join(' ').gsub('@', '') %>">
+                    tags: <% scenario['tags'].each do |tag| %>
+                        <a href="/tags/<%= tag['name'] %>"><%= tag['name'] %></a>
+                    <% end %>
+                </p>
+            <% end %>
+            
+            <p id="scenario">        
+            <% if scenario['steps'] %>
+            
+                <% scenario['steps'].each do |step| %>
+                    <%= step['keyword'] %> 
+                        
+                        <% @conf['substitutions'].each do |sub| %>
+                            <% step['name'].gsub!(sub[0], sub[1]) %>
+                        <% end %>
+
+                        <%= step['name'] %>
+                    <br/>
+                <% end %>
+
+            <% else %>
+                    No steps defined.
+            <% end %>
+            </p>
+        <% end %>
+    
+    <% end %>
+
+    <h2>Verification</h2>
+    
+    <ul>
+        <li>Popular page loads with no errors and in the correct format for the device.  
+        <li>All images, fonts and layout loads to the <a href="#link to design">desired specification</a>.
+    </ul>
+    
+    <h2>Devices Pass/Fail</h2>
+
+    <ul>
+        <% @conf['devices'].each do |device| %>
+            <li>
+            	<input type="checkbox"/>
+            	<a href="/devices/<%= device %>"><%= device %></a>
+            </li>
+        <% end %>
+    </ul>
+    
+    <h2>Scenarios</h2>
+    
+    <ol>
+
+        <% @wally['elements'].each do |scenario| %>
+            <li>
+                <small>
+                    <% if scenario['tags'] then %>
+                        <% scenario['tags'].each do |tag| %>
+                            <%= tag['name'] %>
+                        <% end %>
+                    <% end %>
+                </small>
+                <a href="/features/<%= @feature %>/<%= Digest::SHA1.hexdigest(scenario['name']) %>"><%= scenario['name'] %></a>
+            </li>
+        <% end %>
+
+    </ol>
+    

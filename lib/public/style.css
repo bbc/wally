@@ -1,0 +1,25 @@
+
+body { margin: 1em 2em 20% 2em; }
+h1, h2, h3 { font-family: 'Oswald', sans-serif; font-weight: normal; }
+h1 { font-size: 25px; margin-left: -5px; padding: 0 1em 10px 0; }
+h1 span { font-weight: normal; }
+h3 { font-family: sans-serif; font-size: 18px; }
+h2 {color:#333; font-size: 17px;}
+p, li { font-family: sans-serif; font-size: 18px; font-size: 14px; }
+p { line-height: 160%; }
+li { line-height: 200%; }
+pre { border-left: 1px solid #39c; padding-left: 20px; margin-left: 20px; }
+#description, #scenario { margin-left: 20px; padding-left: 20px; border-left: 1px solid #999; }
+#tags { margin-left: 20px; }
+.wip * { }
+a { text-decoration: none; color: blue; }
+#json a { color: red; }
+#readme, #json { text-align: right; }
+
+h1 a { color: black; }
+
+#feature { color: #f60; font-size: 25px; }
+
+#tagcount { border:1px solid #000; padding: 1em; }
+
+input[type=checkbox] { width: 20px; }

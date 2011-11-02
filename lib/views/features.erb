@@ -1,0 +1,26 @@
+
+<h1>Features</h1>
+
+    <% @wallies.each do |wally| %>
+        
+        <% feature = wally[0] %>
+        
+        <h2><a href="/features/<%= feature %>"><%= wally[1]['name'].to_s %></a></h2>
+
+        <ol>        
+            <% wally[1]['elements'].each do |scenario| %>
+                <li>
+                    <small>
+                        <% if scenario['tags'] then %>
+                            <% scenario['tags'].each do |tag| %>
+                                <%= tag['name'] %>
+                            <% end %>
+                        <% end %>
+                    </small>
+                    <a href="/features/<%= feature %>/<%= Digest::SHA1.hexdigest(scenario['name']) %>"><%= scenario['name'] %></a>
+                </li>
+            <% end %>
+        </ol>
+    <% end %>
+
+

@@ -1,0 +1,28 @@
+<html>
+<head>
+
+    <link href='/style.css' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <section id="readme">
+        <% if @wally %>
+            <span id="json">
+                <a href="/features/<%= @feature %>/json">json</a>
+            </span> | 
+        <% end %>
+        <a href="/README.txt">README</a>
+    </section>
+    <section>
+        <% if @wally %>
+            <h1>
+                <a href="/features">Features</a> <span>&raquo;</span> <a href="/features/<%= @feature %>"><%= @wally['name'] %></a>
+            </h1>
+
+            <p id="description">
+                <%= @wally['description'].strip.gsub(/\n/, '<br/>') %>
+            </p>
+        <% end %>
+        <%= yield %>
+    </section>
+</body>
+</html>
