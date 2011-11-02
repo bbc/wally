@@ -1,0 +1,8 @@
+!!! 5
+%html
+  %head
+    %title Wally
+  %body
+    - @features.each do |feature|
+      %a{:href => feature["uri"]}
+        = feature["name"]

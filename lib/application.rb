@@ -1,6 +1,25 @@
-# require 'rubygems'
+$:.unshift(File.join(File.dirname(__FILE__), "lib"))
 require 'sinatra'
+require 'haml'
+require 'lists_features'
 # require 'digest/sha1'
+
+
+
+get '/features' do
+  @features = ListsFeatures.features
+  haml :features
+end
+
+
+
+
+
+
+
+
+
+
 
 # # ---
 # require 'gherkin'
