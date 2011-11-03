@@ -1,10 +1,5 @@
-!!! 5
-%html
-  %head
-    %title Wally
-  %body
-    = "Feature: " + @feature["name"]
-    = @feature["description"]
-    - if @feature["elements"]
-      - @feature["elements"].each do |element|
-        = "#{element["keyword"]}: #{element["name"]}"
+= "Feature: " + @feature["name"]
+= @feature["description"]
+- if @feature["elements"]
+  - @feature["elements"].each do |element|
+    = "#{element["keyword"]}: #{element["name"]}"
