@@ -12,7 +12,8 @@ describe "Wally" do
     ListsFeatures.should_receive(:features).and_return([
       { "name" => "Sample Feature", "uri" => "/features/sample-feature.feature" },
       { "name" => "Another Feature", "uri" => "/features/another-feature.feature" },
-      { "name" => "Feature With Description", "uri" => "/features/feature-with-description.feature" , "description" => "The Feature Description"}
+      { "name" => "Feature With Description", "uri" => "/features/feature-with-description.feature" , "description" => "The Feature Description"},
+      { "name" => "Feature With Scenario", "uri" => "/features/feature-with-scenario.feature", "elements" => [{"keyword" => "Scenario", "name" => "The Scenario Name 1"}, { "keyword" => "Scenario", "name" => "The Scenario Name 2"}]}
     ])
   end
 
@@ -32,6 +33,12 @@ describe "Wally" do
     it "should show the feature description" do
       get "/features/feature-with-description.feature"
       last_response.body.should include "The Feature Description"
+    end
+
+    it "should show the scenario names" do
+      get "/features/feature-with-scenario.feature"
+      last_response.body.should include "Scenario: The Scenario Name 1"
+      last_response.body.should include "Scenario: The Scenario Name 2"
     end
   end
 end

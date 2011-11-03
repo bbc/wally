@@ -5,3 +5,6 @@
   %body
     = @feature["name"]
     = @feature["description"]
+    - if @feature["elements"]
+      - @feature["elements"].each do |element|
+        = "#{element["keyword"]}: #{element["name"]}"
