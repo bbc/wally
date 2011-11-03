@@ -8,13 +8,24 @@ describe "Wally" do
     Sinatra::Application
   end
 
+  before do
+    ListsFeatures.should_receive(:features).and_return([
+      { "name" => "Sample Feature", "uri" => "/features/sample-feature.feature" },
+      { "name" => "Another Feature", "uri" => "/features/another-feature.feature" }
+    ])
+  end
+
   describe "GET /features" do
     it "should show a link to my sample feature" do
-      ListsFeatures.should_receive(:features).and_return([
-        { "name" => "Sample Feature", "uri" => "sample-feature.feature" }
-      ])
       get "/features"
       last_response.body.should include "Sample Feature"
+    end
+  end
+
+  describe "GET /features/feature-name.feature" do
+    it "should show the feature name" do
+      get "/features/another-feature.feature"
+      last_response.body.should include "Another Feature"
     end
   end
 end
