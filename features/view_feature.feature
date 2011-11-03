@@ -12,7 +12,13 @@ Feature: View Feature
       I want to create value
 
      Scenario: Sample Scenario 1
+     Given I am Aidy
+     When I go for a drink
+     Then I go nuts
      Scenario: Sample Scenario 2
+     Given I am Andrew
+     When I go for a drink
+     Then I go more nuts
      """
     When I visit the sample feature page
 
@@ -26,4 +32,9 @@ Feature: View Feature
 
   Scenario: Feature Scenario Names
     Then I should see "Scenario: Sample Scenario 1"
-    Then I should see "Scenario: Sample Scenario 2"
+    And I should see "Scenario: Sample Scenario 2"
+
+  Scenario: Feature Steps
+    Then I should see "Given I am Aidy"
+    And I should see "When I go for a drink"
+    And I should see "Then I go nuts"
