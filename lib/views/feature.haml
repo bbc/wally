@@ -3,7 +3,7 @@
   %head
     %title Wally
   %body
-    = @feature["name"]
+    = "Feature: " + @feature["name"]
     = @feature["description"]
     - if @feature["elements"]
       - @feature["elements"].each do |element|

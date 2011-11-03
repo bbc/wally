@@ -17,7 +17,7 @@ Feature: View Feature
     When I visit the sample feature page
 
   Scenario: Feature Name
-    Then I should see "Sample Feature"
+    Then I should see "Feature: Sample Feature"
 
   Scenario: Feature Description
     Then I should see "In order to get some value"

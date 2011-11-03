@@ -27,7 +27,7 @@ describe "Wally" do
   describe "GET /features/feature-name.feature" do
     it "should show the feature name" do
       get "/features/another-feature.feature"
-      last_response.body.should include "Another Feature"
+      last_response.body.should include "Feature: Another Feature"
     end
 
     it "should show the feature description" do
