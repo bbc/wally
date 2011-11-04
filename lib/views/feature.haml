@@ -1,9 +1,1 @@
-= "Feature: " + @feature["name"]
-= @feature["description"]
-- if @feature["elements"]
-  - @feature["elements"].each do |element|
-    = "#{element["keyword"]}: #{element["name"]}"
-    - if element["steps"]
-      - element["steps"].each do |step| 
-        = "#{step["keyword"]} #{step["name"]}"
-
+= @feature["contents"]

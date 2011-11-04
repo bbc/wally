@@ -1,6 +1,4 @@
-require 'gherkin'
 require 'gherkin/formatter/json_formatter'
-require 'gherkin/formatter/hashable'
 require 'gherkin/parser/parser'
 
 
@@ -13,23 +11,26 @@ module Gherkin::Formatter
 end
 
 class ListsFeatures
-
-  def self.features
-    features = []
-    Dir.glob("application-features/*.feature").each do |path|
-      uri = "/features/#{path.gsub("application-features/", "")}"
-      features << parse_gherkin(uri, File.read(path))
+  class << self
+    def features
+      features = []
+      Dir.glob("application-features/*.feature").each do |path|
+        uri = "/features/#{path.gsub("application-features/", "")}"
+        features << parse_gherkin(uri, File.read(path))
+      end
+      features
     end
-    features
-  end
 
-  private
+    private
 
-  def self.parse_gherkin(uri, text)
-    io = StringIO.new
-    formatter = Gherkin::Formatter::JSONFormatter.new(io)
-    parser = Gherkin::Parser::Parser.new(formatter, false, 'root')
-    parser.parse(text, uri, 0)
-    formatter.to_hash
+    def parse_gherkin(uri, text)
+      io = StringIO.new
+      formatter = Gherkin::Formatter::JSONFormatter.new(io)
+      parser = Gherkin::Parser::Parser.new(formatter, false, 'root')
+      parser.parse(text, uri, 0)
+      hash = formatter.to_hash
+      hash["contents"] = text
+      hash
+    end
   end
 end
