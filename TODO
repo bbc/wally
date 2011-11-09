@@ -1,0 +1,8 @@
+1) Index of Features - homepage
+2) When click feature link then create a list of scenarios - free narrative shown on this page
+3) When click individual scenario then new page with scenario content
+4) Make tags searchable - investigate
+5) Measure progress of the project - @new tag?
+6) Hyperlink pages to the test and int environment (embedded within steps)
+7) List Dave's test devices with check box (whether they have passed or failed) high level - created YAML file (@QA tag)
+8) Make the interface usable on mobile devices
