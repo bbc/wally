@@ -9,7 +9,7 @@ describe "Wally" do
   end
 
   before do
-    ListsFeatures.should_receive(:features).and_return([
+    ListsFeatures.stub!(:features).and_return([
       { "name" => "Sample Feature", "uri" => "/features/sample-feature.feature", "contents" => "feature contents" },
       { "name" => "Another Feature", "uri" => "/features/another-feature.feature" },
       { "name" => "Feature With Description", "uri" => "/features/feature-with-description.feature" , "description" => "The Feature Description"},
@@ -41,4 +41,14 @@ describe "Wally" do
       last_response.body.should include "feature contents"
     end
   end
+
+  describe "GET /search" do 
+    it "shows the search page" do
+      get "/search"
+      last_response.should be_ok
+      last_response.body.should include "Search"
+
+   end
+ end
+
 end

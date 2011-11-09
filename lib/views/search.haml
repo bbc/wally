@@ -1,0 +1,9 @@
+%form{:method => "GET", :action => "/search"}
+  %input{:type => "text", :id => "q", :name => "q"}
+  %input{:type => "submit", :id => "search", :value => "Search"}
+
+
+- if @features
+  - @features.each do |feature|
+    %a{:href => feature["uri"]} 
+      = feature["name"]

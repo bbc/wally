@@ -4,6 +4,7 @@ require "fileutils"
 require "application"
 require "capybara/cucumber"
 require "rspec"
+require "fakefs/spec_helpers"
 
 
 Capybara.app = Sinatra::Application
