@@ -7,6 +7,7 @@ Feature: Search Features
     Given I am on the search page
     And a feature file named "sample.feature" with the contents:
     """
+    @QA
     Feature: Sample Feature
     """ 
     When I search for "<query>"
@@ -16,3 +17,5 @@ Feature: Search Features
       | query        | feature name   | url                      |
       | Sample       | Sample Feature |/features/sample.feature  |
       | sAmPlE       | Sample Feature |/features/sample.feature  |
+      | @QA          | Sample Feature |/features/sample.feature  |  
+ 
