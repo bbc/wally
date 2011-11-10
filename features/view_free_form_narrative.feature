@@ -13,7 +13,6 @@ Feature: View Free-form Narrative
      """
     When I visit the sample feature page
 
-
   Scenario: Feature Content
     Then I should see the feature free-form narrative
 
