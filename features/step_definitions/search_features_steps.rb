@@ -9,5 +9,5 @@ end
 
 Then /^I should see a link to "([^"]*)" with the url "([^"]*)"$/ do |text, url|
   puts page.body
-  page.should have_link "Sample Feature", :href => url
+  page.should have_link text, :href => url
 end
