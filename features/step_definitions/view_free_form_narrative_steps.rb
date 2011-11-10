@@ -7,9 +7,8 @@ When /^I visit the sample feature page$/ do
   visit "/features/sample.feature"
 end
 
-Then /^I should see the feature file content$/ do
-  @contents.lines.each do |line|
+Then /^I should see the feature free\-form narrative$/ do
+    @contents.lines.each do |line|
     page.should have_content(line.strip.chop)
   end
 end
-
