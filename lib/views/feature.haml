@@ -1,1 +1,5 @@
 = @feature["contents"]
+Scenarios:
+- @scenario_urls.each do |name, url|
+    %a{:href => url}
+        = name

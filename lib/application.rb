@@ -14,6 +14,8 @@ get '/features/:feature' do |feature|
   features.each do |feature_hash|
    @feature = feature_hash if feature_hash["uri"] == "/features/#{feature}"
   end
+
+  get_scenario_urls
   haml :feature
 end
 
@@ -22,4 +24,16 @@ get '/search' do
     @features = SearchFeatures.new.find(:query => params[:q])
   end
   haml :search
+end
+
+def get_scenario_urls
+  @scenario_urls = {}
+  if @feature["elements"]
+    @feature["elements"].each do |element|
+      if element["type"] == "scenario"
+        url = "/features/#{element["id"].gsub(";", "/scenario/")}"
+        @scenario_urls[element["name"]] = url
+      end
+    end
+  end
 end

@@ -4,6 +4,8 @@ Feature: View Free-form Narrative
   I want to view the Feature free-form narrative
 
   Background:
+
+  Scenario: Feature Content
     Given a feature file named "sample.feature" with the contents:
     """
     Feature: Sample Feature
@@ -12,12 +14,4 @@ Feature: View Free-form Narrative
       I want to create value
      """
     When I visit the sample feature page
-
-  Scenario: Feature Content
     Then I should see the feature free-form narrative
-
-
-
-
-
-

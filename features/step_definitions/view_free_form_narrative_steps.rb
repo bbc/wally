@@ -8,7 +8,7 @@ When /^I visit the sample feature page$/ do
 end
 
 Then /^I should see the feature free\-form narrative$/ do
-    @contents.lines.each do |line|
+  @contents.lines.each do |line|
     page.should have_content(line.strip.chop)
   end
 end
