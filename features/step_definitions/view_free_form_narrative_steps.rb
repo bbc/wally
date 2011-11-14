@@ -4,7 +4,7 @@ Given /^a feature file named "([^"]*)" with the contents:$/ do |filename, conten
 end
 
 When /^I visit the sample feature page$/ do
-  visit "/features/sample.feature"
+  visit "/features/sample-feature"
 end
 
 Then /^I should see the feature free\-form narrative$/ do

@@ -10,7 +10,7 @@ describe "Wally" do
 
   before do
     ListsFeatures.stub!(:features).and_return([
-      { "name" => "Sample Feature", "uri" => "/features/sample-feature.feature", "contents" => "feature contents" },
+      { "name" => "Sample Feature", "uri" => "/features/sample-feature.feature", "contents" => "feature contents", "id" => "sample-feature" },
       { "name" => "Another Feature", "uri" => "/features/another-feature.feature" },
       { "name" => "Feature With Description", "uri" => "/features/feature-with-description.feature" , "description" => "The Feature Description"},
       { "name" => "Feature With Scenario", "uri" => "/features/feature-with-scenario.feature", "elements" => [{"keyword" => "Scenario", "name" => "The Scenario Name 1"}, { "keyword" => "Scenario", "name" => "The Scenario Name 2"}]},
@@ -37,7 +37,7 @@ describe "Wally" do
 
   describe "GET /features/feature-name.feature" do
     it "should show the feature contents" do
-      get "/features/sample-feature.feature"
+      get "/features/sample-feature"
       last_response.body.should include "feature contents"
     end
   end

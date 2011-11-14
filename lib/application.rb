@@ -12,7 +12,7 @@ end
 get '/features/:feature' do |feature|
   features = ListsFeatures.features
   features.each do |feature_hash|
-   @feature = feature_hash if feature_hash["uri"] == "/features/#{feature}"
+   @feature = feature_hash if feature_hash["id"] == feature
   end
 
   get_scenario_urls
@@ -28,6 +28,7 @@ end
 
 def get_scenario_urls
   @scenario_urls = {}
+  return unless @feature
   if @feature["elements"]
     @feature["elements"].each do |element|
       if element["type"] == "scenario"
