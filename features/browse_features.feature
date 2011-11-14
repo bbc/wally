@@ -41,9 +41,29 @@ Feature: Browse Features
       When I drink alcohol
       Then I go happy
      """
-
     When I visit the sample feature page
     Then I should see Scenario headers as links
+
+  Scenario: View Scenario Content
+    Given a feature file named "sample.feature" with the contents:
+    """
+    Feature: Sample Feature
+
+    Scenario: Sample Aidy
+      Given my name is "Aidy"
+      When I drink alcohol
+      Then I go nuts
+
+    Scenario: Sample Andrew
+      Given my name is 'Andrew'
+      When I drink alcohol
+      Then I go happy
+     """
+    
+    When I visit the sample feature page
+    And click on a scenario header link
+    Then a page appears with the scenario content
+
 
   Scenario Outline: Search Feature
     Given I am on the search page
