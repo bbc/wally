@@ -44,10 +44,13 @@ Feature: Browse Features
     When I visit the sample feature page
     Then I should see Scenario headers as links
 
-  Scenario: View Scenario Content
+  Scenario: View Scenario Content and Background
     Given a feature file named "sample.feature" with the contents:
     """
     Feature: Sample Feature
+
+    Background:
+      Given some things
 
     Scenario: Sample Aidy
       Given my name is "Aidy"
@@ -63,7 +66,7 @@ Feature: Browse Features
     When I visit the sample feature page
     And click on a scenario header link
     Then a page appears with the scenario content
-
+    And the background is also visible
 
   Scenario Outline: Search Feature
     Given I am on the search page
@@ -81,4 +84,4 @@ Feature: Browse Features
       | sAmPlE       | Sample Feature |/features/sample.feature  |
       | @QA          | Sample Feature |/features/sample.feature  |  
 
-    
+

@@ -30,6 +30,9 @@ get '/features/:feature/scenario/:scenario'  do  |feature_id, scenario_id|
   ListsFeatures.features.each do |feature|
     if feature["id"] == feature_id
       feature["elements"].each do |element|
+        if element["type"] == "background"
+          @background = element
+        end
         if element["type"] == "scenario" && element["id"] == "#{feature_id};#{scenario_id}"
           @scenario = element
         end
