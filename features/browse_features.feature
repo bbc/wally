@@ -1,0 +1,64 @@
+Feature: Browse Features
+  In order to simply view project requirements
+  As a stakeholder
+  I want a web based feature viewer and navigator
+  
+  Scenario: Link to Features
+    Given a feature file with the contents:
+    """
+    Feature: Sample Feature
+    """
+    When I visit the features page
+    Then I should see a link to my sample feature
+
+  Scenario: Feature Content
+    Given a feature file named "sample.feature" with the contents:
+    """
+    Feature: Sample Feature
+      In order to get some value
+      As a person
+      I want to create value
+     """
+    When I visit the sample feature page
+    Then I should see the feature free-form narrative
+   
+
+  Scenario: View Scenario Links
+    Given a feature file named "sample.feature" with the contents:
+    """
+    Feature: Sample Feature
+      In order to get some value
+      As a person
+      I want to create value
+
+    Scenario: Sample Aidy
+      Given my name is "Aidy"
+      When I drink alcohol
+      Then I go nuts
+
+    Scenario: Sample Andrew
+      Given my name is 'Andrew'
+      When I drink alcohol
+      Then I go happy
+     """
+
+    When I visit the sample feature page
+    Then I should see Scenario headers as links
+
+  Scenario Outline: Search Feature
+    Given I am on the search page
+    And a feature file named "sample.feature" with the contents:
+    """
+    @QA
+    Feature: Sample Feature
+    """ 
+    When I search for "<query>"
+    Then I should see a link to "<feature name>" with the url "<url>"
+
+    Examples:
+      | query        | feature name   | url                      |
+      | Sample       | Sample Feature |/features/sample.feature  |
+      | sAmPlE       | Sample Feature |/features/sample.feature  |
+      | @QA          | Sample Feature |/features/sample.feature  |  
+
+    
