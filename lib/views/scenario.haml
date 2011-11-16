@@ -1,6 +1,7 @@
-= @background["keyword"] + ":"
-- @background["steps"].each do |step|
-  = step["keyword"] + step["name"]
+- if @background
+  = @background["keyword"] + ":"
+  - @background["steps"].each do |step|
+    = step["keyword"] + step["name"]
 
 = @scenario["keyword"] + ": " + @scenario["name"]
 - @scenario["steps"].each do |step|

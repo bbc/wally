@@ -49,6 +49,27 @@ Feature: Browse Features
     """
     Feature: Sample Feature
 
+    Scenario: Sample Aidy
+      Given my name is "Aidy"
+      When I drink alcohol
+      Then I go nuts
+
+    Scenario: Sample Andrew
+      Given my name is 'Andrew'
+      When I drink alcohol
+      Then I go happy
+     """
+    
+    When I visit the sample feature page
+    And click on a scenario header link
+    Then a page appears with the scenario content
+
+
+  Scenario: View Scenario Content and Background
+    Given a feature file named "sample.feature" with the contents:
+    """
+    Feature: Sample Feature
+
     Background:
       Given some things
 
