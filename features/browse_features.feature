@@ -3,13 +3,26 @@ Feature: Browse Features
   As a stakeholder
   I want a web based feature viewer and navigator
   
-  Scenario: Link to Features
+  Scenario: Links to features in alphabetical order
     Given a feature file with the contents:
     """
-    Feature: Sample Feature
+    Feature: Kate Moss
+    """
+    Given a feature file with the contents:
+    """
+    Feature: Katie Price
+    """
+    Given a feature file with the contents:
+    """
+    Feature: Jessica-Jane Clement
+    """
+    Given a feature file with the contents:
+    """
+    Feature: Elle Macpherson
     """
     When I visit the features page
-    Then I should see a link to my sample feature
+    Then I should see a link to my sample features
+    And the features are ordered alphabetically
 
   Scenario: Feature Content
     Given a feature file named "sample.feature" with the contents:
@@ -44,7 +57,7 @@ Feature: Browse Features
     When I visit the sample feature page
     Then I should see Scenario headers as links
 
-  Scenario: View Scenario Content and Background
+  Scenario: View Scenario Content 
     Given a feature file named "sample.feature" with the contents:
     """
     Feature: Sample Feature
@@ -118,3 +131,5 @@ Feature: Browse Features
       | Sample       | Sample Feature |/features/sample.feature  |
       | sAmPlE       | Sample Feature |/features/sample.feature  |
       | @QA          | Sample Feature |/features/sample.feature  |
+
+

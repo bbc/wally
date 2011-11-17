@@ -11,16 +11,20 @@ describe ListsFeatures do
     FileUtils.rm_rf "application-features"
   end
 
-  it "returns a hash of features" do
+  it "returns a list of alphabeticaly ordered features" do
     File.open("application-features/1-sample.feature", "w") do |file|
-      file.write "Feature: 1 Sample Feature"
+      file.write "Feature: Zorro"
     end
     File.open("application-features/2-sample.feature", "w") do |file|
-      file.write "Feature: 2 Sample Feature"
+      file.write "Feature: Malgor"
     end
-    ListsFeatures.features.size.should == 2
-    ListsFeatures.features[0]["name"].should == "1 Sample Feature"
-    ListsFeatures.features[1]["name"].should == "2 Sample Feature"
+    File.open("application-features/3-sample.feature", "w") do |file|
+      file.write "Feature: Adrian"
+    end
+    ListsFeatures.features.size.should == 3
+    ListsFeatures.features[0]["name"].should == "Adrian"
+    ListsFeatures.features[1]["name"].should == "Malgor"
+    ListsFeatures.features[2]["name"].should == "Zorro"
   end
 
   it "returns the feature contents" do
@@ -29,4 +33,5 @@ describe ListsFeatures do
     end
     ListsFeatures.features.first["contents"].should == "Feature: 1 Sample Feature"
   end
+
 end

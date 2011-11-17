@@ -1,14 +1,19 @@
-
 Given /^a feature file with the contents:$/ do |contents|
-  create_feature_file("example-file.feature", contents)
+  @current_file_number ||= 0
+  @current_file_number += 1
+  file_name = "feature_#{@current_file_number}.feature"
+  create_feature_file(file_name, contents)
 end
 
 When /^I visit the features page$/ do
   visit "/features"
 end
 
-Then /^I should see a link to my sample feature$/ do
-  page.should have_link "Sample Feature", :href => "/features/sample-feature"
+Then /^I should see a link to my sample features$/ do
+    page.should have_link "Kate Moss", :href => "/features/kate-moss"
+    page.should have_link "Katie Price", :href => "/features/katie-price"
+    page.should have_link "Jessica-Jane Clement", :href => "/features/jessica-jane-clement"
+    page.should have_link "Elle Macpherson", :href => "/features/elle-macpherson"
 end
 
 Given /^I am on the search page$/ do
@@ -63,4 +68,9 @@ end
 
 Then /^the scenario links are sorted$/ do
   page.body.should =~ /C.*I.*N.*V/m
+end
+
+
+Then /^the features are ordered alphabetically$/ do
+  page.body.should =~ /Elle Macpherson.*Jessica-Jane Clement.*Kate Moss.*Katie Price/m
 end

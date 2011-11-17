@@ -18,7 +18,7 @@ class ListsFeatures
         uri = "/features/#{path.gsub("application-features/", "")}"
         features << parse_gherkin(uri, File.read(path))
       end
-      features
+      features.sort {|a,b| a["name"] <=> b["name"]}
     end
 
     private
