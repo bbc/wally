@@ -2,6 +2,6 @@
   = @feature["description"]
 %section{:class=>"scenarios"}
   %h1 Scenarios:
-  - @scenario_urls.each do |name, url|
-    %a{:href => url}
+  - @scenario_urls.keys.sort.each do |name|
+    %a{:href => @scenario_urls[name]}
       = name

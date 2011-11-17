@@ -94,9 +94,10 @@ Feature: Browse Features
     Given a feature file named "sample.feature" with the contents:
     """
     Feature: Sample Feature
-    Scenario: Zorro
-    Scenario: Peter
-    Scenario: Andrew
+      Scenario: V
+      Scenario: C
+      Scenario: I
+      Scenario: N
      """
     When I visit the sample feature page
     Then the scenario links are sorted

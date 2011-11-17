@@ -62,5 +62,5 @@ Then /^the background is also visible$/ do
 end
 
 Then /^the scenario links are sorted$/ do
-  page.body.should =~ /Andrew.*Peter.*Zorro/m
+  page.body.should =~ /C.*I.*N.*V/m
 end

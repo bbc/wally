@@ -41,6 +41,7 @@ get '/features/:feature/scenario/:scenario'  do  |feature_id, scenario_id|
   end
   haml :scenario
 end
+
 def get_scenario_urls
   @scenario_urls = {}
   return unless @feature
