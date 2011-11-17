@@ -34,9 +34,9 @@ When /^I visit the sample feature page$/ do
 end
 
 Then /^I should see the feature free\-form narrative$/ do
-  @contents.lines.each do |line|
-    page.should have_content(line.strip.chop)
-  end
+  page.should have_content "In order to get some value"
+  page.should have_content "As a person"
+  page.should have_content "I want to create value"
 end
 
 Then /^I should see Scenario headers as links$/ do
@@ -61,3 +61,6 @@ Then /^the background is also visible$/ do
   page.body.should have_content "Given some things"
 end
 
+Then /^the scenario links are sorted$/ do
+  page.body.should =~ /Andrew.*Peter.*Zorro/m
+end

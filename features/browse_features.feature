@@ -83,11 +83,24 @@ Feature: Browse Features
       When I drink alcohol
       Then I go happy
      """
-    
+
     When I visit the sample feature page
     And click on a scenario header link
     Then a page appears with the scenario content
     And the background is also visible
+
+
+  Scenario: Sort Scenario Links in Alphabetical Order
+    Given a feature file named "sample.feature" with the contents:
+    """
+    Feature: Sample Feature
+    Scenario: Zorro
+    Scenario: Peter
+    Scenario: Andrew
+     """
+    When I visit the sample feature page
+    Then the scenario links are sorted
+
 
   Scenario Outline: Search Feature
     Given I am on the search page
@@ -95,7 +108,7 @@ Feature: Browse Features
     """
     @QA
     Feature: Sample Feature
-    """ 
+    """
     When I search for "<query>"
     Then I should see a link to "<feature name>" with the url "<url>"
 
@@ -103,6 +116,4 @@ Feature: Browse Features
       | query        | feature name   | url                      |
       | Sample       | Sample Feature |/features/sample.feature  |
       | sAmPlE       | Sample Feature |/features/sample.feature  |
-      | @QA          | Sample Feature |/features/sample.feature  |  
-
-
+      | @QA          | Sample Feature |/features/sample.feature  |

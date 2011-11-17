@@ -1,5 +1,7 @@
+- if @feature["description"]
+  = @feature["description"]
 %section{:class=>"scenarios"}
-  %h1 Scenarios
+  %h1 Scenarios:
   - @scenario_urls.each do |name, url|
     %a{:href => url}
       = name
