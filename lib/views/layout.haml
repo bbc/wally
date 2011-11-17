@@ -2,5 +2,16 @@
 %html
   %head
     %title Wally
+    %link{:rel => 'stylesheet', :type => 'text/css', :href => '/style.css'}
+    %meta{:'http-equiv' => 'X-UA-Compatible', :content => 'IE=edge,chrome=1'}
+    %meta{:name => 'viewport', :content => 'width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;'}
   %body
+  %navigation
+    %p
+      %a{:href=>'/features'}
+        list of features
+  %section
+    %form{:method => "GET", :action => "/search"}
+      %input{:type => "text", :id => "q", :name => "q"}
+      %input{:type => "submit", :id => "search", :value => "Search"}
     = yield
