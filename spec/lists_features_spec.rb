@@ -26,12 +26,4 @@ describe ListsFeatures do
     ListsFeatures.features[1]["name"].should == "Malgor"
     ListsFeatures.features[2]["name"].should == "Zorro"
   end
-
-  it "returns the feature contents" do
-    File.open("application-features/1-sample.feature", "w") do |file|
-      file.write "Feature: 1 Sample Feature"
-    end
-    ListsFeatures.features.first["contents"].should == "Feature: 1 Sample Feature"
-  end
-
 end

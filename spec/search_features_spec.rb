@@ -2,10 +2,12 @@ require File.join(File.dirname(__FILE__), "spec_helper")
 require "search_features"
 
 describe SearchFeatures do
-  include FakeFS::SpecHelpers
-
   before do
     FileUtils.mkdir "application-features"
+  end
+
+  after do
+    FileUtils.rm_rf "application-features"
   end
 
   def write_feature(name, contents)
@@ -60,6 +62,20 @@ describe SearchFeatures do
       results = SearchFeatures.new.find(:query => "I DO SOME THINGS")
       results.first.matched_scenarios.size.should == 1
       results.first.matched_scenarios.first["name"].should == "Matched Scenario"
+    end
+  end
+
+  context "feature with tags" do
+    it "finds features by tag" do
+      write_feature("example-feature.feature", "@tag_name\nFeature: Example Feature")
+      results = SearchFeatures.new.find(:query => "@tag_NAME")
+      results.first.matched_feature["name"].should == "Example Feature"
+    end
+
+    it "finds scenarios by tag" do
+      write_feature("example-feature.feature", "Feature: Example Feature\n@scenario_tag\nScenario: Example Scenario")
+      results = SearchFeatures.new.find(:query => "@scenario_TAG")
+      results.first.matched_scenarios.first["name"].should == "Example Scenario"
     end
   end
 end

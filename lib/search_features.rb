@@ -7,6 +7,14 @@ class SearchFeatures
     ListsFeatures.features.each do |feature|
       result = SearchResult.new(feature)
 
+      if feature["tags"]
+        feature["tags"].each do |tag|
+          if tag["name"].downcase.include? query[:query].downcase
+            result.matched_feature = feature
+          end
+        end
+      end
+
       if feature["name"].downcase.include? query[:query].downcase
         result.matched_feature = feature
       end
@@ -18,6 +26,10 @@ class SearchFeatures
           elsif element["steps"]
             element["steps"].any? do |step|
               step["name"].downcase.include? query[:query].downcase
+            end
+          elsif element["tags"]
+            element["tags"].any? do |tag|
+              tag["name"].downcase.include? query[:query].downcase
             end
           end
         end

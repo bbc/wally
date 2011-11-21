@@ -1,7 +1,6 @@
 require 'gherkin/formatter/json_formatter'
 require 'gherkin/parser/parser'
 
-
 module Gherkin::Formatter
   class JSONFormatter
     def to_hash
@@ -29,7 +28,6 @@ class ListsFeatures
       parser = Gherkin::Parser::Parser.new(formatter, false, 'root')
       parser.parse(text, uri, 0)
       hash = formatter.to_hash
-      hash["contents"] = text
       hash
     end
   end
