@@ -52,11 +52,13 @@ Feature: Browse Features
       As a person
       I want to create value
 
+    @tag1
     Scenario: Sample Aidy
       Given my name is "Aidy"
       When I drink alcohol
       Then I go nuts
 
+    @tag2
     Scenario: Sample Andrew
       Given my name is 'Andrew'
       When I drink alcohol
@@ -64,6 +66,8 @@ Feature: Browse Features
      """
     When I visit the sample feature page
     Then I should see Scenario headers as links
+    And I should see "tag1"
+    And I should see "tag2"
 
   Scenario: View Scenario Content
     Given a feature file named "sample.feature" with the contents:
@@ -89,10 +93,24 @@ Feature: Browse Features
 
     Scenario: Sample Aidy
      """
-
     When I visit the sample feature page
     And click on a scenario header link
     Then the background is visible
+
+  Scenario: View Scenario Tags
+    Given a feature file named "sample.feature" with the contents:
+    """
+    Feature: Sample Feature
+
+    Background:
+      Given some things
+
+    @work_in_progress
+    Scenario: Sample Aidy
+     """
+    When I visit the sample feature page
+    And click on a scenario header link
+    Then I should see "work_in_progress"
 
   Scenario: Sort Scenario Links in Alphabetical Order
     Given a feature file named "sample.feature" with the contents:

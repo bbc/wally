@@ -1,5 +1,9 @@
 %h2
   = @scenario["keyword"] + ": " + @scenario["name"]
+  %span.label.notice
+    - if @scenario["tags"]
+      - @scenario["tags"].each do |tag|
+        %a{:href => "/search?q=#{tag["name"]}"}
 - if @background
   %h3
     = @background["keyword"] + ":"
@@ -9,8 +13,9 @@
 - if @scenario["tags"]
   %p{:class => 'tags'}
     - @scenario["tags"].each do |tag|
-      %a{:href => '/search?q=' + tag["name"]}
-        = tag["name"]
+      %span.label.notice
+        %a{:href => '/search?q=' + tag["name"]}
+          = tag["name"]
 - if @scenario["steps"]
   %p
     - @scenario["steps"].each do |step|
