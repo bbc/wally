@@ -24,7 +24,7 @@ Feature: Browse Features
     Then I should see a link to my sample features
     And the features are ordered alphabetically
 
-  Scenario: Display tags
+  Scenario: Display feature tags
     Given a feature file named "sample.feature" with the contents:
     """
     @sample_tag
@@ -65,7 +65,7 @@ Feature: Browse Features
     When I visit the sample feature page
     Then I should see Scenario headers as links
 
-  Scenario: View Scenario Content 
+  Scenario: View Scenario Content
     Given a feature file named "sample.feature" with the contents:
     """
     Feature: Sample Feature
