@@ -1,9 +1,11 @@
 %h1 
   = "Search for '#{@q}'"
-- if @features
-  - @features.each do |feature|
-    %a{:href => "/features/#{feature['id']}"} 
-      = feature["name"]
-  - if (@features.length == 0)
+- if @matched_features
+  %ul
+    - @matched_features.each do |feature|
+      %li
+        %a{:href => "/features/#{feature['id']}"} 
+          = feature["name"]
+  - if (@matched_features.length == 0)
     %p{}
       = "Where's Wally? This search returned no results."

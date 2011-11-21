@@ -1,15 +1,17 @@
+%h1= @scenario["keyword"] + ": " + @scenario["name"]
 - if @background
   = @background["keyword"] + ":"
   - @background["steps"].each do |step|
     = step["keyword"] + step["name"]
-%h1= @scenario["keyword"] + ": " + @scenario["name"]
 - if @scenario["tags"]
-  - @scenario["tags"].each do |tag|
-    %a{:href => '/search?q=' + tag["name"]}
-      = tag["name"]
+  %p{:class => 'tags'}
+    - @scenario["tags"].each do |tag|
+      %a{:href => '/search?q=' + tag["name"]}
+        = tag["name"]
 - if @scenario["steps"]
-  - @scenario["steps"].each do |step|
-    = step["keyword"] + step["name"] + '<br/>'
+  %p
+    - @scenario["steps"].each do |step|
+      = step["keyword"] + step["name"] + '<br/>'
 - else
   %p{:class => 'nosteps'}
     = "Where's Wally? This scenario has no steps!?"

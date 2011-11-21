@@ -10,6 +10,10 @@ configure do
   set :haml, { :ugly=>true }
 end
 
+before do
+  @features = ListsFeatures.features
+end
+
 get '/features' do
   @features = ListsFeatures.features
   haml :features
@@ -27,7 +31,7 @@ end
 
 get '/search' do
   if params[:q]
-    @features = SearchFeatures.new.find(:query => params[:q])
+    @matched_features = SearchFeatures.new.find(:query => params[:q])
   end
   @q = params[:q]
   haml :search

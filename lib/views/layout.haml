@@ -6,12 +6,18 @@
     %meta{:'http-equiv' => 'X-UA-Compatible', :content => 'IE=edge,chrome=1'}
     %meta{:name => 'viewport', :content => 'width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;'}
   %body
-  %navigation
-    %p
-      %a{:href=>'/features'}
-        Features index
-
-    %form{:method => "GET", :action => "/search", :id => "search"}
-      %input{:type => "text", :id => "q", :name => "q", :placeholder => 'text, @tags etc.', :value => @q }
-      %input{:type => "submit", :id => "search", :value => "Search"}
+    %nav{:id => 'main'}
+      %p
+        %a{:href=>'/features'} Features
+      %form{:method => "GET", :action => "/search", :id => "search"}
+        %input{:type => "text", :id => "q", :name => "q", :placeholder => 'text, @tags etc.', :value => @q }
+        %input{:type => "submit", :id => "search", :value => "Search"}
     = yield
+    %nav{:id => 'features'}
+      %h1
+        Features
+      %ul
+        - @features.each do |feature|
+          %li
+            %a{:href => "/features/#{feature["id"]}"}
+              = feature["name"]

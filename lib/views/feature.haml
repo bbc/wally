@@ -1,11 +1,11 @@
 - if @feature["description"]
-  %section{:class => 'feature'}
-    :markdown
-      #{@feature["description"]}
-%section{:class=>"scenarios"}
-  %h1 Scenarios:
-  - @scenario_urls.keys.sort.each do |name|
-    %ul
+  %h1 Scenarios
+  %section{:class=>"scenarios"}
+    %section{:class => 'feature'}
+      :markdown
+        #{@feature["description"]}
+  %ul
+    - @scenario_urls.keys.sort.each do |name|
       %li
         %a{:href => @scenario_urls[name]}
           = name
