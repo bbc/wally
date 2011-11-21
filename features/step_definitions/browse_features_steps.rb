@@ -36,7 +36,7 @@ Then /^a page appears with the scenario content$/ do
   page.body.should have_content "Then I go nuts"
 end
 
-Then /^the background is also visible$/ do
+Then /^the background is visible$/ do
   page.body.should have_content "Background:"
   page.body.should have_content "Given some things"
 end

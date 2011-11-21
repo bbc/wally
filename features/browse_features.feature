@@ -74,18 +74,12 @@ Feature: Browse Features
       Given my name is "Aidy"
       When I drink alcohol
       Then I go nuts
-
-    Scenario: Sample Andrew
-      Given my name is 'Andrew'
-      When I drink alcohol
-      Then I go happy
      """
     When I visit the sample feature page
     And click on a scenario header link
     Then a page appears with the scenario content
 
-
-  Scenario: View Scenario Content and Background
+  Scenario: View Scenario Background
     Given a feature file named "sample.feature" with the contents:
     """
     Feature: Sample Feature
@@ -94,20 +88,11 @@ Feature: Browse Features
       Given some things
 
     Scenario: Sample Aidy
-      Given my name is "Aidy"
-      When I drink alcohol
-      Then I go nuts
-
-    Scenario: Sample Andrew
-      Given my name is 'Andrew'
-      When I drink alcohol
-      Then I go happy
      """
 
     When I visit the sample feature page
     And click on a scenario header link
-    Then a page appears with the scenario content
-    And the background is also visible
+    Then the background is visible
 
   Scenario: Sort Scenario Links in Alphabetical Order
     Given a feature file named "sample.feature" with the contents:
