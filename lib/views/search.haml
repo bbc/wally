@@ -1,11 +1,15 @@
-%h1 
-  = "Search for '#{@q}'"
-- if @matched_features
+%h1
+  = "Search for '#{params[:q]}'"
+- if params[:q]
   %ul
-    - @matched_features.each do |feature|
+    - @search_results.each do |search_result|
       %li
-        %a{:href => "/features/#{feature['id']}"} 
-          = feature["name"]
-  - if (@matched_features.length == 0)
-    %p{}
-      = "Where's Wally? This search returned no results."
+        %a{:href => "/features/#{search_result.feature["id"]}"}
+          = search_result.feature["name"]
+        %ul
+          - search_result.matched_scenarios.each do |scenario|
+            %li
+              %a{:href => "/features/#{scenario["id"].gsub(";", "/scenario/")}"}
+                = scenario["name"]
+- else
+  %p Where's Wally? This search returned no results.

@@ -31,9 +31,8 @@ end
 
 get '/search' do
   if params[:q]
-    @matched_features = SearchFeatures.new.find(:query => params[:q])
+    @search_results = SearchFeatures.new.find(:query => params[:q])
   end
-  @q = params[:q]
   haml :search
 end
 

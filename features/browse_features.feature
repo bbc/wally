@@ -2,21 +2,21 @@ Feature: Browse Features
   In order to simply view project requirements
   As a stakeholder
   I want a web based feature viewer and navigator
-  
+
   Scenario: Links to features in alphabetical order
-    Given a feature file with the contents:
+    Given a feature file named "kate_moss.feature" with the contents:
     """
     Feature: Kate Moss
     """
-    Given a feature file with the contents:
+    Given a feature file named "katie_price.feature" with the contents:
     """
     Feature: Katie Price
     """
-    Given a feature file with the contents:
+    Given a feature file named "jessica_jane_clement.feature" with the contents:
     """
     Feature: Jessica-Jane Clement
     """
-    Given a feature file with the contents:
+    Given a feature file named "elle_macpherson.feature" with the contents:
     """
     Feature: Elle Macpherson
     """
@@ -34,7 +34,6 @@ Feature: Browse Features
      """
     When I visit the sample feature page
     Then I should see the feature free-form narrative
-   
 
   Scenario: View Scenario Links
     Given a feature file named "sample.feature" with the contents:
@@ -72,7 +71,6 @@ Feature: Browse Features
       When I drink alcohol
       Then I go happy
      """
-    
     When I visit the sample feature page
     And click on a scenario header link
     Then a page appears with the scenario content
@@ -102,7 +100,6 @@ Feature: Browse Features
     Then a page appears with the scenario content
     And the background is also visible
 
-
   Scenario: Sort Scenario Links in Alphabetical Order
     Given a feature file named "sample.feature" with the contents:
     """
@@ -114,22 +111,3 @@ Feature: Browse Features
      """
     When I visit the sample feature page
     Then the scenario links are sorted
-
-
-  Scenario Outline: Search Feature
-    Given I am on the search page
-    And a feature file named "sample.feature" with the contents:
-    """
-    @QA
-    Feature: Sample Feature
-    """
-    When I search for "<query>"
-    Then I should see a link to "<feature name>" with the url "<url>"
-
-    Examples:
-      | query        | feature name   | url                      |
-      | Sample       | Sample Feature |/features/sample.feature  |
-      | sAmPlE       | Sample Feature |/features/sample.feature  |
-      | @QA          | Sample Feature |/features/sample.feature  |
-
-
