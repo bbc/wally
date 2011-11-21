@@ -1,8 +1,11 @@
-%h2= @scenario["keyword"] + ": " + @scenario["name"]
+%h2
+  = @scenario["keyword"] + ": " + @scenario["name"]
 - if @background
-  = @background["keyword"] + ":"
+  %h3
+    = @background["keyword"] + ":"
   - @background["steps"].each do |step|
     = step["keyword"] + step["name"]
+    %br
 - if @scenario["tags"]
   %p{:class => 'tags'}
     - @scenario["tags"].each do |tag|
