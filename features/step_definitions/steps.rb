@@ -6,3 +6,7 @@ end
 Then /^I should see a link to "([^"]*)" with the url "([^"]*)"$/ do |text, url|
   page.should have_link text, :href => url
 end
+
+Then /^I should see "([^"]*)"$/ do |text|
+  page.should have_content(text)
+end

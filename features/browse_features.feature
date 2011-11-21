@@ -24,6 +24,15 @@ Feature: Browse Features
     Then I should see a link to my sample features
     And the features are ordered alphabetically
 
+  Scenario: Display tags
+    Given a feature file named "sample.feature" with the contents:
+    """
+    @sample_tag
+    Feature: Sample Feature
+     """
+    When I visit the sample feature page
+    Then I should see "sample_tag"
+
   Scenario: Feature Content
     Given a feature file named "sample.feature" with the contents:
     """

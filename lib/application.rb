@@ -16,7 +16,7 @@ end
 
 get '/?' do
   @features = ListsFeatures.features
-  haml :features
+  haml :index
 end
 
 get '/features/:feature/?' do |feature|
