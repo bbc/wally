@@ -1,8 +1,14 @@
 $:.unshift(File.join(File.dirname(__FILE__)))
+
 require 'sinatra'
 require 'haml'
+require 'rdiscount'
 require 'lists_features'
 require 'search_features'
+
+configure do
+  set :haml, { :ugly=>true }
+end
 
 get '/features' do
   @features = ListsFeatures.features
@@ -23,6 +29,7 @@ get '/search' do
   if params[:q]
     @features = SearchFeatures.new.find(:query => params[:q])
   end
+  @q = params[:q]
   haml :search
 end
 

@@ -1,14 +1,27 @@
 
-body {
+body, pre {
+    background-color: 0; 
     margin: 2em 2em 20% 1em;
     font-family: Arial, sans-serif;
-    font-size: 1.2em;
+    font-size: 0.9em;
     line-height: 150%;
     }
 
-h1 { 
+section.feature {
+    border-left: 1px solid #369;
+    display: block;
+    padding: 1em;
+}
+
+section.feature p { /* nominally first paragraph is the In Order .. As a .. I Want */
+    white-space: pre-wrap; 
+}
+
+h1 {
+    color: rgb(0, 60, 90);
     margin-top: 1em;
     font-size: 1.5em;
+    font-weight: normal;
     }
     
 a {

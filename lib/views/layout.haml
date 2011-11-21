@@ -9,9 +9,9 @@
   %navigation
     %p
       %a{:href=>'/features'}
-        list of features
-  %section
-    %form{:method => "GET", :action => "/search"}
-      %input{:type => "text", :id => "q", :name => "q"}
+        Features index
+
+    %form{:method => "GET", :action => "/search", :id => "search"}
+      %input{:type => "text", :id => "q", :name => "q", :placeholder => 'text, @tags etc.', :value => @q }
       %input{:type => "submit", :id => "search", :value => "Search"}
     = yield
