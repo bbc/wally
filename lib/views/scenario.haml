@@ -1,4 +1,4 @@
-%h1= @scenario["keyword"] + ": " + @scenario["name"]
+%h2= @scenario["keyword"] + ": " + @scenario["name"]
 - if @background
   = @background["keyword"] + ":"
   - @background["steps"].each do |step|
