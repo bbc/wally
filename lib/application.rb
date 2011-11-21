@@ -14,12 +14,12 @@ before do
   @features = ListsFeatures.features
 end
 
-get '/features' do
+get '/?' do
   @features = ListsFeatures.features
   haml :features
 end
 
-get '/features/:feature' do |feature|
+get '/features/:feature/?' do |feature|
   features = ListsFeatures.features
   features.each do |feature_hash|
    @feature = feature_hash if feature_hash["id"] == feature
@@ -29,14 +29,14 @@ get '/features/:feature' do |feature|
   haml :feature
 end
 
-get '/search' do
+get '/search/?' do
   if params[:q]
     @search_results = SearchFeatures.new.find(:query => params[:q])
   end
   haml :search
 end
 
-get '/features/:feature/scenario/:scenario'  do  |feature_id, scenario_id|
+get '/features/:feature/scenario/:scenario/?'  do  |feature_id, scenario_id|
   ListsFeatures.features.each do |feature|
     if feature["id"] == feature_id
       feature["elements"].each do |element|

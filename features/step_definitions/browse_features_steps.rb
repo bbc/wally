@@ -1,5 +1,5 @@
-When /^I visit the features page$/ do
-  visit "/features"
+When /^I visit the home page$/ do
+  visit "/"
 end
 
 Then /^I should see a link to my sample features$/ do
@@ -44,7 +44,6 @@ end
 Then /^the scenario links are sorted$/ do
   page.body.should =~ /C.*I.*N.*V/m
 end
-
 
 Then /^the features are ordered alphabetically$/ do
   page.body.should =~ /Elle Macpherson.*Jessica-Jane Clement.*Kate Moss.*Katie Price/m

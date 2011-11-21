@@ -20,7 +20,7 @@ Feature: Browse Features
     """
     Feature: Elle Macpherson
     """
-    When I visit the features page
+    When I visit the home page
     Then I should see a link to my sample features
     And the features are ordered alphabetically
 
