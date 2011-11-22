@@ -7,17 +7,26 @@ configure do
   set :haml, { :ugly=>true }
 end
 
+def features_path
+  ARGV.first || "features"
+end
+
+def lists_features
+  Wally::ListsFeatures.new(features_path)
+end
+
 before do
-  @features = Wally::ListsFeatures.features
+  #probably remove this if not needed
+  @features = lists_features.features
 end
 
 get '/?' do
-  @features = Wally::ListsFeatures.features
+  @features = lists_features.features
   haml :index
 end
 
 get '/features/:feature/?' do |feature|
-  features = Wally::ListsFeatures.features
+  features = lists_features.features
   features.each do |feature_hash|
    @feature = feature_hash if feature_hash["id"] == feature
   end
@@ -28,13 +37,13 @@ end
 
 get '/search/?' do
   if params[:q]
-    @search_results = Wally::SearchFeatures.new.find(:query => params[:q])
+    @search_results = Wally::SearchFeatures.new(lists_features).find(:query => params[:q])
   end
   haml :search
 end
 
 get '/features/:feature/scenario/:scenario/?'  do  |feature_id, scenario_id|
-  Wally::ListsFeatures.features.each do |feature|
+  lists_features.features.each do |feature|
     if feature["id"] == feature_id
       feature["elements"].each do |element|
         if element["type"] == "background"

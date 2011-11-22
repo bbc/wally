@@ -1,8 +1,12 @@
 module Wally
   class SearchFeatures
+    def initialize lists_features
+      @lists_features = lists_features
+    end
+
     def find(query)
       results = []
-      ListsFeatures.features.each do |feature|
+      @lists_features.features.each do |feature|
         result = SearchResult.new(feature)
 
         if feature["tags"]

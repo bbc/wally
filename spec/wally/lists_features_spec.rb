@@ -21,10 +21,11 @@ module Wally
       File.open("application-features/3-sample.feature", "w") do |file|
         file.write "Feature: Adrian"
       end
-      ListsFeatures.features.size.should == 3
-      ListsFeatures.features[0]["name"].should == "Adrian"
-      ListsFeatures.features[1]["name"].should == "Malgor"
-      ListsFeatures.features[2]["name"].should == "Zorro"
+      lists_features = ListsFeatures.new("application-features")
+      lists_features.features.size.should == 3
+      lists_features.features[0]["name"].should == "Adrian"
+      lists_features.features[1]["name"].should == "Malgor"
+      lists_features.features[2]["name"].should == "Zorro"
     end
   end
 end

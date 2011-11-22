@@ -11,26 +11,27 @@ end
 
 module Wally
   class ListsFeatures
-    class << self
-      def features
-        features = []
-        Dir.glob("application-features/*.feature").each do |path|
-          uri = "/features/#{path.gsub("application-features/", "")}"
-          features << parse_gherkin(uri, File.read(path))
-        end
-        features.sort {|a,b| a["name"] <=> b["name"]}
-      end
+    def initialize feature_path
+      @feature_path = feature_path
+    end
 
-      private
-
-      def parse_gherkin(uri, text)
-        io = StringIO.new
-        formatter = Gherkin::Formatter::JSONFormatter.new(io)
-        parser = Gherkin::Parser::Parser.new(formatter, false, 'root')
-        parser.parse(text, uri, 0)
-        hash = formatter.to_hash
-        hash
+    def features
+      features = []
+      Dir.glob("#{@feature_path}/*.feature").each do |path|
+        features << parse_gherkin(File.read(path))
       end
+      features.sort {|a,b| a["name"] <=> b["name"]}
+    end
+
+    private
+
+    def parse_gherkin(text)
+      io = StringIO.new
+      formatter = Gherkin::Formatter::JSONFormatter.new(io)
+      parser = Gherkin::Parser::Parser.new(formatter, false, 'root')
+      parser.parse(text, nil, 0)
+      hash = formatter.to_hash
+      hash
     end
   end
 end

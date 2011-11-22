@@ -16,18 +16,22 @@ module Wally
       end
     end
 
+    let :lists_features do
+      ListsFeatures.new("application-features")
+    end
+
     it "finds features containing text" do
       write_feature("sample1.feature", "Feature: Bla")
       write_feature("sample2.feature", "Feature: Meh")
 
-      results = SearchFeatures.new.find(:query => "Meh")
+      results = SearchFeatures.new(lists_features).find(:query => "Meh")
       results.size.should == 1
       results.first.matched_feature["name"].should == "Meh"
     end
 
     it "stores the original feature in the result" do
       write_feature("sample1.feature", "Feature: Bla")
-      results = SearchFeatures.new.find(:query => "Bla")
+      results = SearchFeatures.new(lists_features).find(:query => "Bla")
       results.first.feature["name"].should == "Bla"
     end
 
@@ -35,7 +39,7 @@ module Wally
       write_feature("sample1.feature", "Feature: Bla")
       write_feature("sample2.feature", "Feature: Meh")
 
-      results = SearchFeatures.new.find(:query => "MEH")
+      results = SearchFeatures.new(lists_features).find(:query => "MEH")
       results.size.should == 1
       results.first.matched_feature["name"].should == "Meh"
     end
@@ -53,13 +57,13 @@ module Wally
       end
 
       it "finds scenarios containing text" do
-        results = SearchFeatures.new.find(:query => "Matched SCENARIO")
+        results = SearchFeatures.new(lists_features).find(:query => "Matched SCENARIO")
         results.first.matched_scenarios.size.should == 1
         results.first.matched_scenarios.first["name"].should == "Matched Scenario"
       end
 
       it "finds scenario steps" do
-        results = SearchFeatures.new.find(:query => "I DO SOME THINGS")
+        results = SearchFeatures.new(lists_features).find(:query => "I DO SOME THINGS")
         results.first.matched_scenarios.size.should == 1
         results.first.matched_scenarios.first["name"].should == "Matched Scenario"
       end
@@ -68,13 +72,13 @@ module Wally
     context "feature with tags" do
       it "finds features by tag" do
         write_feature("example-feature.feature", "@tag_name\nFeature: Example Feature")
-        results = SearchFeatures.new.find(:query => "@tag_NAME")
+        results = SearchFeatures.new(lists_features).find(:query => "@tag_NAME")
         results.first.matched_feature["name"].should == "Example Feature"
       end
 
       it "finds scenarios by tag" do
         write_feature("example-feature.feature", "Feature: Example Feature\n@scenario_tag\nScenario: Example Scenario")
-        results = SearchFeatures.new.find(:query => "@scenario_TAG")
+        results = SearchFeatures.new(lists_features).find(:query => "@scenario_TAG")
         results.first.matched_scenarios.first["name"].should == "Example Scenario"
       end
     end

@@ -8,18 +8,18 @@ require "fakefs/spec_helpers"
 
 Capybara.app = Sinatra::Application
 
-FEATURE_PATH = File.join(File.dirname(__FILE__), "../../application-features")
-
 Before do
-  FileUtils.mkdir_p(FEATURE_PATH)
+  ARGV.clear
+  ARGV << "application-features"
+  FileUtils.mkdir_p("application-features")
 end
 
 After do
-  FileUtils.rm_rf(FEATURE_PATH)
+  FileUtils.rm_rf("application-features")
 end
 
 def create_feature_file(file_name, contents)
-  File.open(File.join(FEATURE_PATH, file_name), "w") do |file|
+  File.open(File.join("application-features", file_name), "w") do |file|
     file.write(contents)
   end
 end
