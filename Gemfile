@@ -1,8 +1,4 @@
-source :rubygems
-gem "sinatra"
-gem "cucumber"
-gem "capybara"
-gem "rspec"
-gem "haml"
-gem "fakefs"
-gem "rdiscount"
+source "http://rubygems.org"
+
+# Specify your gem's dependencies in wally.gemspec
+gemspec
