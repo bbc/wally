@@ -5,7 +5,10 @@
       :markdown
         #{@feature["description"]}
   %ul
-    - @scenario_urls.keys.sort.each do |name|
-      %li
-        %a{:href => @scenario_urls[name]}
-          = name
+    - get_sorted_scenarios(@feature).each do |scenario|
+      %a{:href => get_scenario_url(scenario)}
+        = scenario["name"]
+      - if scenario["tags"]
+        - scenario["tags"].each do |tag|
+          %span.label.notice
+            = tag["name"]

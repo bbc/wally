@@ -16,22 +16,17 @@ def lists_features
 end
 
 before do
-  #probably remove this if not needed
   @features = lists_features.features
 end
 
 get '/?' do
-  @features = lists_features.features
   haml :index
 end
 
 get '/features/:feature/?' do |feature|
-  features = lists_features.features
-  features.each do |feature_hash|
+  @features.each do |feature_hash|
    @feature = feature_hash if feature_hash["id"] == feature
   end
-
-  get_scenario_urls
   haml :feature
 end
 
@@ -43,7 +38,7 @@ get '/search/?' do
 end
 
 get '/features/:feature/scenario/:scenario/?'  do  |feature_id, scenario_id|
-  lists_features.features.each do |feature|
+  @features.each do |feature|
     if feature["id"] == feature_id
       feature["elements"].each do |element|
         if element["type"] == "background"
@@ -58,15 +53,20 @@ get '/features/:feature/scenario/:scenario/?'  do  |feature_id, scenario_id|
   haml :scenario
 end
 
-def get_scenario_urls
-  @scenario_urls = {}
-  return unless @feature
-  if @feature["elements"]
-    @feature["elements"].each do |element|
+def get_scenario_url(scenario)
+  url = "/features/#{scenario["id"].gsub(";", "/scenario/")}"
+end
+
+def get_sorted_scenarios(feature)
+  scenarios = []
+
+  if feature["elements"]
+    feature["elements"].each do |element|
       if element["type"] == "scenario"
-        url = "/features/#{element["id"].gsub(";", "/scenario/")}"
-        @scenario_urls[element["name"]] = url
+        scenarios << element
       end
     end
   end
+  scenarios.sort! { |a, b| a["name"] <=> b["name"] }
+  scenarios
 end

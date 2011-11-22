@@ -82,6 +82,18 @@ Feature: Browse Features
     And I should see "tag1"
     And I should see "tag2"
 
+  Scenario: View Scenario Tags On Scenario Page
+    Given a feature file named "sample.feature" with the contents:
+    """
+    Feature: Sample Feature
+
+    @tag1 @tag2
+    Scenario: Sample Aidy
+     """
+    When I visit the sample feature page
+    Then I should see "tag1"
+    And I should see "tag2"
+
   Scenario: View Scenario Background
     Given a feature file named "sample.feature" with the contents:
     """
