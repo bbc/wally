@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "sinatra"
   s.add_runtime_dependency "haml"
   s.add_runtime_dependency "rdiscount"
+  s.add_runtime_dependency "gherkin"
 
   s.add_development_dependency "cucumber"
   s.add_development_dependency "capybara"
