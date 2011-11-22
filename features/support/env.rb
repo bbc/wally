@@ -1,11 +1,10 @@
 $:.unshift(File.join(File.dirname(__FILE__), "../../lib"))
 ENV['RACK_ENV'] = 'test'
+require "wally"
 require "fileutils"
-require "application"
 require "capybara/cucumber"
 require "rspec"
 require "fakefs/spec_helpers"
-
 
 Capybara.app = Sinatra::Application
 

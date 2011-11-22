@@ -1,3 +1,11 @@
+PATH
+  remote: .
+  specs:
+    wally (0.0.1)
+      haml
+      rdiscount
+      sinatra
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -63,7 +71,5 @@ DEPENDENCIES
   capybara
   cucumber
   fakefs
-  haml
-  rdiscount
   rspec
-  sinatra
+  wally!
