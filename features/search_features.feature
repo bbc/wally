@@ -39,3 +39,13 @@ Feature: Search features
     And I am on the search page
     When I search for "I do something"
     Then I should see a link to "Sample Scenario" with the url "/features/sample-feature/scenario/sample-scenario"
+
+  Scenario: Search suggests other searches
+    Given a feature file named "sample.feature" with the contents:
+    """
+    Feature: Batman
+    """
+    And I am on the search page
+    When I search for "btman"
+    Then I should see "Did you mean"
+    And I should see a link to "Batman" with the url "/search?q=Batman"

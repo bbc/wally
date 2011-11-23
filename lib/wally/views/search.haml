@@ -1,15 +1,19 @@
-%h2
-  = "Search for '#{params[:q]}'"
 - if params[:q]
+  %h2
+    = "Search for '#{params[:q]}'"
+  %p
+    Did you mean
+    %a{:href => "/search?q=#{@search_results.suggestion}"}
+      = @search_results.suggestion
   %ul
-    - @search_results.each do |search_result|
+    - @search_results.items.each do |search_result|
       %li
         %a{:href => "/features/#{search_result.feature["id"]}"}
           = search_result.feature["name"]
         %ul
-          - search_result.matched_scenarios.each do |scenario|
+          - if search_result.scenario
             %li
-              %a{:href => "/features/#{scenario["id"].gsub(";", "/scenario/")}"}
-                = scenario["name"]
+              %a{:href => "/features/#{search_result.scenario["id"].gsub(";", "/scenario/")}"}
+                = search_result.scenario["name"]
 - else
   %p Where's Wally? This search returned no results.
