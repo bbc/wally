@@ -1,0 +1,96 @@
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizelegibility;
+}
+
+a {
+  color: rgb(31,148,168);
+}
+
+.logo {
+  position: relative;
+  float: left;
+  width: 270px;
+  left: -10px;
+}
+
+.search-bar {
+  padding-top: 10px;
+}
+
+.search-bar input {
+  position: relative;
+  z-index: 10;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: HelveticaNeue-CondensedBold;
+  color: black;
+}
+
+h1 {
+  font-size: 97px;
+  letter-spacing: -1px;
+  font-family: 'Mistral', Chalkduster;
+  font-weight: 300;
+}
+
+h1 a {
+  color: rgb(255,83,130);
+  background-image: -webkit-gradient(
+  linear,
+  right bottom,
+  left top,
+  color-stop(0.33, rgb(255,83,130)),
+  color-stop(0.85, rgb(31,148,168))
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-right: 10px;
+  padding-bottom: 40px;
+}
+
+h2 {
+  padding-bottom: 20px;
+}
+
+input, textarea, select, .uneditable-input {
+  width: 229px;
+}
+
+.label {
+  margin-left: 4px;
+}
+
+.label.notice {
+  background: rgb(255,83,130);
+}
+
+.container-fluid {
+  min-width: 728px;
+  padding-bottom: 10px;
+  border-top: 3px double #ddd;
+}
+
+.container-fluid:first-child {
+  position: relative;
+  z-index: 10;
+  padding-top: 20px;
+  border-top: none;
+}
+
+.sidebar {
+  padding-top: 20px;
+  padding-right: 19px;
+  border-right: 1px solid #dfdfdf;
+}
+
+.container-fluid > .content {
+  margin-left: 270px;
+  padding-top: 20px;
+}
+
+
+p {
+  max-width: 600px;
+}
