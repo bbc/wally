@@ -25,23 +25,14 @@ module Wally
       write_feature("sample2.feature", "Feature: Meh")
 
       results = SearchFeatures.new(lists_features).find(:query => "Meh")
-      results.size.should == 1
-      results.first.matched_feature["name"].should == "Meh"
+      results.items.size.should == 1
+      results.items.first.feature["name"].should == "Meh"
     end
 
-    it "stores the original feature in the result" do
-      write_feature("sample1.feature", "Feature: Bla")
-      results = SearchFeatures.new(lists_features).find(:query => "Bla")
-      results.first.feature["name"].should == "Bla"
-    end
-
-    it "finds features containing text with any case" do
-      write_feature("sample1.feature", "Feature: Bla")
-      write_feature("sample2.feature", "Feature: Meh")
-
-      results = SearchFeatures.new(lists_features).find(:query => "MEH")
-      results.size.should == 1
-      results.first.matched_feature["name"].should == "Meh"
+    it "has a suggestion" do
+      write_feature("sample1.feature", "Feature: Monkeys")
+      results = SearchFeatures.new(lists_features).find(:query => "mnkeys")
+      results.suggestion.should == "Monkeys"
     end
 
     context "feature with multiple scenarios" do
@@ -50,22 +41,22 @@ module Wally
           Feature: Sample Feature
           Scenario: Sample Scenario
           Scenario: Matched Scenario
-            Given I do some things
+            Given I eat some doughnuts
           Scenario: Another Scenario
         CONTENTS
         write_feature("sample1.feature", contents)
       end
 
       it "finds scenarios containing text" do
-        results = SearchFeatures.new(lists_features).find(:query => "Matched SCENARIO")
-        results.first.matched_scenarios.size.should == 1
-        results.first.matched_scenarios.first["name"].should == "Matched Scenario"
+        results = SearchFeatures.new(lists_features).find(:query => "MATCHED")
+        results.items.size.should == 1
+        results.items.first.scenario["name"].should == "Matched Scenario"
       end
 
       it "finds scenario steps" do
-        results = SearchFeatures.new(lists_features).find(:query => "I DO SOME THINGS")
-        results.first.matched_scenarios.size.should == 1
-        results.first.matched_scenarios.first["name"].should == "Matched Scenario"
+        results = SearchFeatures.new(lists_features).find(:query => "DOUGHNUTS")
+        results.items.size.should == 1
+        results.items.first.scenario["name"].should == "Matched Scenario"
       end
     end
 
@@ -73,13 +64,13 @@ module Wally
       it "finds features by tag" do
         write_feature("example-feature.feature", "@tag_name\nFeature: Example Feature")
         results = SearchFeatures.new(lists_features).find(:query => "@tag_NAME")
-        results.first.matched_feature["name"].should == "Example Feature"
+        results.items.first.feature["name"].should == "Example Feature"
       end
 
       it "finds scenarios by tag" do
         write_feature("example-feature.feature", "Feature: Example Feature\n@scenario_tag\nScenario: Example Scenario")
         results = SearchFeatures.new(lists_features).find(:query => "@scenario_TAG")
-        results.first.matched_scenarios.first["name"].should == "Example Scenario"
+        results.items.first.scenario["name"].should == "Example Scenario"
       end
     end
   end
