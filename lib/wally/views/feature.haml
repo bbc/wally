@@ -10,6 +10,4 @@
         %a{:href => get_scenario_url(scenario)}
           = scenario["name"]
         - if scenario["tags"]
-          - scenario["tags"].each do |tag|
-            %span.label.notice
-              = tag["name"]
+          = haml :tag_links, {:locals => {:tags => scenario["tags"]}, :layout => false}

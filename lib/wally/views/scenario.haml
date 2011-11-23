@@ -1,18 +1,10 @@
 %h2
   = @scenario["keyword"] + ": " + @scenario["name"]
-  %span.label.notice
-    - if @scenario["tags"]
-      - @scenario["tags"].each do |tag|
-        %a{:href => "/search?q=#{tag["name"]}"}
-          = tag["name"]
+  - if @scenario["tags"]
+    = haml :tag_links, {:locals => {:tags => @scenario["tags"]}, :layout => false}
 - if @background
   %h3
     = @background["keyword"] + ":"
-    - if @scenario["tags"]
-      - @scenario["tags"].each do |tag|
-        %span.label.notice
-          %a{:href => "/search?q=#{tag["name"]}"}
-            = tag["name"]
   - @background["steps"].each do |step|
     %p
       %span.step-keyword

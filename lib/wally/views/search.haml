@@ -11,10 +11,14 @@
       %li
         %a{:href => "/features/#{search_result.feature["id"]}"}
           = search_result.feature["name"]
+        - if search_result.feature["tags"]
+          = haml :tag_links, {:locals => {:tags => search_result.feature["tags"]}, :layout => false}
         %ul
           - if search_result.scenario && search_result.scenario["id"]
             %li
               %a{:href => "/features/#{search_result.scenario["id"].gsub(";", "/scenario/")}"}
                 = search_result.scenario["name"]
+              - if search_result.scenario["tags"]
+                = haml :tag_links, {:locals => {:tags => search_result.scenario["tags"]}, :layout => false}
 - else
   %p Where's Wally? This search returned no results.

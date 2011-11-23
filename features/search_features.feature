@@ -61,3 +61,17 @@ Feature: Search features
     When I search for "btman"
     Then I should see "Did you mean"
     And I should see a search result link to "Batman" with the url "/search?q=Batman"
+
+  Scenario: Search displays tags
+    Given a feature file named "sample.feature" with the contents:
+    """
+    @feature_tag
+    Feature: Batman
+
+    @scenario_tag
+    Scenario: Batman?
+    """
+    And I am on the search page
+    When I search for "Batman"
+    Then I should see "feature_tag" in the search results
+    And I should see "scenario_tag" in the search results

@@ -21,12 +21,6 @@
           Features
         %ul
           - @features.each do |feature|
-            %li
-              %a{:href => "/features/#{feature["id"]}"}
-                = feature["name"]
-              - if feature["tags"]
-                - feature["tags"].each do |tag|
-                  %span.label.notice
-                    = tag["name"]
+            = haml :feature_link, {:locals => {:feature => feature}, :layout => false}
       %div.content
         = yield

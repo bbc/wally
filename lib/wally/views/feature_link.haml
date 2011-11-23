@@ -1,0 +1,6 @@
+%li
+  %a{:href => "/features/#{feature["id"]}"}
+    = feature["name"]
+  - if feature["tags"]
+    - tags = feature["tags"]
+    = haml :tag_links, {:locals => {:tags => tags}, :layout => false}

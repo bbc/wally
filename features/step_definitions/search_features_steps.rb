@@ -12,3 +12,9 @@ Then /^I should see a search result link to "([^"]*)" with the url "([^"]*)"$/ d
     page.should have_link text, :href => url
   end
 end
+
+Then /^I should see "([^"]*)" in the search results$/ do |text|
+  within ".content" do
+    page.should have_content text
+  end
+end
