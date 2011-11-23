@@ -95,3 +95,8 @@ input, textarea, select, .uneditable-input {
 p {
   max-width: 600px;
 }
+
+.step-keyword:before {
+  color: #1F94A8;
+  content: "\2714";
+}
