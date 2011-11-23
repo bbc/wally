@@ -101,3 +101,7 @@ p {
   font-size: 15px;
   content: "\2691";
 }
+
+section.feature p:first-child {
+    white-space: pre-wrap
+}
