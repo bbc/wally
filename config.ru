@@ -1,2 +1,2 @@
-require './lib/application'
+require './lib/wally'
 run Sinatra::Application
