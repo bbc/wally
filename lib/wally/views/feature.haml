@@ -6,9 +6,10 @@
         #{@feature["description"]}
   %ul
     - get_sorted_scenarios(@feature).each do |scenario|
-      %a{:href => get_scenario_url(scenario)}
-        = scenario["name"]
-      - if scenario["tags"]
-        - scenario["tags"].each do |tag|
-          %span.label.notice
-            = tag["name"]
+      %li
+        %a{:href => get_scenario_url(scenario)}
+          = scenario["name"]
+        - if scenario["tags"]
+          - scenario["tags"].each do |tag|
+            %span.label.notice
+              = tag["name"]
