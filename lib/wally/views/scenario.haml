@@ -14,12 +14,17 @@
           %a{:href => "/search?q=#{tag["name"]}"}
             = tag["name"]
   - @background["steps"].each do |step|
-    = step["keyword"] + step["name"]
-    %br
+    %p
+      %span.step-keyword
+        = step["keyword"]
+      = step["name"]
 - if @scenario["steps"]
-  %p
-    - @scenario["steps"].each do |step|
-      = step["keyword"] + step["name"] + '<br/>'
+  %h3 Steps:
+  - @scenario["steps"].each do |step|
+    %p
+      %span.step-keyword
+        = step["keyword"]
+      = step["name"]
 - else
   %p{:class => 'nosteps'}
     = "Where's Wally? This scenario has no steps!?"
