@@ -1,4 +1,6 @@
 body {
+  min-width: 714px;
+  padding: 0 27px;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizelegibility;
 }
@@ -11,11 +13,28 @@ a {
   position: relative;
   float: left;
   width: 270px;
-  left: -10px;
+  left: -5px;
+  margin-top: -34px;
+  margin-bottom: -8px;
+}
+
+h1 {
+  margin: 0;
+}
+
+h1 a {
+  position: relative;
+  display: block;
+  /* margin: -40px 0 -60px; */
+  width: 197px;
+  height: 104px;
+  background: url(wally-logo.png) no-repeat -30px -10px;
+  overflow: hidden;
+  text-indent: -5000%;
 }
 
 .search-bar {
-  padding-top: 10px;
+  padding-top: 9px;
 }
 
 .search-bar input {
@@ -28,34 +47,37 @@ h1, h2, h3, h4, h5, h6 {
   color: black;
 }
 
-h1 {
-  font-size: 97px;
-  letter-spacing: -1px;
-  font-family: 'Mistral', Chalkduster;
-  font-weight: 300;
-}
-
-h1 a {
-  color: rgb(255,83,130);
-  background-image: -webkit-gradient(
-  linear,
-  right bottom,
-  left top,
-  color-stop(0.33, rgb(255,83,130)),
-  color-stop(0.85, rgb(31,148,168))
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  padding-right: 10px;
-  padding-bottom: 40px;
-}
-
 h2 {
-  padding-bottom: 20px;
+  padding-bottom: 18px;
 }
 
 input, textarea, select, .uneditable-input {
   width: 229px;
+}
+
+.container-fluid {
+  min-width: 0;
+  padding-bottom: 18px;
+  border-top: 3px double #ddd;
+}
+
+.container-fluid:first-child {
+  position: relative;
+  z-index: 10;
+  padding-top: 63px;
+  padding-bottom: 0;
+  border-top: none;
+}
+
+.sidebar {
+  padding-top: 18px;
+  padding-right: 19px;
+  border-right: 1px solid #dfdfdf;
+}
+
+.container-fluid > .content {
+  margin-left: 270px;
+  padding-top: 18px;
 }
 
 .label {
@@ -66,30 +88,9 @@ input, textarea, select, .uneditable-input {
   background: rgb(255,83,130);
 }
 
-.container-fluid {
-  min-width: 728px;
-  padding-bottom: 10px;
-  border-top: 3px double #ddd;
+.label.notice a {
+  color: white;
 }
-
-.container-fluid:first-child {
-  position: relative;
-  z-index: 10;
-  padding-top: 20px;
-  border-top: none;
-}
-
-.sidebar {
-  padding-top: 20px;
-  padding-right: 19px;
-  border-right: 1px solid #dfdfdf;
-}
-
-.container-fluid > .content {
-  margin-left: 270px;
-  padding-top: 20px;
-}
-
 
 p {
   max-width: 600px;
