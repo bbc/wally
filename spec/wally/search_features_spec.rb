@@ -29,6 +29,13 @@ module Wally
       results.items.first.feature["name"].should == "Meh"
     end
 
+    it "finds features by narrative" do
+      write_feature("sample1.feature", "Feature: bla\nIn order to bananas")
+      results = SearchFeatures.new(lists_features).find(:query => "bananas")
+      results.items.size.should == 1
+      results.items.first.feature["name"].should == "bla"
+    end
+
     it "has a suggestion" do
       write_feature("sample1.feature", "Feature: Monkeys")
       results = SearchFeatures.new(lists_features).find(:query => "mnkeys")

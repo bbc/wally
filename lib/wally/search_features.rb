@@ -14,6 +14,9 @@ module Wally
         if feature["tags"]
           feature_text += " " + feature["tags"].map { |tag| tag["name"] }.join(" ")
         end
+        if feature["description"]
+          feature_text += " " + feature["description"]
+        end
         feature_data = OpenStruct.new
         feature_data.feature = feature
         feature_data.text = feature_text
