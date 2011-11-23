@@ -12,7 +12,7 @@
         %a{:href => "/features/#{search_result.feature["id"]}"}
           = search_result.feature["name"]
         %ul
-          - if search_result.scenario
+          - if search_result.scenario && search_result.scenario["id"]
             %li
               %a{:href => "/features/#{search_result.scenario["id"].gsub(";", "/scenario/")}"}
                 = search_result.scenario["name"]
