@@ -1,10 +1,11 @@
 - if params[:q]
   %h2
     = "Search for '#{params[:q]}'"
-  %p
-    Did you mean
-    %a{:href => "/search?q=#{@search_results.suggestion}"}
-      = @search_results.suggestion
+  - if @search_results.suggestion
+    %p
+      Did you mean
+      %a{:href => "/search?q=#{@search_results.suggestion}"}
+        = @search_results.suggestion
   %ul
     - @search_results.items.each do |search_result|
       %li

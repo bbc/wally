@@ -35,6 +35,13 @@ module Wally
       results.suggestion.should == "Monkeys"
     end
 
+    it "has a suggestion only when it's different from the search query" do
+      write_feature("sample1.feature", "Feature: monkeys\nScenario: feature")
+      write_feature("sample2.feature", "Feature: dogs\nScenario: Sample scenario")
+      results = SearchFeatures.new(lists_features).find(:query => "feature")
+      results.suggestion.should be_nil
+    end
+
     context "feature with multiple scenarios" do
       before do
         contents = <<-CONTENTS
