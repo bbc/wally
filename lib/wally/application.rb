@@ -7,16 +7,11 @@ configure do
   set :haml, { :ugly=>true }
 end
 
-def features_path
-  ARGV.first || "features"
-end
-
-def lists_features
-  Wally::ListsFeatures.new(features_path)
-end
-
 before do
-  @features = lists_features.features
+  features_path = ARGV.first || "features"
+  @lists_features = Wally::ListsFeatures.new(features_path)
+  @features = @lists_features.features
+  @tag_count = Wally::CountsTags.new(@lists_features).count_tags
 end
 
 get '/?' do
@@ -32,7 +27,7 @@ end
 
 get '/search/?' do
   if params[:q]
-    @search_results = Wally::SearchFeatures.new(lists_features).find(:query => params[:q])
+    @search_results = Wally::SearchFeatures.new(@lists_features).find(:query => params[:q])
   end
   haml :search
 end

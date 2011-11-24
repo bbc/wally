@@ -1,5 +1,5 @@
-@tag1 @tag2
+@batman @robin
 Feature: Has lots of tags
 
-@tag @another_tag
+@green_lantern @spider_man
 Scenario: Also has some tags
