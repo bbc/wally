@@ -6,4 +6,4 @@ Feature: Notifications
   Scenario: Ten @wip tags
     Given a feature file with 10 @wip tags
     When I visit the home page
-    Then I should see a notification that says "You have 10 @wip tags"
+    Then I should see a notification that says "You have 10 @wip tags :("
