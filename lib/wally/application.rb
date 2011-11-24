@@ -13,6 +13,7 @@ before do
   @features = @lists_features.features
   @tag_count = Wally::CountsTags.new(@lists_features).count_tags
   @excessive_wip_tags = @tag_count["@wip"] >= 10
+  @scenario_count = @features.to_s.scan(/scenario/).length
 end
 
 get '/?' do

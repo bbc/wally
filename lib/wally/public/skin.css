@@ -72,6 +72,7 @@ input, textarea, select, .uneditable-input {
 .sidebar {
   padding-top: 18px;
   padding-right: 19px;
+  padding-bottom: 200px;
   border-right: 1px solid #dfdfdf;
 }
 

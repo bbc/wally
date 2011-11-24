@@ -18,17 +18,23 @@
     %div.container-fluid
       %div.sidebar
         %h2
-          Features
+          Features (#{@features.length})
         %ul
           - @features.each do |feature|
             = haml :feature_link, {:locals => {:feature => feature}, :layout => false}
         - if @tag_count.any?
-          %h2 Tags
+          %h2 Tags (#{@tag_count.length})
           %ul
             - @tag_count.each do |tag, count|
               %li
                 %a{:href => "/search?q=#{tag}"}
                   = "#{tag} (#{count})"
+        %h2
+          Scenarios (#{@scenario_count})
+        %ul
+          %li
+            %a{:href => "/search?q="}
+              = "list all"
       %div.content
         - if @excessive_wip_tags
           %div.alert-message.error

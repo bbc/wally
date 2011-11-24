@@ -44,3 +44,9 @@ end
 Then /^the features are ordered alphabetically$/ do
   page.body.should =~ /Elle Macpherson.*Jessica-Jane Clement.*Kate Moss.*Katie Price/m
 end
+
+
+Then /^I should see a heading "([^"]*)"$/ do |text|
+  page.body.should have_content text
+end
+
