@@ -7,18 +7,21 @@
       %a{:href => "/search?q=#{@search_results.suggestion}"}
         = @search_results.suggestion
   %ul
-    - @search_results.items.each do |search_result|
+    - @search_results.items.map {|i| i.feature["id"] }.uniq.each do |current_feature_id|
+      - root_search_result = @search_results.items.find { |r| r.feature["id"] == current_feature_id }
       %li
-        %a{:href => "/features/#{search_result.feature["id"]}"}
-          = search_result.feature["name"]
-        - if search_result.feature["tags"]
-          = haml :tag_links, {:locals => {:tags => search_result.feature["tags"]}, :layout => false}
+        %a{:href => "/features/#{root_search_result.feature["id"]}"}
+          = root_search_result.feature["name"]
+        - if root_search_result.feature["tags"]
+          = haml :tag_links, {:locals => {:tags => root_search_result.feature["tags"]}, :layout => false}
+
         %ul
-          - if search_result.scenario && search_result.scenario["id"]
-            %li
-              %a{:href => "/features/#{search_result.scenario["id"].gsub(";", "/scenario/")}"}
-                = search_result.scenario["name"]
-              - if search_result.scenario["tags"]
-                = haml :tag_links, {:locals => {:tags => search_result.scenario["tags"]}, :layout => false}
+          - @search_results.items.select { |r| r.feature["id"] == current_feature_id }.each do |search_result|
+            - if search_result.scenario && search_result.scenario["id"]
+              %li
+                %a{:href => "/features/#{search_result.scenario["id"].gsub(";", "/scenario/")}"}
+                  = search_result.scenario["name"]
+                - if search_result.scenario["tags"]
+                  = haml :tag_links, {:locals => {:tags => search_result.scenario["tags"]}, :layout => false}
 - else
   %p Where's Wally? This search returned no results.
