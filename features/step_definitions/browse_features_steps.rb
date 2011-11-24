@@ -1,7 +1,3 @@
-When /^I visit the home page$/ do
-  visit "/"
-end
-
 Then /^I should see a link to my sample features$/ do
   page.should have_link "Kate Moss", :href => "/features/kate-moss"
   page.should have_link "Katie Price", :href => "/features/katie-price"

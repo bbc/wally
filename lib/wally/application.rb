@@ -12,6 +12,7 @@ before do
   @lists_features = Wally::ListsFeatures.new(features_path)
   @features = @lists_features.features
   @tag_count = Wally::CountsTags.new(@lists_features).count_tags
+  @excessive_wip_tags = @tag_count["@wip"] >= 10
 end
 
 get '/?' do
