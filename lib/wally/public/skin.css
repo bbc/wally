@@ -103,6 +103,11 @@ p {
   content: "\2691";
 }
 
+section.scenarios {
+    border-bottom: 1px dotted #ccc;
+    margin-bottom: 18px;
+}
+
 section.feature p:first-child {
     white-space: pre-wrap
 }
