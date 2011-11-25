@@ -38,5 +38,17 @@ module Wally
         "@tag3" => 1
       }
     end
+
+    it "counts feature tags irrespective of their case" do
+      write_feature("feature-1.feature", "@tag1\nFeature: Feature 1")
+      write_feature("feature-2.feature", "@TAG1\nFeature: Feature 2")
+      write_feature("feature-3.feature", "Feature: Feature 2\n@TAG1\nScenario: Scenario 1")
+      lists_features = ListsFeatures.new("application-features")
+
+      CountsTags.new(lists_features).count_tags.should == {
+        "@tag1" => 3
+      }
+    end
+
   end
 end

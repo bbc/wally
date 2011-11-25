@@ -8,14 +8,14 @@ module Wally
       @lists_features.features.inject(Hash.new(0)) do |tag_count, feature|
         if feature["tags"]
           feature["tags"].each do |tag|
-            tag_count[tag["name"]] += 1
+            tag_count[tag["name"].downcase] += 1
           end
         end
         if feature["elements"]
           feature["elements"].each do |element|
             if element["tags"]
               element["tags"].each do |tag|
-                tag_count[tag["name"]] += 1
+                tag_count[tag["name"].downcase] += 1
               end
             end
           end
