@@ -48,7 +48,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h2 {
-  padding-bottom: 18px;
+  padding-bottom: 9px;
 }
 
 input, textarea, select, .uneditable-input {
@@ -100,7 +100,14 @@ p {
 .step-keyword:before {
   color: #FF5382;
   font-size: 15px;
-  content: "\2691";
+}
+
+.step-keyword {
+    color: #777;
+    font-style: italic;
+    min-width: 40px;
+    display: inline-block;
+    padding-left: 10px;
 }
 
 section.scenarios {
@@ -109,5 +116,8 @@ section.scenarios {
 }
 
 section.feature p:first-child {
-    white-space: pre-wrap
+    white-space: pre-wrap;
+    border-left: 1px solid #999;
+    padding-left: 10px;
+    margin-left: -10px;
 }

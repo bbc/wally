@@ -1,12 +1,16 @@
+%h2
+  = @feature["name"]
 - if @feature["path"]
-  %pre
-    = @feature["path"]
-- if @feature["description"]
-  %h2 Scenarios
+  %p
+    from
+    %em
+      = @feature["path"]
   %section{:class=>"scenarios"}
     %section{:class => 'feature'}
       :markdown
         #{@feature["description"]}
+- if @feature["description"]
+  %h2 Scenarios
   %ul
     - get_sorted_scenarios(@feature).each do |scenario|
       %li

@@ -37,6 +37,7 @@ end
 get '/features/:feature/scenario/:scenario/?'  do  |feature_id, scenario_id|
   @features.each do |feature|
     if feature["id"] == feature_id
+      @feature = feature
       feature["elements"].each do |element|
         if element["type"] == "background"
           @background = element
