@@ -17,14 +17,15 @@
           %input.btn{:type => "submit", :id => "search", :value => "Search"}
     %div.container-fluid
       %div.sidebar
-        %h2
-          Scenarios (#{@scenario_count})
         %ul
           %li
             %a{:href => "/search?q="}
-              = "list all"
+              = "Scenarios (#{@scenario_count})"
+          %li
+            %a{:href => "/"}
+              = "Features (#{@features.length})"             
         %h2
-          Features (#{@features.length})
+          Features
         %ul
           - @features.each do |feature|
             = haml :feature_link, {:locals => {:feature => feature}, :layout => false}
