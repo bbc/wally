@@ -8,7 +8,7 @@
   - @background["steps"].each do |step|
     %p
       %span.step-keyword
-        = step["keyword"]
+        &= step["keyword"]
       = step["name"]
 - if @scenario["steps"]
   %h3 Steps:
@@ -16,7 +16,20 @@
     %p
       %span.step-keyword
         = step["keyword"]
-      = step["name"]
+      = escape_once(step["name"])
 - else
   %p{:class => 'nosteps'}
     = "Where's Wally? This scenario has no steps!?"
+- if @scenario["examples"]
+  %h3 Examples:
+  %table
+    - @scenario["examples"].first["rows"].each_with_index do |row, index|
+      %tr
+        - row["cells"].each do |cell|
+          - if index === 0
+            %th
+              = escape_once(cell)
+          - else
+            %td
+              = escape_once(cell)
+

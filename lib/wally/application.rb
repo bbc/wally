@@ -20,7 +20,7 @@ get '/?' do
   haml :index
 end
 
-get '/features/:feature/?' do |feature|
+get '/features/:feature/?' do |feature|  
   @features.each do |feature_hash|
    @feature = feature_hash if feature_hash["id"] == feature
   end
@@ -41,7 +41,7 @@ get '/features/:feature/scenario/:scenario/?'  do  |feature_id, scenario_id|
         if element["type"] == "background"
           @background = element
         end
-        if element["type"] == "scenario" && element["id"] == "#{feature_id};#{scenario_id}"
+        if (element["type"] == "scenario" || element["type"] == "scenario_outline") && element["id"] == "#{feature_id};#{scenario_id}"
           @scenario = element
         end
       end
@@ -59,7 +59,7 @@ def get_sorted_scenarios(feature)
 
   if feature["elements"]
     feature["elements"].each do |element|
-      if element["type"] == "scenario"
+      if element["type"] == "scenario" || element["type"] == "scenario_outline"
         scenarios << element
       end
     end
