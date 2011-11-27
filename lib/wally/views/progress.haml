@@ -1,0 +1,16 @@
+%h2
+  Progress
+- #{@scenario_count}
+- if @tag_count.any?
+  %p
+    This project has #{@scenario_count} scenarios, of which :-
+  %ul{:class => 'chartlist'}
+    - @tag_count.each do |tag, count|
+    - ratio = (count.to_f / @scenario_count) * 100
+      %li
+        %a{:href => "/search?q=#{tag}"}
+          = "#{tag} (#{ratio.ceil}%)"
+        %span{:class => "count #{tag}"}
+          = ratio.ceil
+        %span{:class => 'index', :style => "width: #{ratio.ceil}%"}
+          = ratio

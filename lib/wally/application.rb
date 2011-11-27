@@ -27,6 +27,10 @@ get '/features/:feature/?' do |feature|
   haml :feature
 end
 
+get '/progress/?' do
+  haml :progress
+end
+
 get '/search/?' do
   if params[:q]
     @search_results = Wally::SearchFeatures.new(@lists_features).find(:query => params[:q])
