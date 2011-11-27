@@ -18,6 +18,12 @@
     %div.container-fluid
       %div.sidebar
         %h2
+          Scenarios (#{@scenario_count})
+        %ul
+          %li
+            %a{:href => "/search?q="}
+              = "list all"
+        %h2
           Features (#{@features.length})
         %ul
           - @features.each do |feature|
@@ -29,12 +35,6 @@
               %li
                 %a{:href => "/search?q=#{tag}"}
                   = "#{tag} (#{count})"
-        %h2
-          Scenarios (#{@scenario_count})
-        %ul
-          %li
-            %a{:href => "/search?q="}
-              = "list all"
       %div.content
         - if @excessive_wip_tags
           %div.alert-message.error
