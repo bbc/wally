@@ -1,6 +1,7 @@
 - if params[:q]
-  %h2
-    = "Search for '#{params[:q]}'"
+  - if params[:q].length > 0
+    %h2
+      = "Search for '#{params[:q]}'"
   - if @search_results.suggestion
     %p
       Did you mean
@@ -23,5 +24,10 @@
                   = search_result.scenario["name"]
                 - if search_result.scenario["tags"]
                   = haml :tag_links, {:locals => {:tags => search_result.scenario["tags"]}, :layout => false}
+  - if @search_results.items.length === 0
+    %p{:class => 'alert-message error'}
+      Where's Wally? This search returned no results.
+
 - else
-  %p Where's Wally? This search returned no results.
+  %p{:class => 'alert-message error'}
+    Where's Wally? This search returned no results.

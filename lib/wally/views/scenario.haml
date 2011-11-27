@@ -1,5 +1,8 @@
 %h2
-  = @scenario["keyword"] + ": " + @scenario["name"]
+  %a{"href" => '../'}
+    = @feature["name"]
+%h2
+  = @scenario["name"]
   - if @scenario["tags"]
     = haml :tag_links, {:locals => {:tags => @scenario["tags"]}, :layout => false}
 - if @background
@@ -18,11 +21,11 @@
         = step["keyword"]
       = escape_once(step["name"])
 - else
-  %p{:class => 'nosteps'}
+  %p{:class => 'alert-message error'}
     = "Where's Wally? This scenario has no steps!?"
 - if @scenario["examples"]
   %h3 Examples:
-  %table
+  %table{:class => 'zebra-striped'}
     - @scenario["examples"].first["rows"].each_with_index do |row, index|
       %tr
         - row["cells"].each do |cell|
