@@ -24,13 +24,16 @@
           %li
             %a{:href => "/"}
               = "Features (#{@features.length})"             
+          %li
+            %a{:href => "/progress"}
+              Progress
         %h2
           Features
         %ul
           - @features.each do |feature|
             = haml :feature_link, {:locals => {:feature => feature}, :layout => false}
         - if @tag_count.any?
-          %h2 Tags (#{@tag_count.length})
+          %h2 Tags
           %ul
             - @tag_count.each do |tag, count|
               %li
