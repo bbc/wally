@@ -28,4 +28,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "capybara"
   s.add_development_dependency "rspec"
   s.add_development_dependency "fakefs"
+  s.add_development_dependency "launchy"
 end
