@@ -7,6 +7,9 @@ require "wally/feature"
 
 configure do
   set :haml, { :ugly=>true }
+  Mongoid.configure do |config|
+    config.master = Mongo::Connection.new.db("wally")
+  end
 end
 
 configure :test do
@@ -15,17 +18,24 @@ configure :test do
   end
 end
 
-before do
-  features_path = ARGV.first || "features"
-  @lists_features = Wally::ListsFeatures.new(features_path)
-  @features = @lists_features.features
-  @tag_count = Wally::CountsTags.new(@lists_features).count_tags
-  @excessive_wip_tags = @tag_count["@wip"] >= 10
-  @scenario_count = @features.to_s.scan(/scenario/).length
+def lists_features
+  Wally::ListsFeatures.new
 end
 
-post '/features/?' do
-  if File.exist?(".wally") && params[:authentication_code] == File.read(".wally")
+def tag_count
+  Wally::CountsTags.new(lists_features).count_tags
+end
+
+def excessive_wip_tags
+  tag_count["@wip"] >= 10
+end
+
+def scenario_count
+  lists_features.features.to_s.scan(/scenario/).length
+end
+
+put '/features/?' do
+  if File.exist?(".wally") && params[:authentication_code] == File.read(".wally").strip
     Wally::Feature.delete_all
 
     JSON.parse(request.body.read).each do |json|
@@ -45,7 +55,7 @@ get '/?' do
 end
 
 get '/features/:feature/?' do |feature|
-  @features.each do |feature_hash|
+  lists_features.features.each do |feature_hash|
    @feature = feature_hash if feature_hash["id"] == feature
   end
   haml :feature
@@ -57,13 +67,13 @@ end
 
 get '/search/?' do
   if params[:q]
-    @search_results = Wally::SearchFeatures.new(@lists_features).find(:query => params[:q])
+    @search_results = Wally::SearchFeatures.new(lists_features).find(:query => params[:q])
   end
   haml :search
 end
 
 get '/features/:feature/scenario/:scenario/?'  do  |feature_id, scenario_id|
-  @features.each do |feature|
+  lists_features.features.each do |feature|
     if feature["id"] == feature_id
       @feature = feature
       feature["elements"].each do |element|

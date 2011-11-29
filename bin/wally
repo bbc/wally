@@ -1,5 +1,15 @@
 #!/usr/bin/env ruby
 $:.unshift(File.dirname(__FILE__) + '/../lib') unless $:.include?(File.dirname(__FILE__) + '/../lib')
 
-require "wally"
-Sinatra::Application.run!
+if ARGV.first == "server"
+  require "wally"
+  Sinatra::Application.run!
+elsif ARGV[0] == "push"
+  require "restclient"
+  require "json"
+  features = []
+  Dir.glob(File.join("#{ARGV[2]}", "**/*.feature")).each do |feature_path|
+    features << {:path => feature_path, :content => File.read(feature_path)}
+  end
+  RestClient.put "#{ARGV[1]}/features/?authentication_code=#{File.read(".wally")}", features.to_json
+end

@@ -11,10 +11,6 @@ end
 
 module Wally
   class ListsFeatures
-    def initialize feature_path
-      @feature_path = feature_path
-    end
-
     def features
       features = []
       Feature.all.each do |feature|

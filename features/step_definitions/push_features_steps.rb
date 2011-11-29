@@ -14,7 +14,7 @@ end
 
 When /^I put data to \/features with the authentication code$/ do
   data = [{:path => "feature-name.feature", :content => "Feature: Feature Name"}].to_json
-  page.driver.post "/features?authentication_code=#{@authentication_code}", data
+  page.driver.put "/features?authentication_code=#{@authentication_code}", data
 end
 
 Then /^I should get a (\d+) http status$/ do |status|

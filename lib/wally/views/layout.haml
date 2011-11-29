@@ -20,28 +20,28 @@
         %ul
           %li
             %a{:href => "/search?q="}
-              = "Scenarios (#{@scenario_count})"
+              = "Scenarios (#{scenario_count})"
           %li
             %a{:href => "/"}
-              = "Features (#{@features.length})"             
+              = "Features (#{lists_features.features.length})"
           %li
             %a{:href => "/progress"}
               Progress
         %h2
           Features
         %ul
-          - @features.each do |feature|
+          - lists_features.features.each do |feature|
             = haml :feature_link, {:locals => {:feature => feature}, :layout => false}
-        - if @tag_count.any?
+        - if tag_count.any?
           %h2 Tags
           %ul
-            - @tag_count.each do |tag, count|
+            - tag_count.each do |tag, count|
               %li
                 %a{:href => "/search?q=#{tag}"}
                   = "#{tag} (#{count})"
       %div.content
-        - if @excessive_wip_tags
+        - if excessive_wip_tags
           %div.alert-message.error
             %p
-              = "You have #{@tag_count["@wip"]} @wip tags :("
+              = "You have #{tag_count["@wip"]} @wip tags :("
         = yield
