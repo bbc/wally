@@ -24,6 +24,22 @@ before do
   @scenario_count = @features.to_s.scan(/scenario/).length
 end
 
+post '/features/?' do
+  if File.exist?(".wally") && params[:authentication_code] == File.read(".wally")
+    Wally::Feature.delete_all
+
+    JSON.parse(request.body.read).each do |json|
+      feature = Wally::Feature.new
+      feature.path = json["path"]
+      feature.content = json["content"]
+      feature.save
+    end
+    halt 201
+  else
+    error 403
+  end
+end
+
 get '/?' do
   haml :index
 end
