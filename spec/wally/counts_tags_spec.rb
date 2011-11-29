@@ -4,23 +4,20 @@ require "wally/counts_tags"
 
 module Wally
   describe CountsTags do
-    before do
-      FileUtils.mkdir_p "application-features"
-    end
-
     after do
-      FileUtils.rm_rf "application-features"
+      Feature.delete_all
     end
 
-    def write_feature(name, contents)
-      File.open("application-features/#{name}", "w") do |file|
-        file.write(contents)
-      end
+    def create_feature path, content
+      feature = Feature.new
+      feature.path = path
+      feature.content = content
+      feature.save
     end
 
     it "counts feature tags" do
-      write_feature("feature-1.feature", "@tag1 @tag2\nFeature: Feature 1")
-      write_feature("feature-2.feature", "@tag2 @tag2\nFeature: Feature 2")
+      create_feature("feature-1.feature", "@tag1 @tag2\nFeature: Feature 1")
+      create_feature("feature-2.feature", "@tag2 @tag2\nFeature: Feature 2")
       lists_features = ListsFeatures.new("application-features")
 
       CountsTags.new(lists_features).count_tags.should == {
@@ -30,8 +27,8 @@ module Wally
     end
 
     it "counts scenario tags" do
-      write_feature("feature-1.feature", "Feature: Feature 1\n@tag1@tag1\nScenario: Scenario 1")
-      write_feature("feature-2.feature", "Feature: Feature 2\n@tag3@tag1\nScenario: Scenario 1")
+      create_feature("feature-1.feature", "Feature: Feature 1\n@tag1@tag1\nScenario: Scenario 1")
+      create_feature("feature-2.feature", "Feature: Feature 2\n@tag3@tag1\nScenario: Scenario 1")
       lists_features = ListsFeatures.new("application-features")
       CountsTags.new(lists_features).count_tags.should == {
         "@tag1" => 3,
@@ -40,9 +37,9 @@ module Wally
     end
 
     it "counts feature tags irrespective of their case" do
-      write_feature("feature-1.feature", "@tag1\nFeature: Feature 1")
-      write_feature("feature-2.feature", "@TAG1\nFeature: Feature 2")
-      write_feature("feature-3.feature", "Feature: Feature 2\n@TAG1\nScenario: Scenario 1")
+      create_feature("feature-1.feature", "@tag1\nFeature: Feature 1")
+      create_feature("feature-2.feature", "@TAG1\nFeature: Feature 2")
+      create_feature("feature-3.feature", "Feature: Feature 2\n@TAG1\nScenario: Scenario 1")
       lists_features = ListsFeatures.new("application-features")
 
       CountsTags.new(lists_features).count_tags.should == {

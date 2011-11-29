@@ -8,18 +8,13 @@ require "fakefs/spec_helpers"
 
 Capybara.app = Sinatra::Application
 
-Before do
-  ARGV.clear
-  ARGV << "application-features"
-  FileUtils.mkdir_p("application-features")
-end
-
 After do
-  FileUtils.rm_rf("application-features")
+  Wally::Feature.delete_all
 end
 
-def create_feature_file(file_name, contents)
-  File.open(File.join("application-features", file_name), "w") do |file|
-    file.write(contents)
-  end
+def create_feature path, content
+  feature = Wally::Feature.new
+  feature.path = path
+  feature.content = content
+  feature.save
 end

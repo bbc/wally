@@ -1,10 +1,18 @@
 $:.unshift(File.join(File.dirname(__FILE__)))
-require 'sinatra'
-require 'haml'
-require 'rdiscount'
+require "sinatra"
+require "haml"
+require "rdiscount"
+require "mongoid"
+require "wally/feature"
 
 configure do
   set :haml, { :ugly=>true }
+end
+
+configure :test do
+  Mongoid.configure do |config|
+    config.master = Mongo::Connection.new.db("wally_test")
+  end
 end
 
 before do
@@ -20,7 +28,7 @@ get '/?' do
   haml :index
 end
 
-get '/features/:feature/?' do |feature|  
+get '/features/:feature/?' do |feature|
   @features.each do |feature_hash|
    @feature = feature_hash if feature_hash["id"] == feature
   end

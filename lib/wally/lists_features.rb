@@ -17,9 +17,9 @@ module Wally
 
     def features
       features = []
-      Dir.glob("#{@feature_path}/*.feature").each do |path|
-        gherkinese = parse_gherkin(File.read(path))
-        gherkinese["path"] = path
+      Feature.all.each do |feature|
+        gherkinese = parse_gherkin(feature.content)
+        gherkinese["path"] = feature.path
         features << gherkinese
       end
       features.sort {|a,b| a["name"] <=> b["name"]}

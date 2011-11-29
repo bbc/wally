@@ -3,24 +3,21 @@ require 'fileutils'
 
 module Wally
   describe ListsFeatures do
-    before do
-      FileUtils.mkdir_p "application-features"
+    after do
+      Feature.delete_all
     end
 
-    after do
-      FileUtils.rm_rf "application-features"
+    def create_feature path, content
+      feature = Feature.new
+      feature.path = path
+      feature.content = content
+      feature.save
     end
 
     it "returns a list of alphabeticaly ordered features" do
-      File.open("application-features/1-sample.feature", "w") do |file|
-        file.write "Feature: Zorro"
-      end
-      File.open("application-features/2-sample.feature", "w") do |file|
-        file.write "Feature: Malgor"
-      end
-      File.open("application-features/3-sample.feature", "w") do |file|
-        file.write "Feature: Adrian"
-      end
+      create_feature("1-sample.feature", "Feature: Zorro")
+      create_feature("2-sample.feature", "Feature: Malgor")
+      create_feature("3-sample.feature", "Feature: Adrian")
       lists_features = ListsFeatures.new("application-features")
       lists_features.features.size.should == 3
       lists_features.features[0]["name"].should == "Adrian"

@@ -1,6 +1,6 @@
 Given /^a feature file named "([^"]*)" with the contents:$/ do |filename, contents|
   @contents = contents
-  create_feature_file(filename, @contents)
+  create_feature(filename, @contents)
 end
 
 When /^I visit the home page$/ do
