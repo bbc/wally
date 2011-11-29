@@ -11,5 +11,5 @@ elsif ARGV[0] == "push"
   Dir.glob(File.join("#{ARGV[2]}", "**/*.feature")).each do |feature_path|
     features << {:path => feature_path, :content => File.read(feature_path)}
   end
-  RestClient.put "#{ARGV[1]}/features/?authentication_code=#{File.read(".wally")}", features.to_json
+  RestClient.put "#{ARGV[1]}/features/?authentication_code=#{File.read(".wally")}", features.to_json, {:content_type => :json, :accept => :json}
 end
