@@ -15,5 +15,4 @@ Feature: Counts
     """
     When I visit the home page
     Then I should see a heading "Features (1)"
-    And I should see a heading "Tags (4)"
-    And I should see a heading "Scenarios (2)"
+    And I should see a heading "Tags (5)"

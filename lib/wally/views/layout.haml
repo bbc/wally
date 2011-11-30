@@ -18,22 +18,23 @@
     %div.container-fluid
       %div.sidebar
         %ul
-          %li
-            %a{:href => "/search?q="}
-              = "Scenarios (#{scenario_count})"
-          %li
-            %a{:href => "/"}
-              = "Features (#{lists_features.features.length})"
+          -# %li
+          -#   %a{:href => "/search?q="}
+          -#     = "Scenarios (#{scenario_count})"
+          -# %li
+          -#   %a{:href => "/"}
+          -#     = "Features (#{lists_features.features.length})"
           %li
             %a{:href => "/progress"}
               Progress
         %h2
-          Features
+          = "Features (#{lists_features.features.length})"
         %ul
           - lists_features.features.each do |feature|
             = haml :feature_link, {:locals => {:feature => feature}, :layout => false}
         - if tag_count.any?
-          %h2 Tags
+          %h2
+            = "Tags (#{tag_count.values.sum})"
           %ul
             - tag_count.each do |tag, count|
               %li
