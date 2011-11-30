@@ -18,7 +18,7 @@ module Wally
       create_feature("1-sample.feature", "Feature: Zorro")
       create_feature("2-sample.feature", "Feature: Malgor")
       create_feature("3-sample.feature", "Feature: Adrian")
-      lists_features = ListsFeatures.new("application-features")
+      lists_features = ListsFeatures.new
       lists_features.features.size.should == 3
       lists_features.features[0]["name"].should == "Adrian"
       lists_features.features[1]["name"].should == "Malgor"

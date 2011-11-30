@@ -14,7 +14,7 @@ module Wally
     end
 
     let :lists_features do
-      ListsFeatures.new("application-features")
+      ListsFeatures.new
     end
 
     it "finds features containing text" do
