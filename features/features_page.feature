@@ -1,7 +1,7 @@
 Feature: Features Page 
   In order to simply view features and their intent
   As a stakeholder
-  I want a home page that display features and free-
+  I want a home page that displays features and free-form narrative
 
   
   Scenario: Links to features in alphabetical order
@@ -45,24 +45,4 @@ Feature: Features Page
     When I visit the sample feature page
     Then I should see the feature free-form narrative
 
- Scenario: View Scenario Links
-    Given a feature file named "sample.feature" with the contents:
-    """
-    Feature: Sample Feature
-      In order to get some value
-      As a person
-      I want to create value
-
-    Scenario: Sample Aidy
-      Given my name is "Aidy"
-      When I drink alcohol
-      Then I go nuts
-
-    Scenario: Sample Andrew
-      Given my name is 'Andrew'
-      When I drink alcohol
-      Then I go happy
-     """
-    When I visit the sample feature page
-    Then I should see Scenario headers as links
 
