@@ -50,4 +50,3 @@ end
 Then /^I should see a heading "([^"]*)"$/ do |text|
   page.body.should have_content text
 end
-
