@@ -48,6 +48,5 @@ end
 
 
 Then /^I should see a heading "([^"]*)"$/ do |text|
-  save_and_open_page
   page.body.should have_content text
 end
