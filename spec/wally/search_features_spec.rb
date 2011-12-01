@@ -23,14 +23,14 @@ module Wally
 
       results = SearchFeatures.new(lists_features).find(:query => "Meh")
       results.items.size.should == 1
-      results.items.first.feature["name"].should == "Meh"
+      results.items.first.object.feature["name"].should == "Meh"
     end
 
     it "finds features by narrative" do
       create_feature("sample1.feature", "Feature: bla\nIn order to bananas")
       results = SearchFeatures.new(lists_features).find(:query => "bananas")
       results.items.size.should == 1
-      results.items.first.feature["name"].should == "bla"
+      results.items.first.object.feature["name"].should == "bla"
     end
 
     it "has a suggestion" do
@@ -61,13 +61,13 @@ module Wally
       it "finds scenarios containing text" do
         results = SearchFeatures.new(lists_features).find(:query => "MATCHED")
         results.items.size.should == 1
-        results.items.first.scenario["name"].should == "Matched Scenario"
+        results.items.first.object.scenario["name"].should == "Matched Scenario"
       end
 
       it "finds scenario steps" do
         results = SearchFeatures.new(lists_features).find(:query => "DOUGHNUTS")
         results.items.size.should == 1
-        results.items.first.scenario["name"].should == "Matched Scenario"
+        results.items.first.object.scenario["name"].should == "Matched Scenario"
       end
     end
 
@@ -75,13 +75,13 @@ module Wally
       it "finds features by tag" do
         create_feature("example-feature.feature", "@tag_name\nFeature: Example Feature")
         results = SearchFeatures.new(lists_features).find(:query => "@tag_NAME")
-        results.items.first.feature["name"].should == "Example Feature"
+        results.items.first.object.feature["name"].should == "Example Feature"
       end
 
       it "finds scenarios by tag" do
         create_feature("example-feature.feature", "Feature: Example Feature\n@scenario_tag\nScenario: Example Scenario")
         results = SearchFeatures.new(lists_features).find(:query => "@scenario_TAG")
-        results.items.first.scenario["name"].should == "Example Scenario"
+        results.items.first.object.scenario["name"].should == "Example Scenario"
       end
     end
   end

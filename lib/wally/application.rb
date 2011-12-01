@@ -34,6 +34,19 @@ def scenario_count
   lists_features.features.to_s.scan(/scenario/).length
 end
 
+def highlighted_search_result_blurb search_result
+  offset = 0
+  highlighted = search_result.object.text
+  span_start = "<span class=\"search-result\">"
+  span_end = "</span>"
+  search_result.matches.each do |match|
+    highlighted.insert(match.index + offset, span_start)
+    offset += span_start.length
+    highlighted.insert(match.index + match.text.length + offset, span_end)
+  end
+  highlighted
+end
+
 put '/features/?' do
   if File.exist?(".wally") && params[:authentication_code] == File.read(".wally").strip
     Wally::Feature.delete_all

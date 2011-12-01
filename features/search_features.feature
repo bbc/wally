@@ -75,3 +75,15 @@ Feature: Search features
     When I search for "Batman"
     Then I should see "feature_tag" in the search results
     And I should see "scenario_tag" in the search results
+
+  Scenario: Higlighted search result
+    Given a feature file named "sample.feature" with the contents:
+    """
+    @feature_tag
+    Feature: Some long convoluted feature name
+    Scenario: Some long convoluted scenario name
+    """
+    And I am on the search page
+    When I search for "convoluted"
+    Then I should see the feature result highlighted
+    Then I should see the scenario result highlighted

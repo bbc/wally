@@ -18,3 +18,11 @@ Then /^I should see "([^"]*)" in the search results$/ do |text|
     page.should have_content text
   end
 end
+
+Then /^I should see the feature result highlighted$/ do
+  page.body.should include "Some long <span class=\"search-result\">convoluted</span> feature name"
+end
+
+Then /^I should see the scenario result highlighted$/ do
+  page.body.should include "Some long <span class=\"search-result\">convoluted</span> scenario name"
+end
