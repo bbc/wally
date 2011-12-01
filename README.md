@@ -4,7 +4,7 @@ Wally is a web-based Cucumber viewer and navigator.
 ## About
 The first cut of a feature is collabatively written; but it then seems to become the property of developers, who commit it to a version control system.
 
-The Product Owner or Business Analyst usually does not want to use an IDE or VCS client to view requiements. They also want to search or group features and scenarios.
+The product owner or business analyst usually does not want to use an IDE or VCS client to view requiements. They also want to search or group features and scenarios.
 
 ## What's wrong with Relish?
 Many of the ideas have been borrowed from Matt Wynne's Relish product, but we;
