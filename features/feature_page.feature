@@ -4,6 +4,17 @@ Feature: Feature Page
   I want a page that displays the feature's name,
        free-form narrative and scenario titles
 
+  Scenario: Feature Content
+    Given a feature file named "sample.feature" with the contents:
+    """
+    Feature: Sample Feature
+      In order to get some value
+      As a person
+      I want to create value
+     """
+    When I visit the sample feature page
+    Then I should see the feature free-form narrative
+
  Scenario: View Scenario Links
     Given a feature file named "sample.feature" with the contents:
     """

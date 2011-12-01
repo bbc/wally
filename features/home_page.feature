@@ -34,15 +34,5 @@ Feature: Home Page
     When I visit the sample feature page
     Then I should see "sample_tag"
 
-  Scenario: Feature Content
-    Given a feature file named "sample.feature" with the contents:
-    """
-    Feature: Sample Feature
-      In order to get some value
-      As a person
-      I want to create value
-     """
-    When I visit the sample feature page
-    Then I should see the feature free-form narrative
 
 
