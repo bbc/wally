@@ -48,4 +48,4 @@ Feature: Feature Page
     When I visit the sample feature page
     Then I should see "tag1"
     And I should see "tag2"
-
+    And TAKE THIS OUT
