@@ -9,9 +9,9 @@ configure do
   set :haml, { :ugly=>true }
 end
 
-if ENV["MONGOHQ_URL"]
+if ENV["MONGOLAB_URI"]
   Mongoid.configure do |config|
-    config.master = Mongo::Connection.from_uri(ENV["MONGOHQ_URL"]).db("wally")
+    config.master = Mongo::Connection.from_uri(ENV["MONGOLAB_URI"]).db("wally")
   end
 else
   Mongoid.configure do |config|
