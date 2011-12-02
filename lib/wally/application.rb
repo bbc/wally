@@ -43,6 +43,7 @@ def highlighted_search_result_blurb search_result
     highlighted.insert(match.index + offset, span_start)
     offset += span_start.length
     highlighted.insert(match.index + match.text.length + offset, span_end)
+    offset += span_end.length
   end
   highlighted
 end

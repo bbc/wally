@@ -166,3 +166,7 @@ section.feature p:first-child {
 .chartlist li:hover { 
   background: #EFEFEF; 
 }
+
+.search-result {
+  background: #F7F77E;
+}

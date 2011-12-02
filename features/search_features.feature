@@ -80,10 +80,16 @@ Feature: Search features
     Given a feature file named "sample.feature" with the contents:
     """
     @feature_tag
-    Feature: Some long convoluted feature name
-    Scenario: Some long convoluted scenario name
+    Feature: Some long WORD feature word name
+    Scenario: Some long WORD scenario word name
     """
     And I am on the search page
-    When I search for "convoluted"
-    Then I should see the feature result highlighted
-    Then I should see the scenario result highlighted
+    When I search for "word"
+    Then I should see the html:
+    """
+    Some long <span class="search-result">WORD</span> feature <span class="search-result">word</span> name
+    """
+    And I should see the html:
+    """
+    Some long <span class="search-result">WORD</span> scenario <span class="search-result">word</span> name
+    """
