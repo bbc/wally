@@ -8,9 +8,15 @@ require "wally/feature"
 configure do
   set :haml, { :ugly=>true }
 
+end
+
+if ENV["MONGOHQ_URL"]
+  Mongoid.configure do |config|
+    config.url = ENV["MONGOHQ_URL"] if ENV["MONGOHQ_URL"]
+  end
+else
   Mongoid.configure do |config|
     config.master = Mongo::Connection.new.db("wally")
-    config.url = ENV["MONGOHQ_URL"] if ENV["MONGOHQ_URL"]
   end
 end
 
@@ -66,7 +72,7 @@ end
 
 get '/features/:feature/?' do |feature|
   lists_features.features.each do |feature_hash|
-   @feature = feature_hash if feature_hash["id"] == feature
+    @feature = feature_hash if feature_hash["id"] == feature
   end
   haml :feature
 end
