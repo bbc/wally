@@ -22,6 +22,8 @@
             - if search_result.object.scenario && search_result.object.scenario["id"]
               %li
                 %a{:href => "/features/#{search_result.object.scenario["id"].gsub(";", "/scenario/")}"}
+                  = search_result.object.scenario["name"]
+                %p
                   = highlighted_search_result_blurb(search_result)
                 - if search_result.object.scenario["tags"]
                   = haml :tag_links, {:locals => {:tags => search_result.object.scenario["tags"]}, :layout => false}
