@@ -1,2 +1,2 @@
 require './lib/wally'
-run Sinatra::Application
+run Sinatra::Application.new
