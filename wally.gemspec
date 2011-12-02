@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "rdiscount"
   s.add_runtime_dependency "gherkin"
   s.add_runtime_dependency "komainu"
-  s.add_runtime_dependency "mongoid"
+  s.add_runtime_dependency "mongo_mapper"
   s.add_runtime_dependency "bson_ext"
   s.add_runtime_dependency "rest-client"
 

@@ -2,21 +2,20 @@ $:.unshift(File.join(File.dirname(__FILE__)))
 require "sinatra"
 require "haml"
 require "rdiscount"
-require "mongoid"
+require "mongo_mapper"
 require "wally/feature"
 
 configure do
   set :haml, { :ugly=>true }
 end
 
-if ENV["MONGOLAB_URI"]
-  Mongoid.configure do |config|
-    config.master = Mongo::Connection.from_uri(ENV["MONGOLAB_URI"]).db("wally")
-  end
+if ENV['MONGOHQ_URL']
+  uri = URI.parse(ENV['MONGOHQ_URL'])
+  MongoMapper.connection = Mongo::Connection.from_uri(ENV['MONGOHQ_URL'])
+  MongoMapper.database = uri.path.gsub(/^\//, '')
 else
-  Mongoid.configure do |config|
-    config.master = Mongo::Connection.new.db("wally")
-  end
+  MongoMapper.connection = Mongo::Connection.new('localhost')
+  MongoMapper.database = "wally"
 end
 
 def lists_features
