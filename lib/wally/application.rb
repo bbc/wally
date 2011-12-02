@@ -11,7 +11,7 @@ end
 
 if ENV["MONGOHQ_URL"]
   Mongoid.configure do |config|
-    config.master = Mongo::Connection.from_uri(ENV["MONGOHQ_URL"]).db
+    config.master = Mongo::Connection.from_uri(ENV["MONGOHQ_URL"]).db("wally")
   end
 else
   Mongoid.configure do |config|
