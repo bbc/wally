@@ -7,12 +7,11 @@ require "wally/feature"
 
 configure do
   set :haml, { :ugly=>true }
-
 end
 
 if ENV["MONGOHQ_URL"]
   Mongoid.configure do |config|
-    config.url = ENV["MONGOHQ_URL"] if ENV["MONGOHQ_URL"]
+    config.master = Mongo::Connection.from_uri(ENV["MONGOHQ_URL"])
   end
 else
   Mongoid.configure do |config|
