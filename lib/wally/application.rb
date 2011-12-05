@@ -38,14 +38,18 @@ end
 def highlighted_search_result_blurb search_result
   offset = 0
   highlighted = search_result.object.text
-  span_start = "<span class=\"search-result\">"
-  span_end = "</span>"
+  span_start = "!!SPAN_START!!"
+  span_end = "!!SPAN_END!!"
   search_result.matches.each do |match|
     highlighted.insert(match.index + offset, span_start)
     offset += span_start.length
     highlighted.insert(match.index + match.text.length + offset, span_end)
     offset += span_end.length
   end
+  require "cgi"
+  highlighted = CGI::escapeHTML(highlighted)
+  highlighted.gsub!(span_start, "<span class=\"search-result\">")
+  highlighted.gsub!(span_end, "</span>")
   highlighted
 end
 
