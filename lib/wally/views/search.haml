@@ -13,20 +13,20 @@
       %li
         %a{:href => "/features/#{root_search_result.object.feature["id"]}"}
           = root_search_result.object.feature["name"]
-        %p
-          != highlighted_search_result_blurb root_search_result
         - if root_search_result.object.feature["tags"]
           = haml :tag_links, {:locals => {:tags => root_search_result.object.feature["tags"]}, :layout => false}
+        %p
+          != highlighted_search_result_blurb root_search_result
         %ul
           - @search_results.items.select { |r| r.object.feature["id"] == current_feature_id }.each do |search_result|
             - if search_result.object.scenario && search_result.object.scenario["id"]
               %li
                 %a{:href => "/features/#{search_result.object.scenario["id"].gsub(";", "/scenario/")}"}
                   = search_result.object.scenario["name"]
-                %p
-                  != highlighted_search_result_blurb(search_result)
                 - if search_result.object.scenario["tags"]
                   = haml :tag_links, {:locals => {:tags => search_result.object.scenario["tags"]}, :layout => false}
+                %p
+                  != highlighted_search_result_blurb(search_result)
   - if @search_results.items.empty?
     %p{:class => 'alert-message error'}
       Where's Wally? This search returned no results.
