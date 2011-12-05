@@ -7,7 +7,7 @@ if ARGV.first == "server"
 elsif ARGV[0] == "push"
   require "restclient"
   require "json"
-  require "wally"
+  require "wally/parses_features"
   features = []
   Dir.glob(File.join("#{ARGV[2]}", "**/*.feature")).each do |feature_path|
     begin
