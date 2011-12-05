@@ -1,6 +1,8 @@
 # Wally
 Wally is a web-based Cucumber viewer and navigator.
 
+An example of Wally in action is at [bbc-wally.heroku.com](http://bbc-wally.heroku.com).
+
 ## About
 The first cut of a feature is collabatively written; but it then seems to become the property of developers, who commit it to a version control system.
 

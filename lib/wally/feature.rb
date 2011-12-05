@@ -1,7 +1,8 @@
 module Wally
   class Feature
-    include Mongoid::Document
-    field :path, :type => String
-    field :content, :type => String
+    include MongoMapper::Document
+
+    key :path, String
+    key :content, String
   end
 end
