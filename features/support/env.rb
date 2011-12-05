@@ -15,6 +15,6 @@ end
 def create_feature path, content
   feature = Wally::Feature.new
   feature.path = path
-  feature.content = content
+  feature.gherkin = Wally::ParsesFeatures.new.parse(content)
   feature.save
 end

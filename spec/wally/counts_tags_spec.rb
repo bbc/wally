@@ -1,6 +1,5 @@
 require File.join(File.dirname(__FILE__), "..", "spec_helper")
 require 'fileutils'
-require "wally/counts_tags"
 
 module Wally
   describe CountsTags do
@@ -11,7 +10,7 @@ module Wally
     def create_feature path, content
       feature = Feature.new
       feature.path = path
-      feature.content = content
+      feature.gherkin = ParsesFeatures.new.parse(content)
       feature.save
     end
 

@@ -9,7 +9,7 @@ module Wally
     def create_feature path, content
       feature = Feature.new
       feature.path = path
-      feature.content = content
+      feature.gherkin = ParsesFeatures.new.parse(content)
       feature.save
     end
 

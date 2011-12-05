@@ -13,7 +13,8 @@ Given /^I have a \.wally authentication file$/ do
 end
 
 When /^I put data to \/features with the authentication code$/ do
-  data = [{:path => "feature-name.feature", :content => "Feature: Feature Name"}].to_json
+  gherkin = Wally::ParsesFeatures.new.parse("Feature: Feature Name")
+  data = [{:path => "feature-name.feature", :gherkin => gherkin}].to_json
   page.driver.put "/features?authentication_code=#{@authentication_code}", data
 end
 

@@ -14,5 +14,5 @@ Feature: Counts
     Scenario: Tag Bar 2
     """
     When I visit the home page
-    Then I should see a heading "Features (1)"
-    And I should see a heading "Tags (5)"
+    Then I should see "Features (1)"
+    And I should see "Tags (5)"

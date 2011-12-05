@@ -55,7 +55,7 @@ put '/features/?' do
     JSON.parse(request.body.read).each do |json|
       feature = Wally::Feature.new
       feature.path = json["path"]
-      feature.content = json["content"]
+      feature.gherkin = json["gherkin"]
       feature.save
     end
     halt 201

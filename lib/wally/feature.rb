@@ -3,6 +3,6 @@ module Wally
     include MongoMapper::Document
 
     key :path, String
-    key :content, String
+    key :gherkin, Hash
   end
 end

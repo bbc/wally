@@ -14,22 +14,11 @@ module Wally
     def features
       features = []
       Feature.all.each do |feature|
-        gherkinese = parse_gherkin(feature.content)
-        gherkinese["path"] = feature.path
-        features << gherkinese
+        gherkin = feature.gherkin
+        gherkin["path"] = feature.path
+        features << gherkin
       end
       features.sort {|a,b| a["name"] <=> b["name"]}
-    end
-
-    private
-
-    def parse_gherkin(text)
-      io = StringIO.new
-      formatter = Gherkin::Formatter::JSONFormatter.new(io)
-      parser = Gherkin::Parser::Parser.new(formatter, false, 'root')
-      parser.parse(text, nil, 0)
-      hash = formatter.to_hash
-      hash
     end
   end
 end

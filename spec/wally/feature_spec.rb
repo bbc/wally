@@ -6,19 +6,18 @@ module Wally
       Feature.delete_all
     end
 
-    it "stores a feature" do
-      feature = Feature.new
-      feature.content = "Feature: Bla"
-      feature.save
-
-      Feature.all.first.content.should == "Feature: Bla"
-    end
+    subject { Feature.new }
 
     it "stores a feature path" do
-      feature = Feature.new
-      feature.path = "hello.feature"
-      feature.save
+      subject.path = "hello.feature"
+      subject.save
       Feature.all.first.path.should == "hello.feature"
+    end
+
+    it "stores the feature content" do
+      subject.gherkin = {"meh" => "ble"}
+      subject.save
+      Feature.all.first.gherkin.should == {"meh" => "ble"}
     end
   end
 end
