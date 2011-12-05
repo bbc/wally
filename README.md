@@ -19,7 +19,7 @@ Many of the ideas have been borrowed from Matt Wynne's Relish product, but we;
 * Include a project progress bar (based on tags)
 
 ### Installation
-* Install [mongodb](http://www.mongodb.org/display/DOCS/Quickstart "mongodb") (> v. 2.0.0) and ensure it is running  
+* Install [mongodb](http://www.mongodb.org/display/DOCS/Quickstart "mongodb") and ensure it is running  
 * gem install wally  
 * wally server  
 * http://localhost:4567/  
