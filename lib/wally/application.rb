@@ -4,6 +4,7 @@ require "haml"
 require "rdiscount"
 require "mongo_mapper"
 require "wally/feature"
+require "cgi"
 
 configure do
   set :haml, { :ugly=>true }
@@ -46,7 +47,6 @@ def highlighted_search_result_blurb search_result
     highlighted.insert(match.index + match.text.length + offset, span_end)
     offset += span_end.length
   end
-  require "cgi"
   highlighted = CGI::escapeHTML(highlighted)
   highlighted.gsub!(span_start, "<span class=\"search-result\">")
   highlighted.gsub!(span_end, "</span>")
