@@ -18,15 +18,6 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_runtime_dependency "sinatra"
-  s.add_runtime_dependency "haml"
-  s.add_runtime_dependency "rdiscount"
-  s.add_runtime_dependency "gherkin"
-  s.add_runtime_dependency "komainu"
-  s.add_runtime_dependency "mongo_mapper"
-  s.add_runtime_dependency "bson_ext"
-  s.add_runtime_dependency "rest-client"
-
   s.add_development_dependency "cucumber"
   s.add_development_dependency "capybara"
   s.add_development_dependency "rspec"
