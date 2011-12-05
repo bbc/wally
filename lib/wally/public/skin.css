@@ -163,6 +163,23 @@ section.feature p:first-child {
   overflow: hidden; 
   line-height: 2em;
 }
+
+.chartlist .notstarted a {
+  color: #C43C35;
+}
+
+.chartlist .wip a {
+  color: #F89406;
+}
+
+.chartlist .notstarted .index {
+  background: #EE736D;
+}
+
+.chartlist .wip .index {
+  background: #F8B04B;
+}
+
 .chartlist li:hover { 
   background: #EFEFEF; 
 }
