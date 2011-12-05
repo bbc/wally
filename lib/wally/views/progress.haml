@@ -6,10 +6,10 @@
   %ul{:class => 'chartlist'}
     - tag_count.each do |tag, count|
     - ratio = (count.to_f / scenario_count) * 100
-      %li
+      %li{:class => "#{tag.downcase.gsub("@", "")}"}
         %a{:href => "/search?q=#{tag}"}
           = "#{tag} (#{ratio.ceil}%)"
         %span{:class => "count #{tag}"}
           = ratio.ceil
-        %span{:class => 'index', :style => "width: #{ratio.ceil}%"}
+        %span{:class => "index", :style => "width: #{ratio.ceil}%"}
           = ratio
