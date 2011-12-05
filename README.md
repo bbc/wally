@@ -1,8 +1,6 @@
 # Wally
 Wally is a web-based Cucumber viewer and navigator.
 
-An example of Wally in action is at [bbc-wally.heroku.com](http://bbc-wally.heroku.com).
-
 ## About
 The first cut of a feature is collabatively written; but it then seems to become the property of developers, who commit it to a version control system.
 
@@ -21,7 +19,7 @@ Many of the ideas have been borrowed from Matt Wynne's Relish product, but we;
 * Include a project progress bar (based on tags)
 
 ### Installation
-* Install [mongodb](http://www.mongodb.org/display/DOCS/Quickstart "mongodb") (> v. 2.0.0) and ensure it is running  
+* Install [mongodb](http://www.mongodb.org/display/DOCS/Quickstart "mongodb") and ensure it is running  
 * gem install wally  
 * wally server  
 * http://localhost:4567/  
