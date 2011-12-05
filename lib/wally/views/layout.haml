@@ -18,19 +18,13 @@
     %div.container-fluid
       %div.sidebar
         %ul
-          -# %li
-          -#   %a{:href => "/search?q="}
-          -#     = "Scenarios (#{scenario_count})"
-          -# %li
-          -#   %a{:href => "/"}
-          -#     = "Features (#{lists_features.features.length})"
           %li
             %a{:href => "/progress"}
               Progress
         %h2
-          = "Features (#{lists_features.features.length})"
+          = "Features (#{Wally::Feature.all.count})"
         %ul
-          - lists_features.features.each do |feature|
+          - Wally::Feature.sort(:name).each do |feature|
             = haml :feature_link, {:locals => {:feature => feature}, :layout => false}
         - if tag_count.any?
           %h2

@@ -1,15 +1,14 @@
 %h2
-  = @feature["name"]
-- if @feature["path"]
-  %p
-    from
-    %em
-      = @feature["path"]
-  %section{:class=>"scenarios"}
-    %section{:class => 'feature'}
-      :markdown
-        #{@feature["description"]}
-- if @feature["description"]
+  = @feature.gherkin["name"]
+%p
+  from
+  %em
+    = @feature.path
+%section{:class=>"scenarios"}
+  %section{:class => 'feature'}
+    :markdown
+      #{@feature.gherkin["description"]}
+- if @feature.gherkin["description"]
   %h2 Scenarios
   %ul
     - get_sorted_scenarios(@feature).each do |scenario|

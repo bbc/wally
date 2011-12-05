@@ -19,5 +19,11 @@ module Wally
       subject.save
       Feature.all.first.gherkin.should == {"meh" => "ble"}
     end
+
+    it "stores the feature name" do
+      subject.gherkin = {"name" => "ble"}
+      subject.save
+      Feature.all.first.name.should == "ble"
+    end
   end
 end

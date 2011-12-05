@@ -5,14 +5,14 @@ module Wally
     end
 
     def count_tags
-      @lists_features.features.inject(Hash.new(0)) do |tag_count, feature|
-        if feature["tags"]
-          feature["tags"].each do |tag|
+      @lists_features.all.inject(Hash.new(0)) do |tag_count, feature|
+        if feature.gherkin["tags"]
+          feature.gherkin["tags"].each do |tag|
             tag_count[tag["name"].downcase] += 1
           end
         end
-        if feature["elements"]
-          feature["elements"].each do |element|
+        if feature.gherkin["elements"]
+          feature.gherkin["elements"].each do |element|
             if element["tags"]
               element["tags"].each do |tag|
                 tag_count[tag["name"].downcase] += 1

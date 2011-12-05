@@ -1,6 +1,6 @@
 %li
-  %a{:href => "/features/#{feature["id"]}"}
-    = feature["name"]
-  - if feature["tags"]
-    - tags = feature["tags"]
+  %a{:href => "/features/#{feature.gherkin["id"]}"}
+    = feature.gherkin["name"]
+  - if feature.gherkin["tags"]
+    - tags = feature.gherkin["tags"]
     = haml :tag_links, {:locals => {:tags => tags}, :layout => false}

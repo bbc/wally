@@ -1,6 +1,6 @@
 %h2
   %a{"href" => '../'}
-    = @feature["name"]
+    = @feature.gherkin["name"]
 %h2
   = @scenario["name"]
   - if @scenario["tags"]

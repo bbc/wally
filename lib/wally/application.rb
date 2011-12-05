@@ -18,12 +18,8 @@ else
   MongoMapper.database = "wally"
 end
 
-def lists_features
-  Wally::ListsFeatures.new
-end
-
 def tag_count
-  Wally::CountsTags.new(lists_features).count_tags
+  Wally::CountsTags.new(Wally::Feature).count_tags
 end
 
 def excessive_wip_tags
@@ -31,7 +27,12 @@ def excessive_wip_tags
 end
 
 def scenario_count
-  lists_features.features.to_s.scan(/scenario/).length
+  Feature.all.inject(0) do |count, feature|
+    if feature.gherkin["elements"]
+      count += feature.gherkin["elements"].select { |e| e["type"] == "scenario" }
+    end
+    count
+  end
 end
 
 def highlighted_search_result_blurb search_result
@@ -68,9 +69,9 @@ get '/?' do
   haml :index
 end
 
-get '/features/:feature/?' do |feature|
-  lists_features.features.each do |feature_hash|
-    @feature = feature_hash if feature_hash["id"] == feature
+get '/features/:feature/?' do |id|
+  Wally::Feature.all.each do |feature|
+    @feature = feature if feature.gherkin["id"] == id
   end
   haml :feature
 end
@@ -81,16 +82,16 @@ end
 
 get '/search/?' do
   if params[:q]
-    @search_results = Wally::SearchFeatures.new(lists_features).find(:query => params[:q])
+    @search_results = Wally::SearchFeatures.new(Wally::Feature).find(:query => params[:q])
   end
   haml :search
 end
 
 get '/features/:feature/scenario/:scenario/?'  do  |feature_id, scenario_id|
-  lists_features.features.each do |feature|
-    if feature["id"] == feature_id
+  Wally::Feature.all.each do |feature|
+    if feature.gherkin["id"] == feature_id
       @feature = feature
-      feature["elements"].each do |element|
+      feature.gherkin["elements"].each do |element|
         if element["type"] == "background"
           @background = element
         end
@@ -110,8 +111,8 @@ end
 def get_sorted_scenarios(feature)
   scenarios = []
 
-  if feature["elements"]
-    feature["elements"].each do |element|
+  if feature.gherkin["elements"]
+    feature.gherkin["elements"].each do |element|
       if element["type"] == "scenario" || element["type"] == "scenario_outline"
         scenarios << element
       end

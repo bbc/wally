@@ -10,7 +10,13 @@ elsif ARGV[0] == "push"
   require "wally"
   features = []
   Dir.glob(File.join("#{ARGV[2]}", "**/*.feature")).each do |feature_path|
-    gherkin = Wally::ParsesFeatures.new.parse(File.read(feature_path))
+    begin
+      gherkin = Wally::ParsesFeatures.new.parse(File.read(feature_path))
+    rescue
+      puts "Couldn't parse '#{feature_path}'"
+      puts "Contents:"
+      puts File.read(feature_path)
+    end
     features << {:path => feature_path, :gherkin => gherkin}
   end
   RestClient.put "#{ARGV[1]}/features/?authentication_code=#{File.read(".wally")}", features.to_json, {:content_type => :json, :accept => :json}
