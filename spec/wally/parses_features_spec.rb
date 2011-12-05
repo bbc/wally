@@ -13,5 +13,16 @@ module Wally
         "uri"         => nil
       }
     end
+
+    it "raises nice errors" do
+      feature = "!WEFFW"
+      error = nil
+      begin
+        ParsesFeatures.new.parse(feature)
+      rescue Exception => e
+        error = e
+      end
+      error.should_not be_nil
+    end
   end
 end

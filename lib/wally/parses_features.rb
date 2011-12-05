@@ -15,9 +15,16 @@ module Wally
       io = StringIO.new
       formatter = Gherkin::Formatter::JSONFormatter.new(io)
       parser = Gherkin::Parser::Parser.new(formatter, false, 'root')
-      parser.parse(text, nil, 0)
+      begin
+        parser.parse(text, nil, 0)
+      rescue Exception => e
+        raise FeatureParseException.new
+      end
       hash = formatter.to_hash
       hash
     end
+  end
+
+  class FeatureParseException < StandardError
   end
 end
