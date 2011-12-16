@@ -6,7 +6,7 @@ Then /^I should see a link to my sample features$/ do
 end
 
 When /^I visit the sample feature page$/ do
-  visit "/features/sample-feature"
+  visit "/project/features/sample-feature"
 end
 
 Then /^I should see the feature free\-form narrative$/ do
@@ -17,14 +17,13 @@ end
 
 Then /^I should see Scenario headers as links$/ do
   page.body.should have_content "Scenarios"
-  page.should have_link "Sample Aidy", :href => "/features/sample-feature/scenario/sample-aidy"
-  page.should have_link "Sample Andrew", :href => "/features/sample-feature/scenario/sample-andrew"
+  page.should have_link "Sample Aidy", :href => "/project/features/sample-feature/scenario/sample-aidy"
+  page.should have_link "Sample Andrew", :href => "/project/features/sample-feature/scenario/sample-andrew"
 end
 
 When /^click on a scenario header link$/ do
   page.click_link "Sample Aidy"
 end
-
 
 Then /^a page appears with the scenario content$/ do
   page.body.should have_content "Sample Aidy"

@@ -4,6 +4,10 @@ require "haml"
 require "rdiscount"
 require "mongo_mapper"
 require "wally/feature"
+require "wally/project"
+require "wally/search_features"
+require "wally/counts_tags"
+require "wally/parses_features"
 require "cgi"
 
 configure do
@@ -19,8 +23,12 @@ else
   MongoMapper.database = "wally"
 end
 
+def current_project
+  Wally::Project.first(:name => params[:project])
+end
+
 def tag_count
-  Wally::CountsTags.new(Wally::Feature).count_tags
+  Wally::CountsTags.new(current_project).count_tags
 end
 
 def excessive_wip_tags
@@ -28,9 +36,9 @@ def excessive_wip_tags
 end
 
 def scenario_count
-  Feature.all.inject(0) do |count, feature|
+  current_project.features.inject(0) do |count, feature|
     if feature.gherkin["elements"]
-      count += feature.gherkin["elements"].select { |e| e["type"] == "scenario" }
+      count += feature.gherkin["elements"].select { |e| e["type"] == "scenario" }.size
     end
     count
   end
@@ -53,53 +61,52 @@ def highlighted_search_result_blurb search_result
   highlighted
 end
 
-put '/features/?' do
+put '/:project/features/?' do
   if File.exist?(".wally") && params[:authentication_code] == File.read(".wally").strip
-    Wally::Feature.delete_all
+    current_project.delete if current_project
+    project = Wally::Project.create(:name => "project")
 
     JSON.parse(request.body.read).each do |json|
-      feature = Wally::Feature.new
-      feature.path = json["path"]
-      feature.gherkin = json["gherkin"]
-      feature.save
+      project.features << Wally::Feature.new(:path => json["path"], :gherkin => json["gherkin"])
     end
+    project.save
     halt 201
   else
     error 403
   end
 end
 
-get '/?' do
+get '/:project/?' do
   haml :index
 end
 
-get '/features/:feature/?' do |id|
-  Wally::Feature.all.each do |feature|
-    @feature = feature if feature.gherkin["id"] == id
+get '/:project/features/:feature/?' do
+  current_project.features.each do |feature|
+    @feature = feature if feature.gherkin["id"] == params[:feature]
   end
   haml :feature
 end
 
-get '/progress/?' do
+get '/:project/progress/?' do
   haml :progress
 end
 
-get '/search/?' do
+get '/:project/search/?' do
   if params[:q]
-    @search_results = Wally::SearchFeatures.new(Wally::Feature).find(:query => params[:q])
+    @search_results = Wally::SearchFeatures.new(current_project).find(:query => params[:q])
   end
   haml :search
 end
 
-get '/features/:feature/scenario/:scenario/?'  do  |feature_id, scenario_id|
-  Wally::Feature.all.each do |feature|
-    if feature.gherkin["id"] == feature_id
+get '/:project/features/:feature/scenario/:scenario/?' do
+  current_project.features.each do |feature|
+    if feature.gherkin["id"] == params[:feature]
       @feature = feature
       feature.gherkin["elements"].each do |element|
         if element["type"] == "background"
           @background = element
         end
-        if (element["type"] == "scenario" || element["type"] == "scenario_outline") && element["id"] == "#{feature_id};#{scenario_id}"
+        if (element["type"] == "scenario" || element["type"] == "scenario_outline") && element["id"] == "#{params[:feature]};#{params[:scenario]}"
           @scenario = element
         end
       end
@@ -109,7 +116,7 @@ get '/features/:feature/scenario/:scenario/?'  do  |feature_id, scenario_id|
 end
 
 def get_scenario_url(scenario)
-  url = "/features/#{scenario["id"].gsub(";", "/scenario/")}"
+  url = "/#{current_project.name}/features/#{scenario["id"].gsub(";", "/scenario/")}"
 end
 
 def get_sorted_scenarios(feature)

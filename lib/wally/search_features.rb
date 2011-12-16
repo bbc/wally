@@ -9,7 +9,7 @@ module Wally
     def find(query)
       searchables = []
 
-      @lists_features.all.each do |feature|
+      @lists_features.features.each do |feature|
         feature_text = feature.gherkin["name"]
         if feature.gherkin["tags"]
           feature_text += " " + feature.gherkin["tags"].map { |tag| tag["name"] }.join(" ")

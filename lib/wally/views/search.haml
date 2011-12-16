@@ -5,13 +5,13 @@
   - if @search_results.suggestion
     %p
       Did you mean
-      %a{:href => "/search?q=#{@search_results.suggestion}"}
+      %a{:href => "/#{current_project.name}/search?q=#{@search_results.suggestion}"}
         = @search_results.suggestion
   %ul
     - @search_results.items.map {|i| i.object.feature["id"] }.uniq.each do |current_feature_id|
       - root_search_result = @search_results.items.find { |r| r.object.feature["id"] == current_feature_id }
       %li
-        %a{:href => "/features/#{root_search_result.object.feature["id"]}"}
+        %a{:href => "/#{current_project.name}/features/#{root_search_result.object.feature["id"]}"}
           = root_search_result.object.feature["name"]
         - if root_search_result.object.feature["tags"]
           = haml :tag_links, {:locals => {:tags => root_search_result.object.feature["tags"]}, :layout => false}
@@ -21,7 +21,7 @@
           - @search_results.items.select { |r| r.object.feature["id"] == current_feature_id }.each do |search_result|
             - if search_result.object.scenario && search_result.object.scenario["id"]
               %li
-                %a{:href => "/features/#{search_result.object.scenario["id"].gsub(";", "/scenario/")}"}
+                %a{:href => "/#{current_project.name}/features/#{search_result.object.scenario["id"].gsub(";", "/scenario/")}"}
                   = search_result.object.scenario["name"]
                 - if search_result.object.scenario["tags"]
                   = haml :tag_links, {:locals => {:tags => search_result.object.scenario["tags"]}, :layout => false}

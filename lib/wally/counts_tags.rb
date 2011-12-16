@@ -1,11 +1,11 @@
 module Wally
   class CountsTags
-    def initialize lists_features
-      @lists_features = lists_features
+    def initialize project
+      @project = project
     end
 
     def count_tags
-      @lists_features.all.inject(Hash.new(0)) do |tag_count, feature|
+      @project.features.inject(Hash.new(0)) do |tag_count, feature|
         if feature.gherkin["tags"]
           feature.gherkin["tags"].each do |tag|
             tag_count[tag["name"].downcase] += 1

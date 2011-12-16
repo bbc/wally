@@ -1,6 +1,6 @@
 module Wally
   class Feature
-    include MongoMapper::Document
+    include MongoMapper::EmbeddedDocument
 
     key :path, String
     key :gherkin, Hash

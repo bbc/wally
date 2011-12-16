@@ -3,42 +3,35 @@ require File.join(File.dirname(__FILE__), "..", "spec_helper")
 module Wally
   describe SearchFeatures do
     after do
-      Feature.delete_all
-    end
-
-    def create_feature path, content
-      feature = Feature.new
-      feature.path = path
-      feature.gherkin = ParsesFeatures.new.parse(content)
-      feature.save
+      Project.delete_all
     end
 
     it "finds features containing text" do
-      create_feature("sample1.feature", "Feature: Bla")
-      create_feature("sample2.feature", "Feature: Meh")
+      create_feature("project", "sample1.feature", "Feature: Bla")
+      create_feature("project", "sample2.feature", "Feature: Meh")
 
-      results = SearchFeatures.new(Feature).find(:query => "Meh")
+      results = SearchFeatures.new(project("project")).find(:query => "Meh")
       results.items.size.should == 1
       results.items.first.object.feature["name"].should == "Meh"
     end
 
     it "finds features by narrative" do
-      create_feature("sample1.feature", "Feature: bla\nIn order to bananas")
-      results = SearchFeatures.new(Feature).find(:query => "bananas")
+      create_feature("project", "sample1.feature", "Feature: bla\nIn order to bananas")
+      results = SearchFeatures.new(project("project")).find(:query => "bananas")
       results.items.size.should == 1
       results.items.first.object.feature["name"].should == "bla"
     end
 
     it "has a suggestion" do
-      create_feature("sample1.feature", "Feature: Monkeys")
-      results = SearchFeatures.new(Feature).find(:query => "mnkeys")
+      create_feature("project", "sample1.feature", "Feature: Monkeys")
+      results = SearchFeatures.new(project("project")).find(:query => "mnkeys")
       results.suggestion.should == "Monkeys"
     end
 
     it "has a suggestion only when it's different from the search query" do
-      create_feature("sample1.feature", "Feature: monkeys\nScenario: feature")
-      create_feature("sample2.feature", "Feature: dogs\nScenario: Sample scenario")
-      results = SearchFeatures.new(Feature).find(:query => "feature")
+      create_feature("project", "sample1.feature", "Feature: monkeys\nScenario: feature")
+      create_feature("project", "sample2.feature", "Feature: dogs\nScenario: Sample scenario")
+      results = SearchFeatures.new(project("project")).find(:query => "feature")
       results.suggestion.should be_nil
     end
 
@@ -51,17 +44,17 @@ module Wally
             Given I eat some doughnuts
           Scenario: Another Scenario
         CONTENTS
-        create_feature("sample1.feature", contents)
+        create_feature("project", "sample1.feature", contents)
       end
 
       it "finds scenarios containing text" do
-        results = SearchFeatures.new(Feature).find(:query => "MATCHED")
+        results = SearchFeatures.new(project("project")).find(:query => "MATCHED")
         results.items.size.should == 1
         results.items.first.object.scenario["name"].should == "Matched Scenario"
       end
 
       it "finds scenario steps" do
-        results = SearchFeatures.new(Feature).find(:query => "DOUGHNUTS")
+        results = SearchFeatures.new(project("project")).find(:query => "DOUGHNUTS")
         results.items.size.should == 1
         results.items.first.object.scenario["name"].should == "Matched Scenario"
       end
@@ -69,14 +62,14 @@ module Wally
 
     context "feature with tags" do
       it "finds features by tag" do
-        create_feature("example-feature.feature", "@tag_name\nFeature: Example Feature")
-        results = SearchFeatures.new(Feature).find(:query => "@tag_NAME")
+        create_feature("project", "example-feature.feature", "@tag_name\nFeature: Example Feature")
+        results = SearchFeatures.new(project("project")).find(:query => "@tag_NAME")
         results.items.first.object.feature["name"].should == "Example Feature"
       end
 
       it "finds scenarios by tag" do
-        create_feature("example-feature.feature", "Feature: Example Feature\n@scenario_tag\nScenario: Example Scenario")
-        results = SearchFeatures.new(Feature).find(:query => "@scenario_TAG")
+        create_feature("project", "example-feature.feature", "Feature: Example Feature\n@scenario_tag\nScenario: Example Scenario")
+        results = SearchFeatures.new(project("project")).find(:query => "@scenario_TAG")
         results.items.first.object.scenario["name"].should == "Example Scenario"
       end
     end

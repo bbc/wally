@@ -3,7 +3,7 @@ Given /^a feature file with (\d+) @wip tags$/ do |wip_tag_count|
   1.upto(wip_tag_count.to_i) do |number|
     contents += "@wip\nScenario: Scenario #{number}\n"
   end
-  create_feature("sample1.feature", contents)
+  create_feature("project", "sample1.feature", contents)
 end
 
 Then /^I should see a notification that says "([^"]*)"$/ do |text|
