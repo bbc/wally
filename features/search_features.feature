@@ -15,9 +15,9 @@ Feature: Search features
 
     Examples:
       | query        | feature name   | url                      |
-      | Sample       | Sample Feature |/features/sample-feature  |
-      | sAmPlE       | Sample Feature |/features/sample-feature  |
-      | @QA          | Sample Feature |/features/sample-feature  |
+      | Sample       | Sample Feature |/project/features/sample-feature  |
+      | sAmPlE       | Sample Feature |/project/features/sample-feature  |
+      | @QA          | Sample Feature |/project/features/sample-feature  |
 
   Scenario: Search feature narrative
     Given a feature file named "sample.feature" with the contents:
@@ -29,7 +29,7 @@ Feature: Search features
     """
     And I am on the search page
     When I search for "donkey"
-    Then I should see a search result link to "Sample Feature" with the url "/features/sample-feature"
+    Then I should see a search result link to "Sample Feature" with the url "/project/features/sample-feature"
 
   Scenario: Search scenario name
     Given a feature file named "sample.feature" with the contents:
@@ -39,7 +39,7 @@ Feature: Search features
     """
     And I am on the search page
     When I search for "Sample Scenario"
-    Then I should see a search result link to "Sample Scenario" with the url "/features/sample-feature/scenario/sample-scenario"
+    Then I should see a search result link to "Sample Scenario" with the url "/project/features/sample-feature/scenario/sample-scenario"
 
   Scenario: Search scenario steps
     Given a feature file named "sample.feature" with the contents:
@@ -50,7 +50,7 @@ Feature: Search features
     """
     And I am on the search page
     When I search for "I do something"
-    Then I should see a search result link to "Sample Scenario" with the url "/features/sample-feature/scenario/sample-scenario"
+    Then I should see a search result link to "Sample Scenario" with the url "/project/features/sample-feature/scenario/sample-scenario"
 
   Scenario: Search suggests other searches
     Given a feature file named "sample.feature" with the contents:
@@ -60,7 +60,7 @@ Feature: Search features
     And I am on the search page
     When I search for "btman"
     Then I should see "Did you mean"
-    And I should see a search result link to "Batman" with the url "/search?q=Batman"
+    And I should see a search result link to "Batman" with the url "/project/search?q=Batman"
 
   Scenario: Search displays tags
     Given a feature file named "sample.feature" with the contents:

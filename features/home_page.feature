@@ -1,9 +1,8 @@
-Feature: Home Page 
+Feature: Home Page
   In order to simply view a project's complete story set
   As a stakeholder
-  I want a home page that displays all features 
+  I want a home page that displays all features
 
-  
   Scenario: Links to features in alphabetical order
     Given a feature file named "kate_moss.feature" with the contents:
     """
@@ -30,9 +29,6 @@ Feature: Home Page
     """
     @sample_tag
     Feature: Sample Feature
-     """
+    """
     When I visit the sample feature page
     Then I should see "sample_tag"
-
-
-
