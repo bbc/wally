@@ -1,4 +1,4 @@
-Feature: Home Page
+Feature: Project Home Page
   In order to simply view a project's complete story set
   As a stakeholder
   I want a home page that displays all features
