@@ -13,7 +13,7 @@ Feature: List Tags
     @tag3 @multiple
     Scenario: Tag Scenario 2
     """
-    When I visit the home page
+    When I visit the project page
     Then I should see a link to "@tag1 (1)" with the url "/project/search?q=@tag1"
     And I should see a link to "@tag2 (1)" with the url "/project/search?q=@tag2"
     And I should see a link to "@tag3 (1)" with the url "/project/search?q=@tag3"

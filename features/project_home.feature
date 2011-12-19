@@ -20,15 +20,6 @@ Feature: Project Home Page
     """
     Feature: Elle Macpherson
     """
-    When I visit the home page
+    When I visit the project page
     Then I should see a link to my sample features
     And the features are ordered alphabetically
-
-  Scenario: Display feature tags
-    Given a feature file named "sample.feature" with the contents:
-    """
-    @sample_tag
-    Feature: Sample Feature
-    """
-    When I visit the sample feature page
-    Then I should see "sample_tag"

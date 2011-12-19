@@ -3,8 +3,12 @@ Given /^a feature file named "([^"]*)" with the contents:$/ do |filename, conten
   create_feature("project", filename, @contents)
 end
 
-When /^I visit the home page$/ do
+When /^I visit the project page$/ do
   visit "/project"
+end
+
+When /^I visit the sample feature page$/ do
+  visit "/project/features/sample-feature"
 end
 
 Then /^I should see a link to "([^"]*)" with the url "([^"]*)"$/ do |text, url|

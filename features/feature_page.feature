@@ -1,10 +1,9 @@
 Feature: Feature Page
   In order to view a feature and its intent
   As a stakeholder
-  I want a page that displays the feature's name,
-       free-form narrative and scenario titles
+  I want a page that displays the feature's name, free-form narrative and scenario titles
 
-  Scenario: Feature Content
+  Scenario: Content
     Given a feature file named "sample.feature" with the contents:
     """
     Feature: Sample Feature
@@ -15,7 +14,16 @@ Feature: Feature Page
     When I visit the sample feature page
     Then I should see the feature free-form narrative
 
- Scenario: View Scenario Links
+  Scenario: Tags
+    Given a feature file named "sample.feature" with the contents:
+    """
+    @sample_tag
+    Feature: Sample Feature
+    """
+    When I visit the sample feature page
+    Then I should see "sample_tag"
+
+ Scenario: Scenario Links
     Given a feature file named "sample.feature" with the contents:
     """
     Feature: Sample Feature
@@ -35,7 +43,7 @@ Feature: Feature Page
      """
     When I visit the sample feature page
     Then I should see Scenario headers as links
-    
+
   Scenario: Sort Scenario Links in Alphabetical Order
     Given a feature file named "sample.feature" with the contents:
     """
@@ -44,18 +52,18 @@ Feature: Feature Page
       Scenario: C
       Scenario: I
       Scenario: N
-     """
+    """
     When I visit the sample feature page
-   Then the scenario links are sorted
+    Then the scenario links are sorted
 
-  Scenario: View Scenario Tags - Feature Page
+  Scenario: Scenario Tags
     Given a feature file named "sample.feature" with the contents:
     """
     Feature: Sample Feature
 
     @tag1 @tag2
     Scenario: Sample Aidy
-     """
+    """
     When I visit the sample feature page
     Then I should see "tag1"
     And I should see "tag2"

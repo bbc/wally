@@ -16,5 +16,5 @@ Feature: Push Features To Server
   Scenario: Pushed features show up on home page
     Given I have a .wally authentication file
     When I put data to /project/features with the authentication code
-    And I visit the home page
+    And I visit the project page
     Then I should see the uploaded feature
