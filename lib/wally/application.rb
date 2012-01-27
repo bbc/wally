@@ -77,7 +77,7 @@ put '/:project/features/?' do
 end
 
 get '/:project/?' do
-  haml :index
+  haml :project 
 end
 
 get '/:project/features/:feature/?' do
