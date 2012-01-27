@@ -1,0 +1,6 @@
+- if Wally::Project.all.empty?
+  %p Welcome to Wally. Please upload some features
+
+- Wally::Project.all.each do |project|
+  %a{:href => "/#{project.name}"}
+    = project.name

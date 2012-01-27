@@ -76,6 +76,10 @@ put '/:project/features/?' do
   end
 end
 
+get '/' do
+  haml :index, :layout => false
+end
+
 get '/:project/?' do
   haml :project 
 end
