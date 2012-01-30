@@ -20,11 +20,13 @@ Many of the ideas have been borrowed from Matt Wynne's Relish product, but we;
 
 ### Installation
 * Install [mongodb](http://www.mongodb.org/display/DOCS/Quickstart "mongodb") and ensure it is running  (e.g. '~ $ ./mongodb-xxxxx-xxxx-x.x.x/bin/mongod')
-* gem install wally  
+* gem install wally 
+
+### Usage
 * wally server  
 * http://localhost:4567/  
 * create a '.wally' file and enter any authentication text you like  
-* wally push http://localhost:4567/ feature_dir  
+* wally push http://localhost:4567/project-name feature-dir  
 
 
 ## Wally?
