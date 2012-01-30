@@ -64,7 +64,7 @@ end
 put '/:project/features/?' do
   if File.exist?(".wally") && params[:authentication_code] == File.read(".wally").strip
     current_project.delete if current_project
-    project = Wally::Project.create(:name => "project")
+    project = Wally::Project.create(:name => params[:project])
 
     JSON.parse(request.body.read).each do |json|
       project.features << Wally::Feature.new(:path => json["path"], :gherkin => json["gherkin"])

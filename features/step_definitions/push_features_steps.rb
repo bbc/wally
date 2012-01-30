@@ -12,16 +12,20 @@ Given /^I have a \.wally authentication file$/ do
   end
 end
 
-When /^I put data to \/project\/features with the authentication code$/ do
-  gherkin = Wally::ParsesFeatures.new.parse("Feature: Feature Name")
-  data = [{:path => "feature-name.feature", :gherkin => gherkin}].to_json
-  page.driver.put "/project/features?authentication_code=#{@authentication_code}", data
-end
-
 Then /^I should get a (\d+) http status$/ do |status|
   page.driver.status_code.should eql status.to_i
 end
 
 Then /^I should see the uploaded feature$/ do
   page.body.should have_content "Feature Name"
+end
+
+When /^I put data to \/my_project_name\/features with the authentication code$/ do
+  gherkin = Wally::ParsesFeatures.new.parse("Feature: Feature Name")
+  data = [{:path => "feature-name.feature", :gherkin => gherkin}].to_json
+  page.driver.put "/my_project_name/features?authentication_code=#{@authentication_code}", data
+end
+
+When /^I visit "([^"]*)" page$/ do |project_name|
+  visit "/#{project_name}"
 end
