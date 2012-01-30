@@ -28,11 +28,12 @@ def current_project
 end
 
 def tag_count
+  return {} if current_project.nil?
   Wally::CountsTags.new(current_project).count_tags
 end
 
 def excessive_wip_tags
-  tag_count["@wip"] >= 10
+  tag_count["@wip"] >= 10 if tag_count["@wip"]
 end
 
 def scenario_count
@@ -77,7 +78,7 @@ put '/:project/features/?' do
 end
 
 get '/' do
-  haml :index, :layout => false
+  haml :index
 end
 
 get '/:project/?' do
