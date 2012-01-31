@@ -9,10 +9,11 @@ Then /^I see: "([^"]*)"$/ do |text|
   page.should have_content text
 end
 
-Then /^should not see "([^"]*)"$/ do |text|
-  page.should_not have_content text
+Then /^I should redirected to the "([^"]*)" project page$/ do |project|
+  page.current_url.should include "/#{project}"
 end
 
-Then /^I see a link to the "([^"]*)" project$/ do |project_name|
-  page.should have_link project_name, :href => "/#{project_name}"
+When /^I select the project "([^"]*)"$/ do |project|
+  select(project, :from => "projects")
 end
+

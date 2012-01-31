@@ -78,7 +78,12 @@ put '/:project/features/?' do
 end
 
 get '/' do
-  haml :index
+  first_project = Wally::Project.first
+  if first_project
+    redirect "/#{first_project.name}"
+  else
+    haml :index
+  end
 end
 
 get '/:project/?' do

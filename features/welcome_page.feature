@@ -1,5 +1,5 @@
 Feature: Welcome Page
-  In order view a list of projects
+  As a stakeholder
   I want a welcome page
 
   Scenario: No projects
@@ -7,7 +7,8 @@ Feature: Welcome Page
     When I view the welcome page
     Then I see: "Welcome to Wally. Please upload some features"
 
-  Scenario: No projects
+  @javascript
+  Scenario: Project links on home page
     Given a feature file on the project "sample1" with the contents:
     """
     Feature: Sample1
@@ -17,6 +18,13 @@ Feature: Welcome Page
     Feature: Sample2
     """
     When I view the welcome page
-    Then I see a link to the "sample1" project
-    And I see a link to the "sample2" project
-    And should not see "Welcome to Wally"
+    And I select the project "sample2"
+    Then I should redirected to the "sample2" project page
+
+  Scenario: Redirect to first project
+    Given a feature file on the project "sample1" with the contents:
+    """
+    Feature: Sample1
+    """
+    When I view the welcome page
+    Then I should redirected to the "sample1" project page
