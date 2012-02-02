@@ -187,3 +187,10 @@ section.feature p:first-child {
 .search-result {
   background: #F7F77E;
 }
+
+.project-list {
+  float: right;
+  padding-top: 10px;
+  background: white;
+}
+
