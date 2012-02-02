@@ -20,31 +20,28 @@
             %option{:value =>  project.name} 
               = project.name
 
-      - if current_project
-        %div.search-bar
-          %form{:method => "GET", :action => "/#{current_project.name}/search", :id => "search"}
-            %input{:type => "text", :id => "q", :name => "q", :placeholder => 'text, @tags etc.', :value => @q }
-            %input.btn{:type => "submit", :id => "search", :value => "Search"}
+      %div.search-bar
+        %form{:method => "GET", :action => "/#{current_project.name}/search", :id => "search"}
+          %input{:type => "text", :id => "q", :name => "q", :placeholder => 'text, @tags etc.', :value => @q }
+          %input.btn{:type => "submit", :id => "search", :value => "Search"}
       %div.container-fluid
-        - if current_project
-          %div.sidebar
-            %ul
-              %li
-                %a{:href => "/#{current_project.name}/progress"}
-                  Progress
+        %div.sidebar
+          %ul
+            %li
+              %a{:href => "/#{current_project.name}/progress"}
+                Progress
+          %h2
+            = "Features (#{current_project.features.count})"
+          %ul
+            - current_project.features.sort{|a,b| a.name <=> b.name}.each do |feature|
+              = haml :feature_link, {:locals => {:feature => feature}, :layout => false}
             %h2
-              = "Features (#{current_project.features.count})"
+              = "Tags (#{tag_count.values.sum})"
             %ul
-              - current_project.features.sort{|a,b| a.name <=> b.name}.each do |feature|
-                = haml :feature_link, {:locals => {:feature => feature}, :layout => false}
-            - if tag_count.any?
-              %h2
-                = "Tags (#{tag_count.values.sum})"
-              %ul
-                - tag_count.each do |tag, count|
-                  %li
-                    %a{:href => "/#{current_project.name}/search?q=#{tag}"}
-                      = "#{tag} (#{count})"
+              - tag_count.each do |tag, count|
+                %li
+                  %a{:href => "/#{current_project.name}/search?q=#{tag}"}
+                    = "#{tag} (#{count})"
         %div.content
           - if excessive_wip_tags
             %div.alert-message.error
