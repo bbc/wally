@@ -18,3 +18,8 @@ end
 Then /^I should see "([^"]*)"$/ do |text|
   page.should have_content(text)
 end
+
+When /^I select "([^"]*)"$/ do |text|
+  click_link text
+end
+

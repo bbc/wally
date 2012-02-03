@@ -82,7 +82,7 @@ get '/' do
   if first_project
     redirect "/#{first_project.name}"
   else
-    markdown File.read("README.md"),  layout => false
+    markdown File.read("README.md"),  :layout => false
   end
 end
 
