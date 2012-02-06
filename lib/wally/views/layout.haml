@@ -35,13 +35,15 @@
           %ul
             - current_project.features.sort{|a,b| a.name <=> b.name}.each do |feature|
               = haml :feature_link, {:locals => {:feature => feature}, :layout => false}
-            %h2
-              = "Tags (#{tag_count.values.sum})"
-            %ul
-              - tag_count.each do |tag, count|
-                %li
-                  %a{:href => "/projects/#{current_project.name}/search?q=#{tag}"}
-                    = "#{tag} (#{count})"
+
+          %h2
+            = "Tags (#{tag_count.values.sum})"
+          %ul
+            - tag_count.each do |tag, count|
+              %li
+                %a{:href => "/projects/#{current_project.name}/search?q=#{tag}"}
+                  = "#{tag} (#{count})"
+
         %div.content
           - if excessive_wip_tags
             %div.alert-message.error
