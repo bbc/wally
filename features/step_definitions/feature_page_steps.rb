@@ -6,8 +6,8 @@ end
 
 Then /^I should see Scenario headers as links$/ do
   page.body.should have_content "Scenarios"
-  page.should have_link "Sample Aidy", :href => "/project/features/sample-feature/scenario/sample-aidy"
-  page.should have_link "Sample Andrew", :href => "/project/features/sample-feature/scenario/sample-andrew"
+  page.should have_link "Sample Aidy", :href => "/projects/project/features/sample-feature/scenario/sample-aidy"
+  page.should have_link "Sample Andrew", :href => "/projects/project/features/sample-feature/scenario/sample-andrew"
 end
 
 Then /^the scenario links are sorted$/ do

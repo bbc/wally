@@ -4,11 +4,11 @@ Given /^a feature file named "([^"]*)" with the contents:$/ do |filename, conten
 end
 
 When /^I visit the project page$/ do
-  visit "/project"
+  visit "/projects/project"
 end
 
 When /^I visit the sample feature page$/ do
-  visit "/project/features/sample-feature"
+  visit "/projects/project/features/sample-feature"
 end
 
 When /^I select "([^"]*)"$/ do |text|

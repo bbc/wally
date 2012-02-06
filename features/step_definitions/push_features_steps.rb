@@ -23,9 +23,9 @@ end
 When /^I put data to \/my_project_name\/features with the authentication code$/ do
   gherkin = Wally::ParsesFeatures.new.parse("Feature: Feature Name")
   data = [{:path => "feature-name.feature", :gherkin => gherkin}].to_json
-  page.driver.put "/my_project_name/features?authentication_code=#{@authentication_code}", data
+  page.driver.put "/projects/my_project_name/features?authentication_code=#{@authentication_code}", data
 end
 
 When /^I visit "([^"]*)" page$/ do |project_name|
-  visit "/#{project_name}"
+  visit "/projects/#{project_name}"
 end

@@ -3,7 +3,7 @@ Given /^a feature file on the project "([^"]*)" with the contents:$/ do |project
 end
 
 Given /^I visit the project page for "([^"]*)"$/ do |project|
-  visit "/#{project}"
+  visit "/projects/#{project}"
 end
 
 Then /^I should see a link to the feature "([^"]*)"$/ do |feature|

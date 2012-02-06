@@ -26,7 +26,7 @@ Many of the ideas have been borrowed from Matt Wynne's Relish product, but we;
 * wally server  
 * http://localhost:4567/  
 * create a '.wally' file and enter any authentication text you like  
-* wally push http://localhost:4567/project-name feature-dir  
+* wally push http://localhost:4567/projects/project-name feature-dir  
 
 
 ## Wally?

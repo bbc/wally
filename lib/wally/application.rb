@@ -62,7 +62,7 @@ def highlighted_search_result_blurb search_result
   highlighted
 end
 
-put '/:project/features/?' do
+put '/projects/:project/features/?' do
   if File.exist?(".wally") && params[:authentication_code] == File.read(".wally").strip
     current_project.delete if current_project
     project = Wally::Project.create(:name => params[:project])
@@ -77,38 +77,38 @@ put '/:project/features/?' do
   end
 end
 
-get '/' do
+get '/?' do
   first_project = Wally::Project.first
   if first_project
-    redirect "/#{first_project.name}"
+    redirect "/projects/#{first_project.name}"
   else
-    markdown File.read("README.md"),  :layout => false
+    markdown File.read("README.md"), :layout => false
   end
 end
 
-get '/:project/?' do
-  haml :project 
+get '/projects/:project/?' do
+  haml :project
 end
 
-get '/:project/features/:feature/?' do
+get '/projects/:project/features/:feature/?' do
   current_project.features.each do |feature|
     @feature = feature if feature.gherkin["id"] == params[:feature]
   end
   haml :feature
 end
 
-get '/:project/progress/?' do
+get '/projects/:project/progress/?' do
   haml :progress
 end
 
-get '/:project/search/?' do
+get '/projects/:project/search/?' do
   if params[:q]
     @search_results = Wally::SearchFeatures.new(current_project).find(:query => params[:q])
   end
   haml :search
 end
 
-get '/:project/features/:feature/scenario/:scenario/?' do
+get '/projects/:project/features/:feature/scenario/:scenario/?' do
   current_project.features.each do |feature|
     if feature.gherkin["id"] == params[:feature]
       @feature = feature
@@ -126,7 +126,7 @@ get '/:project/features/:feature/scenario/:scenario/?' do
 end
 
 def get_scenario_url(scenario)
-  url = "/#{current_project.name}/features/#{scenario["id"].gsub(";", "/scenario/")}"
+  url = "/projects/#{current_project.name}/features/#{scenario["id"].gsub(";", "/scenario/")}"
 end
 
 def get_sorted_scenarios(feature)

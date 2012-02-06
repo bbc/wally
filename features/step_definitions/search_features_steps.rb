@@ -1,5 +1,5 @@
 Given /^I am on the search page$/ do
-  visit "/project/search"
+  visit "/projects/project/search"
 end
 
 When /^I search for "([^"]*)"$/ do |text|
