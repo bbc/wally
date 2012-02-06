@@ -1,34 +1,25 @@
-@wip
 Feature: Progress Bar
-  In order to gauge the state of the project
+  In order to see the state of the project
   As a stakeholder
   I want a visual representation of counted tags
 
-  Scenario: Progress bar
+  Scenario: Progress Bar
     Given a feature file on the project "project_name" with the contents:
     """
-    @wip
-    Feature: Wip feature
-
-    @wip
-    Scenario: Wip scenario 
-
-    """
-    And a feature file named "not_started.feature" with the contents:
-    """
-    @notstarted
-    Feature: Not started feature
+    Feature: Mixed
     
+    @wip
+    Scenario: WiP
+
     @notstarted
-    Scenario: Not started scenario
-    """
-    And a feature file named "qa.feature" with the contents:
-    """
-    @qa
-    Feature: QA feature
-    """
-    When I visit the project page
+    Scenario: Not Started
+    """ 
+    When I visit the project page for "project_name" 
     And I select "Progress"
-    Then a total tag count is displayed
+    Then I should see "This project has 2 scenarios"
+    And I should see "@wip (50%)"
+    And I should see "@notstarted (50%)"
+    
+
 
 
