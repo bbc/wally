@@ -21,12 +21,13 @@ Many of the ideas have been borrowed from Matt Wynne's Relish product, but we;
 ### Installation
 * Install [mongodb](http://www.mongodb.org/display/DOCS/Quickstart "mongodb") and ensure it is running  (e.g. '~ $ ./mongodb-xxxxx-xxxx-x.x.x/bin/mongod')
 * gem install wally 
+* you might also want mongo_mapper (gem install mongo_mapper)
 
 ### Usage
-* wally server  
-* http://localhost:4567/  
-* create a '.wally' file and enter any authentication text you like  
-* wally push http://localhost:4567/projects/project-name feature-dir  
+* create a '.wally' file and enter any authentication text you like (echo myPassword > .wally) 
+* run wally server (in the same dir that you put the .wally file)  
+* check http://localhost:4567/  
+* import your features (from local dir) wally push http://localhost:4567/projects/project-name feature-dir  
 
 
 ## Wally?
