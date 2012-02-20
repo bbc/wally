@@ -1,5 +1,5 @@
 %li
-  %a{:href => "/#{current_project.name}/features/#{feature.gherkin["id"]}"}
+  %a{:href => "/projects/#{current_project.name}/features/#{feature.gherkin["id"]}"}
     = feature.gherkin["name"]
   - if feature.gherkin["tags"]
     - tags = feature.gherkin["tags"]
