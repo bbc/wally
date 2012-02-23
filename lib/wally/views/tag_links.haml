@@ -1,4 +1,4 @@
 - tags.each do |tag|
   %span.label.notice
-    %a{:href => "/search?q=#{tag["name"]}"}
+    %a{:href => "/projects/#{current_project.name}/search?q=#{tag["name"]}"}
       = tag["name"]
