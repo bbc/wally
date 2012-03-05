@@ -24,7 +24,7 @@ else
 end
 
 def current_project
-  Wally::Project.first(:name => params[:project])
+  @current_project ||= Wally::Project.first(:name => params[:project])
 end
 
 def tag_count
