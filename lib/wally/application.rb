@@ -87,6 +87,10 @@ get '/?' do
   end
 end
 
+get '/robots.txt' do
+  "User-agent: *\nDisallow: /"
+end
+
 get '/projects/:project/?' do
   haml :project
 end
