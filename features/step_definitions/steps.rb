@@ -26,3 +26,10 @@ end
 Then /^the total tag count is displayed$/ do
   save_and_open_page
 end
+
+Then /^I should see each tag has an individual colour$/ do
+ find('a.tag-tag1').should be_visible
+ find('a.tag-tag2').should be_visible
+ find('a.tag-tag3').should be_visible
+end
+

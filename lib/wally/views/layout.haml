@@ -41,7 +41,7 @@
           %ul
             - tag_count.each do |tag, count|
               %li
-                %a{:href => "/projects/#{current_project.name}/search?q=#{tag}"}
+                %a{:href => "/projects/#{current_project.name}/search?q=#{tag}", :class => "tag-#{tag.delete('@')}"}
                   = "#{tag} (#{count})"
 
         %div.content

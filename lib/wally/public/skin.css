@@ -194,3 +194,15 @@ section.feature p:first-child {
   background: white;
 }
 
+/* tags */
+
+.tag-blocked, .tag-irritating {
+    background: #f00;
+    color: #fff;
+    }
+
+.tag-wip {
+    background: #666FF;
+    color: #fff;
+    }
+    
