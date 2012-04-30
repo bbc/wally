@@ -6,7 +6,8 @@ When /^I view the welcome page$/ do
 end
 
 Then /^I should redirected to the "([^"]*)" project page$/ do |project|
-  page.current_url.should include "/projects/#{project}"
+  sleep 1
+  page.current_path.should include "/projects/#{project}"
 end
 
 When /^I select the project "([^"]*)"$/ do |project|

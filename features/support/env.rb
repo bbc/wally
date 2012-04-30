@@ -12,19 +12,10 @@ After do
   Wally::Project.delete_all
 end
 
-require 'headless'
-headless = Headless.new
-at_exit do
-  headless.destroy
+Capybara.register_driver :selenium_chrome do |app|
+  Capybara::Selenium::Driver.new(app, :browser => :chrome)
 end
-
-Before("@selenium,@javascript", "~@no-headless") do
-  headless.start if Capybara.current_driver == :selenium
-end
-
-After("@selenium,@javascript", "~@no-headless") do
-  headless.stop if Capybara.current_driver == :selenium
-end
+Capybara.javascript_driver = :selenium_chrome
 
 def project name
   project = Wally::Project.first(:name => name)
