@@ -5,7 +5,7 @@ Feature: Welcome Page
   Scenario: No projects
     Given there aren't any projects
     When I view the welcome page
-    Then "Wally is a web-based Cucumber viewer and navigator" is rendered
+    Then I see the wally README
 
   @javascript
   Scenario: Project links on home page

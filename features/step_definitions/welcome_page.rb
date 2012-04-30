@@ -14,7 +14,6 @@ When /^I select the project "([^"]*)"$/ do |project|
   select(project, :from => "projects")
 end
 
-Then /^"([^"]*)" is rendered$/ do |text|
-  page.should have_content text
+Then /^I see the wally README$/ do
+  page.should have_content "Wally is a web-based Cucumber viewer and navigator"
 end
-
