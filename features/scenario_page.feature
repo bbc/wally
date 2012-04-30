@@ -48,3 +48,37 @@ Feature: Scenario Page
     When I visit the sample feature page
     And click on a scenario header link
     Then I should see "work_in_progress"
+
+  Scenario: Data Table
+    Given a feature file named "sample.feature" with the contents:
+    """
+    Feature: Sample Feature
+
+      Scenario: Data Table
+        Given the following people exist:
+          | name   | email            |
+          | Aidy   | aidy@example.com |
+          | Andrew | vos@example.com  |
+    """
+    When I visit the sample feature page
+    And click on a scenario header link
+    Then I should see the data table
+
+  Scenario: Scenario Outline
+    Given a feature file named "sample.feature" with the contents:
+    """
+    Feature: Sample Feature
+
+      Scenario Outline: Outline with examples
+        Given there are <start> cucumbers
+        When I eat <eat> cucumbers
+        Then I should have <left> cucumbers
+
+        Examples:
+          | start | eat | left |
+          |  12   |  5  |  7   |
+          |  20   |  5  |  15  |
+    """
+    When I visit the sample feature page
+    And click on a scenario header link
+    Then I should see the examples table

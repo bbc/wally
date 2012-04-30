@@ -20,19 +20,12 @@
       %span.step-keyword
         = step["keyword"]
       = escape_once(step["name"])
+      - if step["rows"]
+        = haml :table, {:locals => {:rows => step["rows"]}, :layout => false}
 - else
   %p{:class => 'alert-message error'}
     = "Where's Wally? This scenario has no steps!?"
 - if @scenario["examples"]
   %h3 Examples:
-  %table{:class => 'zebra-striped'}
-    - @scenario["examples"].first["rows"].each_with_index do |row, index|
-      %tr
-        - row["cells"].each do |cell|
-          - if index === 0
-            %th
-              = escape_once(cell)
-          - else
-            %td
-              = escape_once(cell)
+  = haml :table, {:locals => {:rows => @scenario["examples"].first["rows"]}, :layout => false}
 
