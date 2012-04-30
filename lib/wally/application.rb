@@ -47,7 +47,7 @@ end
 
 def highlighted_search_result_blurb search_result
   offset = 0
-  highlighted = search_result.object.text
+  highlighted = search_result.object.text.dup
   span_start = "!!SPAN_START!!"
   span_end = "!!SPAN_END!!"
   search_result.matches.each do |match|

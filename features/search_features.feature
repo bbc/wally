@@ -76,12 +76,13 @@ Feature: Search features
     Then I should see "feature_tag" in the search results
     And I should see "scenario_tag" in the search results
 
-  Scenario: Higlighted search result
-    Given a feature file named "sample.feature" with the contents:
+  Scenario: Highlighted search result with multiple matches
+    Given a feature file named "sample1.feature" with the contents:
     """
     @feature_tag
     Feature: Some <long WORD feature word name
     Scenario: Some <long WORD scenario word name
+    Given I have a word
     """
     And I am on the search page
     When I search for "word"
@@ -92,4 +93,8 @@ Feature: Search features
     And I should see the html:
     """
     Some &lt;long <span class="search-result">WORD</span> scenario <span class="search-result">word</span> name
+    """
+    And I should see the html:
+    """
+    I have a <span class="search-result">word</span>
     """
