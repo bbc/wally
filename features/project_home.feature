@@ -21,5 +21,5 @@ Feature: Project Home Page
     Feature: Elle Macpherson
     """
     When I visit the project page
-    Then I should see a link to my sample features
+    Then I see a link to my sample features
     And the features are ordered alphabetically

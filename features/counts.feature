@@ -18,8 +18,8 @@ Feature: Counts
 
   Scenario: Features
     When I visit the project page
-    Then I should see "Features (1)"
+    Then I see "Features (1)"
 
   Scenario: Tags
     When I visit the project page
-    Then I should see "Tags (5)"
+    Then I see "Tags (5)"

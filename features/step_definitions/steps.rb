@@ -15,11 +15,11 @@ When /^I select "([^"]*)"$/ do |text|
   click_link text
 end
 
-Then /^I should see a link to "([^"]*)" with the url "([^"]*)"$/ do |text, url|
+Then /^I see a link to "([^"]*)" with the url "([^"]*)"$/ do |text, url|
   page.should have_link text, :href => url
 end
 
-Then /^I should see "([^"]*)"$/ do |text|
+Then /^I see "([^"]*)"$/ do |text|
   page.should have_content(text)
 end
 
@@ -27,7 +27,7 @@ Then /^the total tag count is displayed$/ do
   save_and_open_page
 end
 
-Then /^I should see each tag has an individual colour$/ do
+Then /^I see each tag has an individual colour$/ do
  find('a.tag-tag1').should be_visible
  find('a.tag-tag2').should be_visible
  find('a.tag-tag3').should be_visible

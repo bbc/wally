@@ -7,19 +7,15 @@ Feature: Progress Bar
     Given a feature file on the project "project_name" with the contents:
     """
     Feature: Mixed
-    
+
     @wip
     Scenario: WiP
 
     @notstarted
     Scenario: Not Started
-    """ 
+    """
     When I visit the project page for "project_name" 
     And I select "Progress"
-    Then I should see "This project has 2 scenarios"
-    And I should see "@wip (50%)"
-    And I should see "@notstarted (50%)"
-    
-
-
-
+    Then I see "This project has 2 scenarios"
+    And I see "@wip (50%)"
+    And I see "@notstarted (50%)"

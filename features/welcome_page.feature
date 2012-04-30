@@ -5,7 +5,7 @@ Feature: Welcome Page
   Scenario: No projects
     Given there aren't any projects
     When I view the welcome page
-    Then "Wally is a web-based Cucumber viewer and navigator" should be rendered
+    Then "Wally is a web-based Cucumber viewer and navigator" is rendered
 
   @javascript
   Scenario: Project links on home page
@@ -19,7 +19,7 @@ Feature: Welcome Page
     """
     When I view the welcome page
     And I select the project "sample2"
-    Then I should redirected to the "sample2" project page
+    Then I am redirected to the "sample2" project page
 
   Scenario: Redirect to first project
     Given a feature file on the project "sample1" with the contents:
@@ -27,4 +27,4 @@ Feature: Welcome Page
     Feature: Sample1
     """
     When I view the welcome page
-    Then I should redirected to the "sample1" project page
+    Then I am redirected to the "sample1" project page

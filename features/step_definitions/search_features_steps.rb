@@ -7,18 +7,18 @@ When /^I search for "([^"]*)"$/ do |text|
   click_button 'Search'
 end
 
-Then /^I should see a search result link to "([^"]*)" with the url "([^"]*)"$/ do |text, url|
+Then /^I see a search result link to "([^"]*)" with the url "([^"]*)"$/ do |text, url|
   within ".content" do
     page.should have_link text, :href => url
   end
 end
 
-Then /^I should see "([^"]*)" in the search results$/ do |text|
+Then /^I see "([^"]*)" in the search results$/ do |text|
   within ".content" do
     page.should have_content text
   end
 end
 
-Then /^I should see the html:$/ do |html|
+Then /^I see the html:$/ do |html|
   page.body.should include html
 end

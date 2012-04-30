@@ -6,6 +6,6 @@ Given /^a feature file with (\d+) @wip tags$/ do |wip_tag_count|
   create_feature("project", "sample1.feature", contents)
 end
 
-Then /^I should see a notification that says "([^"]*)"$/ do |text|
+Then /^I see a notification that says "([^"]*)"$/ do |text|
   page.should have_content text
 end

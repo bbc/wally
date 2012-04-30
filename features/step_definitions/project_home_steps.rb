@@ -1,4 +1,4 @@
-Then /^I should see a link to my sample features$/ do
+Then /^I see a link to my sample features$/ do
   page.should have_link "Kate Moss", :href => "/projects/project/features/kate-moss"
   page.should have_link "Katie Price", :href => "/projects/project/features/katie-price"
   page.should have_link "Jessica-Jane Clement", :href => "/projects/project/features/jessica-jane-clement"

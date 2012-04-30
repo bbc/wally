@@ -9,4 +9,4 @@ Feature: Projects
     Feature: Projects
     """
     And I visit the project page for "project_name"
-    Then I should see a link to the feature "Projects"
+    Then I see a link to the feature "Projects"

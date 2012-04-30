@@ -6,6 +6,6 @@ Given /^I visit the project page for "([^"]*)"$/ do |project|
   visit "/projects/#{project}"
 end
 
-Then /^I should see a link to the feature "([^"]*)"$/ do |feature|
+Then /^I see a link to the feature "([^"]*)"$/ do |feature|
   page.should have_link feature
 end

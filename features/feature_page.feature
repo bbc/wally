@@ -12,7 +12,7 @@ Feature: Feature Page
       I want to create value
      """
     When I visit the sample feature page
-    Then I should see the feature free-form narrative
+    Then I see the feature free-form narrative
 
   Scenario: Tags
     Given a feature file named "sample.feature" with the contents:
@@ -21,7 +21,7 @@ Feature: Feature Page
     Feature: Sample Feature
     """
     When I visit the sample feature page
-    Then I should see "sample_tag"
+    Then I see "sample_tag"
 
  Scenario: Scenario Links
     Given a feature file named "sample.feature" with the contents:
@@ -42,7 +42,7 @@ Feature: Feature Page
       Then I go happy
      """
     When I visit the sample feature page
-    Then I should see Scenario headers as links
+    Then I see Scenario headers as links
 
   Scenario: Sort Scenario Links in Alphabetical Order
     Given a feature file named "sample.feature" with the contents:
@@ -65,5 +65,5 @@ Feature: Feature Page
     Scenario: Sample Aidy
     """
     When I visit the sample feature page
-    Then I should see "tag1"
-    And I should see "tag2"
+    Then I see "tag1"
+    And I see "tag2"

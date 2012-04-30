@@ -12,11 +12,11 @@ Given /^I have a \.wally authentication file$/ do
   end
 end
 
-Then /^I should get a (\d+) http status$/ do |status|
+Then /^I get a (\d+) http status$/ do |status|
   page.driver.status_code.should eql status.to_i
 end
 
-Then /^I should see the uploaded feature$/ do
+Then /^I see the uploaded feature$/ do
   page.body.should have_content "Feature Name"
 end
 

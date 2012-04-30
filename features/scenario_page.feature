@@ -17,8 +17,8 @@ Feature: Scenario Page
     When I visit the sample feature page
     And click on a scenario header link
     Then a page appears with the scenario content
-    And I should see "tag1"
-    And I should see "tag2"
+    And I see "tag1"
+    And I see "tag2"
 
   Scenario: Background
     Given a feature file named "sample.feature" with the contents:
@@ -47,7 +47,7 @@ Feature: Scenario Page
      """
     When I visit the sample feature page
     And click on a scenario header link
-    Then I should see "work_in_progress"
+    Then I see "work_in_progress"
 
   Scenario: Data Table
     Given a feature file named "sample.feature" with the contents:
@@ -62,7 +62,7 @@ Feature: Scenario Page
     """
     When I visit the sample feature page
     And click on a scenario header link
-    Then I should see the data table
+    Then I see the data table
 
   Scenario: Scenario Outline
     Given a feature file named "sample.feature" with the contents:
@@ -72,7 +72,7 @@ Feature: Scenario Page
       Scenario Outline: Outline with examples
         Given there are <start> cucumbers
         When I eat <eat> cucumbers
-        Then I should have <left> cucumbers
+        Then I have <left> cucumbers
 
         Examples:
           | start | eat | left |
@@ -81,4 +81,4 @@ Feature: Scenario Page
     """
     When I visit the sample feature page
     And click on a scenario header link
-    Then I should see the examples table
+    Then I see the examples table
