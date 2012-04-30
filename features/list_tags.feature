@@ -18,3 +18,14 @@ Feature: List Tags
     And I should see a link to "@tag2 (1)" with the url "/projects/project/search?q=@tag2"
     And I should see a link to "@tag3 (1)" with the url "/projects/project/search?q=@tag3"
     And I should see a link to "@multiple (2)" with the url "/projects/project/search?q=@multiple"
+
+    Scenario: Coloured tags
+      Given a feature file named "sample.feature" with the contents:
+      """
+      @tag1
+      Feature: Tag Feature
+      @tag2 @tag3
+      Scenario: Tag Scenario 1
+      """
+      When I visit the project page
+      Then I should see each tag has an individual colour
