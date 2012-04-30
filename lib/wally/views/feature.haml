@@ -8,12 +8,12 @@
   %section{:class => 'feature'}
     :markdown
       #{@feature.gherkin["description"]}
-- if @feature.gherkin["description"]
-  %h2 Scenarios
-  %ul
-    - get_sorted_scenarios(@feature).each do |scenario|
-      %li
-        %a{:href => get_scenario_url(scenario)}
-          = scenario["name"]
-        - if scenario["tags"]
-          = haml :tag_links, {:locals => {:tags => scenario["tags"]}, :layout => false}
+  - if @feature.gherkin["description"]
+    %h2 Scenarios
+    %ul
+      - get_sorted_scenarios(@feature).each do |scenario|
+        %li
+          %a{:href => get_scenario_url(scenario)}
+            = scenario["name"]
+          - if scenario["tags"]
+            = haml :tag_links, {:locals => {:tags => scenario["tags"]}, :layout => false}

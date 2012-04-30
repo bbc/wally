@@ -1,0 +1,10 @@
+%table{:class => 'zebra-striped'}
+  - rows.each_with_index do |row, index|
+    %tr
+      - row["cells"].each do |cell|
+        - if index === 0
+          %th
+            = escape_once(cell)
+        - else
+          %td
+            = escape_once(cell)
