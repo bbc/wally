@@ -18,5 +18,10 @@ end
 
 Then /^I can switch to the (\d).+ project$/ do |project_number|
   select project_number, :from => 'projects'
+
+  #This is needed because there seems to be a bug in the chrome driver.
+  #The first time this is called, we get the old url, and the second time we get the new url.
+  page.current_url
+
   page.current_url.end_with?(project_number).should be_true
 end
