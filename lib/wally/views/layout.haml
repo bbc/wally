@@ -17,7 +17,7 @@
       %div.project-list
         %select#projects{:name => "projects"}
           - Wally::Project.all.each do |project|
-            %option{:value =>  project.name}
+            %option{ :value =>  project.name, :selected => project == current_project }
               = project.name
 
       %div.search-bar

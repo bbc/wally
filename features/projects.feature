@@ -10,3 +10,10 @@ Feature: Projects
     """
     And I visit the project page for "project_name"
     Then I see a link to the feature "Projects"
+
+  @javascript
+  Scenario: Switch between projects
+    Given 2 projects exist
+    When I view the welcome page
+    Then I can switch to the 2nd project
+    And I can switch to the 1st project
