@@ -29,7 +29,7 @@ end
 
 def tag_count
   return {} if current_project.nil?
-  Wally::CountsTags.new(current_project).count_tags
+  @tag_count ||= Wally::CountsTags.new(current_project).count_tags
 end
 
 def excessive_wip_tags
