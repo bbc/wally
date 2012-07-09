@@ -62,19 +62,39 @@ def highlighted_search_result_blurb search_result
   highlighted
 end
 
-put '/projects/:project/features/?' do
-  if File.exist?(".wally") && params[:authentication_code] == File.read(".wally").strip
-    current_project.delete if current_project
-    project = Wally::Project.create(:name => params[:project])
+def authenticated?
+  File.exist?(".wally") && params[:authentication_code] == File.read(".wally").strip
+end
 
-    JSON.parse(request.body.read).each do |json|
-      project.features << Wally::Feature.new(:path => json["path"], :gherkin => json["gherkin"])
+def get_scenario_url(scenario)
+  url = "/projects/#{current_project.name}/features/#{scenario["id"].gsub(";", "/scenario/")}"
+end
+
+def get_sorted_scenarios(feature)
+  scenarios = []
+
+  if feature.gherkin["elements"]
+    feature.gherkin["elements"].each do |element|
+      if element["type"] == "scenario" || element["type"] == "scenario_outline"
+        scenarios << element
+      end
     end
-    project.save
-    halt 201
-  else
-    error 403
   end
+  scenarios.sort! { |a, b| a["name"] <=> b["name"] }
+  scenarios
+end
+
+put '/projects/:project/features/?' do
+  error 403 unless authenticated?
+
+  current_project.delete if current_project
+  project = Wally::Project.create(:name => params[:project])
+
+  JSON.parse(request.body.read).each do |json|
+    project.features << Wally::Feature.new(:path => json["path"], :gherkin => json["gherkin"])
+  end
+  project.save
+  halt 201
 end
 
 get '/?' do
@@ -93,6 +113,13 @@ end
 
 get '/projects/:project/?' do
   haml :project
+end
+
+delete '/projects/:project' do
+  error 403 unless authenticated?
+  project = Wally::Project.first(:name => params[:project])
+  project.destroy
+  halt 201
 end
 
 get '/projects/:project/features/:feature/?' do
@@ -128,22 +155,4 @@ get '/projects/:project/features/:feature/scenario/:scenario/?' do
     end
   end
   haml :scenario
-end
-
-def get_scenario_url(scenario)
-  url = "/projects/#{current_project.name}/features/#{scenario["id"].gsub(";", "/scenario/")}"
-end
-
-def get_sorted_scenarios(feature)
-  scenarios = []
-
-  if feature.gherkin["elements"]
-    feature.gherkin["elements"].each do |element|
-      if element["type"] == "scenario" || element["type"] == "scenario_outline"
-        scenarios << element
-      end
-    end
-  end
-  scenarios.sort! { |a, b| a["name"] <=> b["name"] }
-  scenarios
 end

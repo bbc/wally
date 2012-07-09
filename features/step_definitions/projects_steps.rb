@@ -25,3 +25,4 @@ Then /^I can switch to the (\d).+ project$/ do |project_number|
 
   page.current_url.end_with?(project_number).should be_true
 end
+

@@ -9,25 +9,28 @@ The product owner or business analyst usually does not want to use an IDE or VCS
 ## What's wrong with Relish?
 Many of the ideas have been borrowed from Matt Wynne's Relish product, but we;
 
-### Didn't want
+## Didn't want
 * To sign-in
 
-### Wanted to
+## Wanted to
 * Use it through mobile devices
-* Easily group features and scenarios by tags 
+* Easily group features and scenarios by tags
 * Count features and tags
 * Include a project progress bar (based on tags)
 
-### Installation
+## Installation
 * Install [mongodb](http://www.mongodb.org/display/DOCS/Quickstart "mongodb") and ensure it is running  (e.g. '~ $ ./mongodb-xxxxx-xxxx-x.x.x/bin/mongod')
-* `gem install wally` 
-* you might also want mongo_mapper (`gem install mongo_mapper`)
+* ```gem install wally```
+* you might also want mongo_mapper (```gem install mongo_mapper```)
 
-### Usage
-* create a '.wally' file and enter any authentication text you like (`echo myPassword > .wally`) 
-* run wally server, in the same dir that you put the .wally file (`wally server`)
-* check [http://localhost:4567/](http://localhost:4567/)  
-* import your features (from local dir) `wally push http://localhost:4567/projects/<project-name> <feature-dir>` 
+## Usage
+* create a '.wally' file and enter any authentication text you like (```echo myPassword > .wally```)
+* run wally server, in the same dir that you put the .wally file (```wally server```)
+* check [http://localhost:4567/](http://localhost:4567/)
+* import your features (from local dir) ```wally push http://localhost:4567/projects/<project-name> <feature-dir>```
+
+## Deleting projects
+```wally destroy http://localhost:4567/projects/<project-name>```
 
 
 ## Wally?

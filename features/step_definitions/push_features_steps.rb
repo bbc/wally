@@ -26,6 +26,23 @@ When /^I put data to \/my_project_name\/features with the authentication code$/ 
   page.driver.put "/projects/my_project_name/features?authentication_code=#{@authentication_code}", data
 end
 
+Given /^I create a project called "([^"]*)"$/ do |project_name|
+  project project_name
+  Wally::Project.first(:name => project_name).class.should equal Wally::Project
+end
+
+When /^I send DELETE to "([^"]*)"$/ do |project_path|
+  page.driver.delete "#{project_path}?authentication_code=#{@authentication_code}"
+end
+
+Then /^"([^"]*)" should exist$/ do |project_name|
+  Wally::Project.first(:name => project_name).class.should equal Wally::Project
+end
+
+Then /^"([^"]*)" should not exist$/ do |project_name|
+  Wally::Project.first(:name => project_name).class.should_not equal Wally::Project
+end
+
 When /^I visit "([^"]*)" page$/ do |project_name|
   visit "/projects/#{project_name}"
 end
