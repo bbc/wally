@@ -7,9 +7,9 @@ Gem::Specification.new do |s|
   s.version     = Wally::VERSION
   s.authors     = ["Andrew Vos"]
   s.email       = ["andrew.vos@gmail.com"]
-  s.homepage    = ""
-  s.summary     = %q{}
-  s.description = %q{}
+  s.homepage    = "https://github.com/BBC-News/wally"
+  s.summary     = %q{Cucumber feature viewer and navigator}
+  s.description = %q{Cucumber feature viewer and navigator}
 
   s.rubyforge_project = "wally"
 
