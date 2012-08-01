@@ -134,10 +134,9 @@ get '/projects/:project/?' do
 end
 
 delete '/projects/:project' do
-  error 403 unless authenticated?
-  project = Wally::Project.find_by_name(params[:project])
-  project.destroy
-  halt 201
+  if (project = Wally::Project.find_by_name(params[:project]))
+    project.destroy
+  end
 end
 
 get '/projects/:project/features/:feature/?' do
