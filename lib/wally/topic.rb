@@ -2,6 +2,7 @@ module Wally
   class Topic
     include MongoMapper::EmbeddedDocument
 
+    key :name, String
     key :path, String
     key :id, String
     key :feature_id, String
@@ -23,7 +24,7 @@ module Wally
     end
     
     def name
-      File.basename(path)
+      @name || File.basename(path).humanize
     end
     alias_method :label, :name
     
@@ -53,10 +54,15 @@ module Wally
     
     def link_feature(feature)
       @feature_id = feature.id
+      @name = feature.name
     end
     
     def to_param
       path.gsub('/', ':')
+    end
+    
+    def feature(project)
+      project.feature(feature_id)
     end
     
     private

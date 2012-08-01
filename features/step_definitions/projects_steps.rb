@@ -23,6 +23,14 @@ Given /^there is no project named "(.*?)"$/ do |name|
   end
 end
 
+Given /^I push the following features to project "(.*?)"$/ do |project, table|
+  p =  Wally::Project.find_by_name!(project)
+  table.hashes.each do |h|
+    p.import_content(h['Path'], StringIO.new("Feature: #{h['Name']}"))
+  end
+  p.save
+end
+
 Then /^there should be an empty project named "(.*?)"$/ do |name|
   p = Wally::Project.find_by_name(name)
   p.should_not be_nil

@@ -1,3 +1,5 @@
+require 'wally/parses_features'
+
 module Wally
   class Feature
     include MongoMapper::EmbeddedDocument
@@ -6,11 +8,22 @@ module Wally
     key :gherkin, Hash
     key :name, String
 
-    before_save :save_feature_name
+    class << self
+      def parse_feature(path, io)
+        f = new
+        f.path = path
+        f.gherkin = Wally::ParsesFeatures.parse(io.read)
+        f.name = f.gherkin['name']
+        f
+      end
+    end
 
-    private
-    def save_feature_name
-      @name = gherkin["name"]
+    def id
+      gherkin['id']
+    end
+    
+    def to_param
+      id
     end
   end
 end

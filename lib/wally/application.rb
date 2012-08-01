@@ -9,6 +9,7 @@ require 'wally/search_features'
 require 'wally/counts_tags'
 require 'wally/projects_service'
 require 'cgi'
+require 'wally/url_helpers'
 
 configure do
   set :haml, { :ugly=>true }
@@ -22,6 +23,8 @@ else
   MongoMapper.connection = Mongo::Connection.new('localhost')
   MongoMapper.database = "wally"
 end
+
+include Wally::UrlHelpers
 
 def current_project
   @current_project ||= Wally::Project.find_by_name(params[:project])
@@ -100,6 +103,12 @@ post '/projects/:name/pushes' do |name|
   project.save
   
   201
+end
+
+get '/projects/:project_id/topics/:topic_id' do |project_id, topic_id|
+  @current_project = Wally::Project.find_by_name(project_id)
+  @topic = @current_project.topic(topic_id)
+  haml :topic
 end
 
 get '/?' do

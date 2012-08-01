@@ -14,6 +14,10 @@ module Wally
       end
     end
     
+    def feature(id)
+      features.detect { |feature| feature.gherkin["id"] == id }
+    end
+    
     def topic(topic_path)
       topic_path = topic_path.gsub(':', '/')
       topics.detect do |t| 

@@ -13,3 +13,7 @@ end
 Then /^the scenario links are sorted$/ do
   page.body.should =~ /C.*I.*N.*V/m
 end
+
+Then /^I see the feature page for "(.*?)"$/ do |feature|
+  page.find(:css, 'section.feature h2').text.should include(feature)
+end
