@@ -4,23 +4,4 @@ $:.unshift(File.dirname(__FILE__) + '/../lib') unless $:.include?(File.dirname(_
 if ARGV.first == "server"
   require "wally"
   Sinatra::Application.run!
-elsif ARGV[0] == "push"
-  require "restclient"
-  require "json"
-  require "wally/parses_features"
-  features = []
-  Dir.glob(File.join("#{ARGV[2]}", "**/*.feature")).each do |feature_path|
-    begin
-      gherkin = Wally::ParsesFeatures.new.parse(File.read(feature_path))
-    rescue
-      puts "Couldn't parse '#{feature_path}'"
-      puts "Contents:"
-      puts File.read(feature_path)
-    end
-    features << {:path => feature_path, :gherkin => gherkin}
-  end
-  RestClient.put "#{ARGV[1]}/features/?authentication_code=#{File.read(".wally")}", features.to_json, {:content_type => :json, :accept => :json}
-elsif ARGV[0] == "destroy"
-  require "restclient"
-  RestClient.delete ARGV[1]
 end

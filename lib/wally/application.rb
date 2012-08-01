@@ -84,19 +84,6 @@ def get_sorted_scenarios(feature)
   scenarios
 end
 
-put '/projects/:project/features/?' do
-  error 403 unless authenticated?
-
-  current_project.delete if current_project
-  project = Wally::Project.create(:name => params[:project])
-
-  JSON.parse(request.body.read).each do |json|
-    project.features << Wally::Feature.new(:path => json["path"], :gherkin => json["gherkin"])
-  end
-  project.save
-  halt 201
-end
-
 post '/projects/:name' do |name|
   if Wally::Project.find_by_name(name)
     halt 409
