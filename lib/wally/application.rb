@@ -1,14 +1,14 @@
 $:.unshift(File.join(File.dirname(__FILE__)))
-require "sinatra"
-require "haml"
-require "rdiscount"
-require "mongo_mapper"
-require "wally/feature"
-require "wally/project"
-require "wally/search_features"
-require "wally/counts_tags"
-require "wally/parses_features"
-require "cgi"
+require 'sinatra'
+require 'haml'
+require 'rdiscount'
+require 'mongo_mapper'
+require 'wally/feature'
+require 'wally/project'
+require 'wally/search_features'
+require 'wally/counts_tags'
+require 'wally/projects_service'
+require 'cgi'
 
 configure do
   set :haml, { :ugly=>true }
@@ -24,7 +24,7 @@ else
 end
 
 def current_project
-  @current_project ||= Wally::Project.first(:name => params[:project])
+  @current_project ||= Wally::Project.find_by_name(params[:project])
 end
 
 def tag_count
@@ -97,6 +97,24 @@ put '/projects/:project/features/?' do
   halt 201
 end
 
+post '/projects/:name' do |name|
+  if Wally::Project.find_by_name(name)
+    halt 409
+  end
+  Wally::Project.create(:name => name)
+end
+
+post '/projects/:name/pushes' do |name| 
+  unless (project = Wally::Project.find_by_name(name))
+    error 404
+  end
+  
+  projects_service.tar_gz_push(project, request.body)
+  project.save
+  
+  201
+end
+
 get '/?' do
   first_project = Wally::Project.first
   if first_project
@@ -117,7 +135,7 @@ end
 
 delete '/projects/:project' do
   error 403 unless authenticated?
-  project = Wally::Project.first(:name => params[:project])
+  project = Wally::Project.find_by_name(params[:project])
   project.destroy
   halt 201
 end
@@ -155,4 +173,8 @@ get '/projects/:project/features/:feature/scenario/:scenario/?' do
     end
   end
   haml :scenario
+end
+
+def projects_service
+  Wally::ProjectsService
 end
