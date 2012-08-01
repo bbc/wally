@@ -1,7 +1,7 @@
 Feature: Hierarchical "topic" navigation
 
-Wally aggregates features and markdown documentation and lets
-you navigate them hierarchically.
+  So that feature organization is not lost, 
+  Wally maintains the hierarchical structure of your features.
   
 Background:
   Given wally-client is configured with the url of an accessible Wally server
