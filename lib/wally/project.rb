@@ -1,4 +1,5 @@
 require 'wally/topic'
+require 'wally/project_customizer'
 
 module Wally
   class Project
@@ -12,6 +13,10 @@ module Wally
       def find_by_name(name)
         Wally::Project.first(:name => name)
       end
+    end
+    
+    def add_topic(topic)
+      topics << topic
     end
     
     def feature(id)
@@ -33,6 +38,10 @@ module Wally
       end
     end
         
+    def customize(navigation_config = [])
+      ProjectCustomizer.customize(self, navigation_config)
+    end
+    
     def clear_features
       features.clear
       topics.clear
