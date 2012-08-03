@@ -1,4 +1,13 @@
-- living_documentation:
-  - hierarchical_topic_navigation
-  
-  
+- wally-client
+- projects (Multi-project support)
+- hierarchical_topic_navigation
+- customize_topic_navigation
+- search_features (Searching)
+- progress_bar
+- counts
+- notifications
+- list_tags (Tags)
+- welcome_page
+- project_home
+- feature_page
+- scenario_page
