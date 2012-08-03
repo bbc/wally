@@ -25,9 +25,11 @@
       %p
         %span.step-keyword
           = step["keyword"]
-        = escape_once(step["name"])
+        &= step["name"]
         - if step["rows"]
           = haml :table, {:locals => {:rows => step["rows"]}, :layout => false}
+        - if step['doc_string']
+          %pre&= step['doc_string']['value']
 - else
   %p{:class => 'alert-message error'}
     = "Where's Wally? This scenario has no steps!?"

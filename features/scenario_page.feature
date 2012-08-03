@@ -109,4 +109,18 @@ Feature: Scenario Page
      """
     When I visit the "Scenario with description" from "Sample feature"
     Then I see "Note: Something special"
-      
+ 
+  Scenario: Doc strings
+    Given a feature file named "sample.feature" with the contents:
+    """
+    Feature: Sample feature
+
+      Scenario: Doc string
+        Given the following:
+        \"\"\"
+        contents of scenario docstring
+        \"\"\"
+    """
+    When I visit the "Doc string" from "Sample feature"
+    Then I see "contents of scenario docstring"
+    
