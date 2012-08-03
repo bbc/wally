@@ -64,6 +64,20 @@ Feature: Scenario Page
     And click on a scenario header link
     Then I see the data table
 
+  Scenario: Single cell data table
+    Given a feature file named "sample.feature" with the contents:
+    """
+    Feature: Sample Feature
+
+      Scenario: Data Table
+        Given the following names:
+          | Aidy   |
+          | Andrew |
+    """
+    When I visit the sample feature page
+    And click on a scenario header link
+    Then I see the data table as a list
+    
   Scenario: Scenario Outline
     Given a feature file named "sample.feature" with the contents:
     """

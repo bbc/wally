@@ -205,4 +205,12 @@ section.feature p:first-child {
     background: #66f;
     color: #fff;
     }
+
+/* scenarios */
     
+ul.data-table {
+    list-style-type: none;
+}
+ul.data-table li {
+    color: #000000;
+    }

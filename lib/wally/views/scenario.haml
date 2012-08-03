@@ -14,14 +14,15 @@
         &= step["keyword"]
       = step["name"]
 - if @scenario["steps"]
-  %h3 Steps:
-  - @scenario["steps"].each do |step|
-    %p
-      %span.step-keyword
-        = step["keyword"]
-      = escape_once(step["name"])
-      - if step["rows"]
-        = haml :table, {:locals => {:rows => step["rows"]}, :layout => false}
+  %section.steps
+    %h3 Steps:
+    - @scenario["steps"].each do |step|
+      %p
+        %span.step-keyword
+          = step["keyword"]
+        = escape_once(step["name"])
+        - if step["rows"]
+          = haml :table, {:locals => {:rows => step["rows"]}, :layout => false}
 - else
   %p{:class => 'alert-message error'}
     = "Where's Wally? This scenario has no steps!?"
