@@ -11,8 +11,16 @@ When /^I visit the sample feature page$/ do
   visit "/projects/project/features/sample-feature"
 end
 
+When /^I follow "(.*?)"$/ do |link|
+  click_link(link)
+end
+
 When /^I select "([^"]*)"$/ do |text|
   click_link text
+end
+
+Then /^I see a "(.*?)" link$/ do |link|
+  page.should have_link(link)
 end
 
 Then /^I see a link to "([^"]*)" with the url "([^"]*)"$/ do |text, url|
