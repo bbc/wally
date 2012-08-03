@@ -49,6 +49,19 @@ module Wally
           subject.topic('foo/bar/baz/a').should_not be_nil
         end
       end
+
+      describe 'readme file', 'markdown is stored with relevant topic' do
+        it 'picks up readme.md' do
+          subject.import_content('foo/bar/readme.md', StringIO.new('bar markdown'))
+          subject.topic('foo/bar').markdown.should == 'bar markdown'
+        end
+        
+        it 'picks up README.md' do
+          subject.import_content('foo/bar/README.md', StringIO.new('bar markdown'))
+          subject.topic('foo/bar').markdown.should == 'bar markdown'
+        end
+      end
+      
     end
 
     describe '#topic(path)', 'looks up a topic by path' do

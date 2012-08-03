@@ -31,11 +31,17 @@ module Wally
     end
 
     def import_content(path, io)
+      markdown = nil
+      if md = path.match(/(\/?readme.md$)/i)
+        path = path.sub(md[1], '')
+        markdown = io.read
+      end
       topic = ensure_topics(path)
       if path.match(/\.feature$/)
         features << feature = Feature.parse_feature(path, io)
         topic.link_feature(feature)
       end
+      topic.markdown = markdown if markdown
     end
         
     def customize(navigation_config = [])

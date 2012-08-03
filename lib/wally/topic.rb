@@ -7,6 +7,7 @@ module Wally
     key :id, String
     key :feature_id, String
     key :sort_weight, Integer
+    key :markdown, String
     
     many :children, :class => Wally::Topic
      
