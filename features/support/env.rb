@@ -28,7 +28,6 @@ end
 
 def create_feature project, path, content
   project = project(project)
-  feature = Wally::Feature.new(:path => path, :gherkin => Wally::ParsesFeatures.new.parse(content))
-  project.features << feature
+  feature = project.import_content(path, StringIO.new(content))
   project.save
 end
