@@ -21,7 +21,6 @@ Many of the ideas have been borrowed from Matt Wynne's Relish product, but we;
 ## Installation
 * Install [mongodb](http://www.mongodb.org/display/DOCS/Quickstart "mongodb") and ensure it is running  (e.g. '~ $ ./mongodb-xxxxx-xxxx-x.x.x/bin/mongod')
 * ```gem install wally```
-* you might also want mongo_mapper (```gem install mongo_mapper```)
 
 ## Usage
 * create a '.wally' file and enter any authentication text you like (```echo myPassword > .wally```)
