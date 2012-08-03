@@ -9,7 +9,7 @@ require 'aruba/cucumber'
 
 Capybara.app = Sinatra::Application
 
-After do
+Before do
   Wally::Project.delete_all
 end
 
