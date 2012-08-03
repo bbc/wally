@@ -1,0 +1,4 @@
+work_dir: ./wally_tmp
+
+mongo_url: mongodb://localhost
+mongo_database: wally

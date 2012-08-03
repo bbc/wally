@@ -2,6 +2,7 @@ module Wally
   class Config
     class << self
       attr_accessor :work_dir
+      attr_accessor :mongo_url, :mongo_database
       
       # Directory for use while processing feature pushes
       # and other file system dependent tasks.

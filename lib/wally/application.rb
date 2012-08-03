@@ -20,14 +20,8 @@ config_file = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'co
 puts "using config file #{config_file}"
 Wally::Config.configure(YAML.load(File.read(config_file)))
 
-if ENV['MONGOHQ_URL']
-  uri = URI.parse(ENV['MONGOHQ_URL'])
-  MongoMapper.connection = Mongo::Connection.from_uri(ENV['MONGOHQ_URL'])
-  MongoMapper.database = uri.path.gsub(/^\//, '')
-else
-  MongoMapper.connection = Mongo::Connection.new('localhost')
-  MongoMapper.database = "wally"
-end
+MongoMapper.connection = Mongo::Connection.from_uri(Wally::Config.mongo_url)
+MongoMapper.database = Wally::Config.mongo_database
 
 include Wally::UrlHelpers
 
