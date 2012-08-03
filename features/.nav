@@ -1,8 +1,9 @@
-- wally-client
+- wally-client (wally-client)
 - projects (Multi-project support)
 - hierarchical_topic_navigation
 - customize_topic_navigation
 - search_features (Searching)
+- readme_pages
 - progress_bar
 - counts
 - notifications

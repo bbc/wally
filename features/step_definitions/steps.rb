@@ -47,3 +47,8 @@ Then /^I see each tag has an individual colour$/ do
  find('a.tag-tag3').should be_visible
 end
 
+Then /^I see a HTML page heading with "(.*?)"$/ do |text|
+  find('h1, h2, h3', :text => /#{text}/)
+end
+
+
