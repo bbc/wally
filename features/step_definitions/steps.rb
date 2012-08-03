@@ -11,6 +11,12 @@ When /^I visit the sample feature page$/ do
   visit "/projects/project/features/sample-feature"
 end
 
+When /^I visit the "(.*?)" from "(.*?)"$/ do |scenario, feature|
+  visit '/projects/project/'
+  click_link(feature)
+  click_link(scenario)
+end
+
 When /^I follow "(.*?)"$/ do |link|
   click_link(link)
 end

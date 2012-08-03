@@ -96,3 +96,17 @@ Feature: Scenario Page
     When I visit the sample feature page
     And click on a scenario header link
     Then I see the examples table
+
+  Scenario: Scenario description
+    Given a feature file named "sample.feature" with the contents:
+    """
+    Feature: Sample feature
+
+      Scenario: Scenario with description
+         Note: Something special
+         
+         Given something
+     """
+    When I visit the "Scenario with description" from "Sample feature"
+    Then I see "Note: Something special"
+      
