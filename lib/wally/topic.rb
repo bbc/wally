@@ -6,6 +6,7 @@ module Wally
     key :path, String
     key :id, String
     key :feature_id, String
+    key :sort_weight, Integer
     
     many :children, :class => Wally::Topic
      
@@ -14,9 +15,9 @@ module Wally
         self
       else
         if topic_path.match(/^#{path}/)
-          child = children.each do |t|
-            break child if (child = t.topic(topic_path))
-          end
+          child = nil
+          children.detect { |t| child = t.topic(topic_path) }
+          child
         else
           nil
         end
@@ -52,6 +53,10 @@ module Wally
       @path = fix_path(p)
     end
     
+    def add_child(topic)
+      children << topic
+    end
+    
     def link_feature(feature)
       @feature_id = feature.id
       @name = feature.name
@@ -63,6 +68,14 @@ module Wally
     
     def feature(project)
       project.feature(feature_id)
+    end
+    
+    def <=>(other)
+      if sort_weight.nil?
+        other.sort_weight.nil? ? (name <=> other.name) : 1
+      else
+        other.sort_weight.nil? ? -1 : (sort_weight <=> other.sort_weight)
+      end
     end
     
     private

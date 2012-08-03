@@ -58,5 +58,29 @@ module Wally
         end
       end
     end
+    
+    describe '#<=>(other)', 'comparison operator' do
+      it 'a topic with a lighter sort weight is before one with a heavier sort weight' do
+        subject.sort_weight = 5
+        other = Topic.new(:sort_weight => 3)
+        (subject <=> other).should == 1
+        (other <=> subject).should == -1
+      end
+      
+      specify 'a topic with a sort weight is before a topic with no sort weight' do
+        subject.sort_weight = 1000
+        other = Topic.new(:sort_weight => nil)
+        (subject <=> other).should == -1
+        (other <=> subject).should == 1
+      end
+      
+      specify 'two topics without an explicit sort weight are ordered by name' do
+        subject.sort_weight = nil
+        subject.name = 'foo'
+        other = Topic.new(:sort_weight => nil, :name => 'bar')
+        (subject <=> other).should == 1
+        (other <=> subject).should == -1
+      end
+    end
   end
 end
