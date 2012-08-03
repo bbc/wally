@@ -3,5 +3,5 @@
     = @topic.label
   
   %ul.subtopics
-    - @topic.children.each do |child_topic|
+    - @topic.children.sort.each do |child_topic|
       = haml :topic_link, :locals => {:topic => child_topic}

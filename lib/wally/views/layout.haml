@@ -34,7 +34,7 @@
             = "Features (#{current_project.features.count})"
             
           %ul.topics
-            - current_project.topics.sort{|a,b| a.name <=> b.name}.each do |topic|
+            - current_project.topics.sort.each do |topic|
               = haml :topic_link, :locals => {:topic => topic}
 
           %h2
