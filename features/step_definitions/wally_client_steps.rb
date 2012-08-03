@@ -16,7 +16,7 @@ Given /^a file "([^"]+)" with the following content:$/ do |path, content|
 end
 
 Given /^wally\-client is configured with the url of an accessible Wally server$/ do
-  write_file('wally.yml', {'url' => 'http://localhost:4567'}.to_yaml)
+  write_file('wally-client.yml', {'url' => 'http://localhost:4567'}.to_yaml)
 end
 
 When /^I attempt to add a project named "(.*?)" using wally\-client$/ do |name|
