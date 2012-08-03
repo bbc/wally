@@ -20,19 +20,12 @@ Scenario: Navigate topic hierarchy
     | Feature C |
     | Foo       |
   When I follow "Foo" in the project sidebar
-  Then I see the topic page for "Foo"
-  And I see the following sub-topics listed in order
+  Then I see the following sub-topics listed in order
     | Feature A |
     | Feature B |
   When I navigate into the "Feature A" sub-topic
   Then I see the feature page for "Feature A"
 
-@comming-soon
-Scenario: Topic order can be changed using a .nav file
-
-@comming-soon
-Scenario: Topic names can be customized using a .nav file
-  
  
   
   
