@@ -10,10 +10,15 @@ require 'wally/counts_tags'
 require 'wally/projects_service'
 require 'cgi'
 require 'wally/url_helpers'
+require 'wally/config'
 
 configure do
   set :haml, { :ugly=>true }
 end
+
+config_file = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'config', 'wally.yml'))
+puts "using config file #{config_file}"
+Wally::Config.configure(YAML.load(File.read(config_file)))
 
 if ENV['MONGOHQ_URL']
   uri = URI.parse(ENV['MONGOHQ_URL'])
