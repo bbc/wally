@@ -1,0 +1,5 @@
+%h3 Sub-topics
+
+%ul.subtopics
+  - @topic.children.sort.each do |child_topic|
+    = haml :topic_link, :locals => {:topic => child_topic}

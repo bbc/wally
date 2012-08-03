@@ -1,7 +1,14 @@
 %section.topic
   %h2
     = @topic.label
-  
-  %ul.subtopics
-    - @topic.children.sort.each do |child_topic|
-      = haml :topic_link, :locals => {:topic => child_topic}
+    
+  = haml :sub_topics
+      
+  %hr
+    
+  - if @topic.markdown
+    = markdown @topic.markdown
+    
+  %hr
+    
+  = haml :sub_topics
