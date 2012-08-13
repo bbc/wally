@@ -13,13 +13,17 @@ module Wally
         f = new
         f.path = path
         f.gherkin = Wally::ParsesFeatures.parse(io.read)
-        f.name = f.gherkin['name']
         f
       end
     end
-
+    
     def id
       gherkin['id']
+    end
+    
+    def gherkin=(gherkin)
+      @gherkin = gherkin
+      self.name = gherkin['name'] unless gherkin.nil?
     end
     
     def to_param
