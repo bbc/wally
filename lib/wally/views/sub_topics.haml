@@ -2,4 +2,4 @@
 
 %ul.subtopics
   - @topic.children.sort.each do |child_topic|
-    = haml :topic_link, :locals => {:topic => child_topic}
+    %li= haml :topic_link, :locals => {:topic => child_topic}

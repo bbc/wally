@@ -2,6 +2,10 @@ Given /^a feature file on the project "([^"]*)" with the contents:$/ do |project
   create_feature(project, "feature1.feature", contents)
 end
 
+Given /^a feature file "(.*?)" in project "(.*?)" with the contents:$/ do |path, project, contents|
+  create_feature(project, path, contents)
+end
+
 Given /^I visit the project page for "([^"]*)"$/ do |project|
   visit "/projects/#{project}"
 end

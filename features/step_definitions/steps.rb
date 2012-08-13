@@ -51,4 +51,10 @@ Then /^I see a HTML page heading with "(.*?)"$/ do |text|
   find('h1, h2, h3', :text => /#{text}/)
 end
 
+Then /^I see the following outline:$/ do |outline|
+  outline.each_line do |line|
+    indents = line.scan('*')
+    page.should have_css(indents.map { |i| 'li' }.join(' '), :text => line.gsub('*', '').strip)
+  end
+end
 

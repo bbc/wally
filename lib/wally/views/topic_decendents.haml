@@ -1,0 +1,16 @@
+= haml :topic_link, :locals => { :topic => topic }
+
+- if topic.feature?
+  %ul
+    - get_sorted_scenarios(topic.feature(current_project)).each do |scenario|
+      %li
+        %a{:href => project_scenario_path(current_project, scenario)}
+          &= scenario['name']
+  
+- unless topic.children.empty?
+  %ul
+    - topic.children.sort.each do |topic|
+      %li
+        = haml :topic_decendents, :locals => { :topic => topic }
+        
+

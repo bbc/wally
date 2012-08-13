@@ -14,7 +14,7 @@
       %ul
         - get_sorted_scenarios(@feature).each do |scenario|
           %li
-            %a{:href => get_scenario_url(scenario)}
+            %a{:href => project_scenario_path(current_project, scenario)}
               = scenario["name"]
             - if scenario["tags"]
               = haml :tag_links, {:locals => {:tags => scenario["tags"]}, :layout => false}

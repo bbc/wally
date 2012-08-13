@@ -68,10 +68,6 @@ def authenticated?
   File.exist?(".wally") && params[:authentication_code] == File.read(".wally").strip
 end
 
-def get_scenario_url(scenario)
-  url = "/projects/#{current_project.name}/features/#{scenario["id"].gsub(";", "/scenario/")}"
-end
-
 def get_sorted_scenarios(feature)
   scenarios = []
 
@@ -150,6 +146,11 @@ get '/projects/:project/search/?' do
     @search_results = Wally::SearchFeatures.new(current_project).find(:query => params[:q])
   end
   haml :search
+end
+
+get '/projects/:project/expanded_outline/?' do |project_id|
+  @current_project = Wally::Project.find_by_name(project_id)
+  haml :expanded_outline
 end
 
 get '/projects/:project/features/:feature/scenario/:scenario/?' do
