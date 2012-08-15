@@ -19,8 +19,8 @@ elsif ARGV[0] == "push"
     end
     features << {:path => feature_path, :gherkin => gherkin}
   end
-  RestClient.put "#{ARGV[1]}/features/?authentication_code=#{File.read(".wally")}", features.to_json, {:content_type => :json, :accept => :json}
+  RestClient.put "#{ARGV[1]}/features/?authentication_code=#{File.read(".wally").strip}", features.to_json, {:content_type => :json, :accept => :json}
 elsif ARGV[0] == "destroy"
   require "restclient"
-  RestClient.delete ARGV[1]
+  RestClient.delete "#{ARGV[1]}?authentication_code=#{File.read(".wally").strip}"
 end
