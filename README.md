@@ -35,3 +35,20 @@ Many of the ideas have been borrowed from Matt Wynne's Relish product, but we;
 
 ## Wally?
 If you walk in to a British fish shop and ask for a wally you'll receive a [pickled gherkin](https://github.com/cucumber/cucumber/wiki/Gherkin).
+
+# Heroku
+Add this to a config.ru:
+
+```
+require "wally"
+run Sinatra::Application
+```
+
+Add this to a Gemfile:
+
+```
+source :rubygems
+gem "wally"
+```
+
+Run ```bundle``` in that directory, commit this all to a git repo and push to Heroku!
