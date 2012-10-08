@@ -7,7 +7,7 @@
     - tag_count.each do |tag, count|
     - ratio = (count.to_f / scenario_count) * 100
       %li{:class => "#{tag.downcase.gsub("@", "")}"}
-        %a{:href => "/search?q=#{tag}"}
+        %a{:href => "/projects/#{current_project.name}/search?q=#{tag}"}
           = "#{tag} (#{ratio.ceil}%)"
         %span{:class => "count #{tag}"}
           = ratio.ceil
