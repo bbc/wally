@@ -17,40 +17,6 @@ else
   MongoMapper.database = "wally"
 end
 
-def current_project
-  @current_project ||= Wally::Project.first(:name => params[:project])
-end
-
-def highlighted_search_result_blurb search_result
-  offset = 0
-  highlighted = search_result.object.text.dup
-  span_start = "!!SPAN_START!!"
-  span_end = "!!SPAN_END!!"
-  search_result.matches.each do |match|
-    highlighted.insert(match.index + offset, span_start)
-    offset += span_start.length
-    highlighted.insert(match.index + match.text.length + offset, span_end)
-    offset += span_end.length
-  end
-  highlighted = CGI::escapeHTML(highlighted)
-  highlighted.gsub!(span_start, "<span class=\"search-result\">")
-  highlighted.gsub!(span_end, "</span>")
-  highlighted
-end
-
-def authenticated?
-  if File.exist?(".wally")
-    params[:authentication_code] == File.read(".wally").strip
-  else
-    params[:authentication_code] == ENV['WALLY']
-  end
-end
-
-def get_scenario_url(scenario)
-  url = "/projects/#{current_project.name}/features/#{scenario["id"].gsub(";", "/scenario/")}"
-end
-
-
 put '/projects/:project/features/?' do
   error 403 unless authenticated?
 
@@ -122,4 +88,37 @@ get '/projects/:project/features/:feature/scenario/:scenario/?' do
     end
   end
   haml :scenario
+end
+
+def current_project
+  @current_project ||= Wally::Project.first(:name => params[:project])
+end
+
+def get_scenario_url(scenario)
+  "/projects/#{current_project.name}/features/#{scenario["id"].gsub(";", "/scenario/")}"
+end
+
+def authenticated?
+  if File.exist?(".wally")
+    params[:authentication_code] == File.read(".wally").strip
+  else
+    params[:authentication_code] == ENV['WALLY']
+  end
+end
+
+def highlighted_search_result_blurb search_result
+  offset = 0
+  highlighted = search_result.object.text.dup
+  span_start = "!!SPAN_START!!"
+  span_end = "!!SPAN_END!!"
+  search_result.matches.each do |match|
+    highlighted.insert(match.index + offset, span_start)
+    offset += span_start.length
+    highlighted.insert(match.index + match.text.length + offset, span_end)
+    offset += span_end.length
+  end
+  highlighted = CGI::escapeHTML(highlighted)
+  highlighted.gsub!(span_start, "<span class=\"search-result\">")
+  highlighted.gsub!(span_end, "</span>")
+  highlighted
 end
