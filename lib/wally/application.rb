@@ -1,4 +1,5 @@
 $:.unshift(File.join(File.dirname(__FILE__)))
+
 require "sinatra"
 require "haml"
 require "rdiscount"
@@ -18,24 +19,6 @@ end
 
 def current_project
   @current_project ||= Wally::Project.first(:name => params[:project])
-end
-
-def tag_count
-  return {} if current_project.nil?
-  @tag_count ||= Wally::CountsTags.new(current_project).count_tags
-end
-
-def excessive_wip_tags
-  tag_count["@wip"] >= 10 if tag_count["@wip"]
-end
-
-def scenario_count
-  current_project.features.inject(0) do |count, feature|
-    if feature.gherkin["elements"]
-      count += feature.gherkin["elements"].select { |e| e["type"] == "scenario" }.size
-    end
-    count
-  end
 end
 
 def highlighted_search_result_blurb search_result
@@ -67,19 +50,6 @@ def get_scenario_url(scenario)
   url = "/projects/#{current_project.name}/features/#{scenario["id"].gsub(";", "/scenario/")}"
 end
 
-def get_sorted_scenarios(feature)
-  scenarios = []
-
-  if feature.gherkin["elements"]
-    feature.gherkin["elements"].each do |element|
-      if element["type"] == "scenario" || element["type"] == "scenario_outline"
-        scenarios << element
-      end
-    end
-  end
-  scenarios.sort! { |a, b| a["name"] <=> b["name"] }
-  scenarios
-end
 
 put '/projects/:project/features/?' do
   error 403 unless authenticated?

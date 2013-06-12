@@ -11,7 +11,7 @@
   - if @feature.gherkin["description"]
     %h2 Scenarios
     %ul
-      - get_sorted_scenarios(@feature).each do |scenario|
+      - @feature.sorted_scenarios.each do |scenario|
         %li
           %a{:href => get_scenario_url(scenario)}
             = scenario["name"]

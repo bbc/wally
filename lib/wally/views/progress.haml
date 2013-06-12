@@ -1,8 +1,8 @@
 %h2
   Progress
-- if tag_count
+- if current_project.tag_count
   %p
-    This project has #{scenario_count} scenarios, of which :-
+    This project has #{current_project.scenario_count} scenarios, of which :-
   %ul{:class => 'chartlist'}
     - tag_count.each do |tag, count|
     - ratio = (count.to_f / scenario_count) * 100
