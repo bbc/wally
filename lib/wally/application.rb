@@ -2,13 +2,6 @@ $:.unshift(File.join(File.dirname(__FILE__)))
 require "sinatra"
 require "haml"
 require "rdiscount"
-require "mongo_mapper"
-require "wally/feature"
-require "wally/project"
-require "wally/search_features"
-require "wally/counts_tags"
-require "wally/parses_features"
-require "cgi"
 
 configure do
   set :haml, { :ugly=>true }
