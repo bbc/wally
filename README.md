@@ -41,13 +41,13 @@ Add this to a config.ru:
 
 ```
 require "wally"
-run Sinatra::Application
+run Wally::Application
 ```
 
 Add this to a Gemfile:
 
 ```
-source :rubygems
+source "https://rubygems.org"
 gem "wally"
 ```
 
