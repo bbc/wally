@@ -4,8 +4,8 @@
   %p
     This project has #{current_project.scenario_count} scenarios, of which :-
   %ul{:class => 'chartlist'}
-    - tag_count.each do |tag, count|
-    - ratio = (count.to_f / scenario_count) * 100
+    - current_project.tag_count.each do |tag, count|
+      - ratio = (count.to_f / current_project.scenario_count) * 100
       %li{:class => "#{tag.downcase.gsub("@", "")}"}
         %a{:href => "/projects/#{current_project.name}/search?q=#{tag}"}
           = "#{tag} (#{ratio.ceil}%)"
