@@ -9,7 +9,7 @@ module Wally
     before_save :save_feature_name
 
     def sorted_scenarios
-      gherkin.fetch("elements",[]).inject([]) do |scenarios,element|
+      gherkin.fetch("elements",[]).each_with_object([]) do |element, scenarios|
         if element["type"] == "scenario" || element["type"] == "scenario_outline"
           scenarios << element
         end
