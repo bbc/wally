@@ -41,6 +41,9 @@ def scenario_count
     if feature.gherkin["elements"]
       count += feature.gherkin["elements"].select { |e| e["type"] == "scenario" }.size
     end
+    if feature.gherkin["elements"]
+      count += feature.gherkin["elements"].select { |e| e["type"] == "scenario_outline" }.size
+    end
     count
   end
 end
