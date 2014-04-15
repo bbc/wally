@@ -66,7 +66,11 @@ def highlighted_search_result_blurb search_result
 end
 
 def authenticated?
-  File.exist?(".wally") && params[:authentication_code] == File.read(".wally").strip
+  if File.exist?(".wally")
+    params[:authentication_code] == File.read(".wally").strip
+  else
+    params[:authentication_code] == ENV['WALLY']
+  end
 end
 
 def get_scenario_url(scenario)
