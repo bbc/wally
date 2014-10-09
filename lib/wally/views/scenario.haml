@@ -13,6 +13,17 @@
       %span.step-keyword
         &= step["keyword"]
       = step["name"]
+  %h3 Comments:
+  %p
+    - if @scenario["comments"]
+      - @scenario["comments"].each do |comment|
+        %p
+          %span.step-keyword      
+            %i
+              = comment["value"][1..-1]
+    - else
+      %span.step-keyword      
+        %i No comments.
 - if @scenario["steps"]
   %h3 Steps:
   - @scenario["steps"].each do |step|

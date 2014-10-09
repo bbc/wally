@@ -9,6 +9,15 @@
     :markdown
       #{@feature.gherkin["description"]}
   - if @feature.gherkin["description"]
+    %h2 Comments:
+    %p
+      - if @feature.gherkin["comments"]
+        - @feature.gherkin["comments"].each do |comment|
+          %p
+            %i
+              = comment["value"][1..-1]
+      - else
+        %i No comments.
     %h2 Scenarios
     %ul
       - get_sorted_scenarios(@feature).each do |scenario|
