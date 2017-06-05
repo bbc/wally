@@ -1,0 +1,7 @@
+%h2 Expanded outline
+ 
+%ul.topics
+  - current_project.topics.sort.each do |topic|
+    %li
+      = haml :topic_decendents, :locals => { :topic => topic }
+        

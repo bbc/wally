@@ -11,6 +11,12 @@ end
 
 module Wally
   class ParsesFeatures
+    class << self
+      def parse(text)
+        new.parse(text)
+      end
+    end
+    
     def parse text
       io = StringIO.new
       formatter = Gherkin::Formatter::JSONFormatter.new(io)

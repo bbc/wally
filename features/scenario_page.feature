@@ -64,6 +64,20 @@ Feature: Scenario Page
     And click on a scenario header link
     Then I see the data table
 
+  Scenario: Single cell data table
+    Given a feature file named "sample.feature" with the contents:
+    """
+    Feature: Sample Feature
+
+      Scenario: Data Table
+        Given the following names:
+          | Aidy   |
+          | Andrew |
+    """
+    When I visit the sample feature page
+    And click on a scenario header link
+    Then I see the data table as a list
+    
   Scenario: Scenario Outline
     Given a feature file named "sample.feature" with the contents:
     """
@@ -82,3 +96,31 @@ Feature: Scenario Page
     When I visit the sample feature page
     And click on a scenario header link
     Then I see the examples table
+
+  Scenario: Scenario description
+    Given a feature file named "sample.feature" with the contents:
+    """
+    Feature: Sample feature
+
+      Scenario: Scenario with description
+         Note: Something special
+         
+         Given something
+     """
+    When I visit the "Scenario with description" from "Sample feature"
+    Then I see "Note: Something special"
+ 
+  Scenario: Doc strings
+    Given a feature file named "sample.feature" with the contents:
+    """
+    Feature: Sample feature
+
+      Scenario: Doc string
+        Given the following:
+        \"\"\"
+        contents of scenario docstring
+        \"\"\"
+    """
+    When I visit the "Doc string" from "Sample feature"
+    Then I see "contents of scenario docstring"
+    

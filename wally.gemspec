@@ -27,11 +27,14 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "komainu"
   s.add_runtime_dependency "mongo_mapper"
   s.add_runtime_dependency "bson_ext"
-
+  s.add_runtime_dependency 'archive-tar-minitar'
+  
   s.add_development_dependency "cucumber"
   s.add_development_dependency "capybara"
   s.add_development_dependency "rspec"
   s.add_development_dependency "fakefs"
   s.add_development_dependency "launchy"
   s.add_development_dependency "pry"
+  s.add_development_dependency 'aruba'
+  s.add_development_dependency 'wally-client'
 end

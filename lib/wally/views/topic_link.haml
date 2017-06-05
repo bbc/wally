@@ -1,0 +1,3 @@
+
+- href = topic.feature? ? project_feature_path(current_project, topic.feature(current_project)) : project_topic_path(current_project, topic)
+%a{ :href => href }= topic.name

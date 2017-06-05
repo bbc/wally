@@ -1,30 +1,32 @@
 $:.unshift(File.join(File.dirname(__FILE__)))
-require "sinatra"
-require "haml"
-require "rdiscount"
-require "mongo_mapper"
-require "wally/feature"
-require "wally/project"
-require "wally/search_features"
-require "wally/counts_tags"
-require "wally/parses_features"
-require "cgi"
+require 'sinatra'
+require 'haml'
+require 'rdiscount'
+require 'mongo_mapper'
+require 'wally/feature'
+require 'wally/project'
+require 'wally/search_features'
+require 'wally/counts_tags'
+require 'wally/projects_service'
+require 'cgi'
+require 'wally/url_helpers'
+require 'wally/config'
 
 configure do
   set :haml, { :ugly=>true }
 end
 
-if ENV['MONGOHQ_URL']
-  uri = URI.parse(ENV['MONGOHQ_URL'])
-  MongoMapper.connection = Mongo::Connection.from_uri(ENV['MONGOHQ_URL'])
-  MongoMapper.database = uri.path.gsub(/^\//, '')
-else
-  MongoMapper.connection = Mongo::Connection.new('localhost')
-  MongoMapper.database = "wally"
-end
+config_file = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'config', 'wally.yml'))
+puts "using config file #{config_file}"
+Wally::Config.configure(YAML.load(File.read(config_file)))
+
+MongoMapper.connection = Mongo::Connection.from_uri(Wally::Config.mongo_url)
+MongoMapper.database = Wally::Config.mongo_database
+
+include Wally::UrlHelpers
 
 def current_project
-  @current_project ||= Wally::Project.first(:name => params[:project])
+  @current_project ||= Wally::Project.find_by_name(params[:project])
 end
 
 def tag_count
@@ -69,10 +71,6 @@ def authenticated?
   File.exist?(".wally") && params[:authentication_code] == File.read(".wally").strip
 end
 
-def get_scenario_url(scenario)
-  url = "/projects/#{current_project.name}/features/#{scenario["id"].gsub(";", "/scenario/")}"
-end
-
 def get_sorted_scenarios(feature)
   scenarios = []
 
@@ -87,17 +85,28 @@ def get_sorted_scenarios(feature)
   scenarios
 end
 
-put '/projects/:project/features/?' do
-  error 403 unless authenticated?
-
-  current_project.delete if current_project
-  project = Wally::Project.create(:name => params[:project])
-
-  JSON.parse(request.body.read).each do |json|
-    project.features << Wally::Feature.new(:path => json["path"], :gherkin => json["gherkin"])
+post '/projects/:name' do |name|
+  if Wally::Project.find_by_name(name)
+    halt 409
   end
+  Wally::Project.create(:name => name)
+end
+
+post '/projects/:name/pushes' do |name| 
+  unless (project = Wally::Project.find_by_name(name))
+    error 404
+  end
+  
+  projects_service.tar_gz_push(project, request.body)
   project.save
-  halt 201
+  
+  201
+end
+
+get '/projects/:project_id/topics/:topic_id' do |project_id, topic_id|
+  @current_project = Wally::Project.find_by_name(project_id)
+  @topic = @current_project.topic(topic_id)
+  haml :topic
 end
 
 get '/?' do
@@ -119,10 +128,9 @@ get '/projects/:project/?' do
 end
 
 delete '/projects/:project' do
-  error 403 unless authenticated?
-  project = Wally::Project.first(:name => params[:project])
-  project.destroy
-  halt 201
+  if (project = Wally::Project.find_by_name(params[:project]))
+    project.destroy
+  end
 end
 
 get '/projects/:project/features/:feature/?' do
@@ -143,6 +151,11 @@ get '/projects/:project/search/?' do
   haml :search
 end
 
+get '/projects/:project/expanded_outline/?' do |project_id|
+  @current_project = Wally::Project.find_by_name(project_id)
+  haml :expanded_outline
+end
+
 get '/projects/:project/features/:feature/scenario/:scenario/?' do
   current_project.features.each do |feature|
     if feature.gherkin["id"] == params[:feature]
@@ -158,4 +171,8 @@ get '/projects/:project/features/:feature/scenario/:scenario/?' do
     end
   end
   haml :scenario
+end
+
+def projects_service
+  Wally::ProjectsService
 end

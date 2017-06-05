@@ -1,19 +1,20 @@
-%h2
-  = @feature.gherkin["name"]
-%p
-  from
-  %em
-    = @feature.path
-%section{:class=>"scenarios"}
-  %section{:class => 'feature'}
-    :markdown
-      #{@feature.gherkin["description"]}
-  - if @feature.gherkin["description"]
-    %h2 Scenarios
-    %ul
-      - get_sorted_scenarios(@feature).each do |scenario|
-        %li
-          %a{:href => get_scenario_url(scenario)}
-            = scenario["name"]
-          - if scenario["tags"]
-            = haml :tag_links, {:locals => {:tags => scenario["tags"]}, :layout => false}
+%section.feature
+  %h2
+    = @feature.gherkin["name"]
+  %p
+    from
+    %em
+      = @feature.path
+  %section{:class=>"scenarios"}
+    %section{:class => 'feature'}
+      :markdown
+        #{@feature.gherkin["description"]}
+    - if @feature.gherkin["description"]
+      %h2 Scenarios
+      %ul
+        - get_sorted_scenarios(@feature).each do |scenario|
+          %li
+            %a{:href => project_scenario_path(current_project, scenario)}
+              = scenario["name"]
+            - if scenario["tags"]
+              = haml :tag_links, {:locals => {:tags => scenario["tags"]}, :layout => false}

@@ -1,0 +1,14 @@
+%section.topic
+  %h2
+    = @topic.label
+    
+  = haml :sub_topics
+      
+  %hr
+    
+  - if @topic.markdown
+    = markdown @topic.markdown
+    
+  %hr
+    
+  = haml :sub_topics

@@ -11,8 +11,22 @@ When /^I visit the sample feature page$/ do
   visit "/projects/project/features/sample-feature"
 end
 
+When /^I visit the "(.*?)" from "(.*?)"$/ do |scenario, feature|
+  visit '/projects/project/'
+  click_link(feature)
+  click_link(scenario)
+end
+
+When /^I follow "(.*?)"$/ do |link|
+  click_link(link)
+end
+
 When /^I select "([^"]*)"$/ do |text|
   click_link text
+end
+
+Then /^I see a "(.*?)" link$/ do |link|
+  page.should have_link(link)
 end
 
 Then /^I see a link to "([^"]*)" with the url "([^"]*)"$/ do |text, url|
@@ -31,5 +45,16 @@ Then /^I see each tag has an individual colour$/ do
  find('a.tag-tag1').should be_visible
  find('a.tag-tag2').should be_visible
  find('a.tag-tag3').should be_visible
+end
+
+Then /^I see a HTML page heading with "(.*?)"$/ do |text|
+  find('h1, h2, h3', :text => /#{text}/)
+end
+
+Then /^I see the following outline:$/ do |outline|
+  outline.each_line do |line|
+    indents = line.scan('*')
+    page.should have_css(indents.map { |i| 'li' }.join(' '), :text => line.gsub('*', '').strip)
+  end
 end
 

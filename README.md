@@ -21,17 +21,17 @@ Many of the ideas have been borrowed from Matt Wynne's Relish product, but we;
 ## Installation
 * Install [mongodb](http://www.mongodb.org/display/DOCS/Quickstart "mongodb") and ensure it is running  (e.g. '~ $ ./mongodb-xxxxx-xxxx-x.x.x/bin/mongod')
 * ```gem install wally```
-* you might also want mongo_mapper (```gem install mongo_mapper```)
 
 ## Usage
-* create a '.wally' file and enter any authentication text you like (```echo myPassword > .wally```)
 * run wally server, in the same dir that you put the .wally file (```wally server```)
 * check [http://localhost:4567/](http://localhost:4567/)
-* import your features (from local dir) ```wally push http://localhost:4567/projects/<project-name> <feature-dir>```
-
-## Deleting projects
-```wally destroy http://localhost:4567/projects/<project-name>```
-
+* add projects and import features using the wally-client gem 
+  	 ex.
+	   $ gem install wally-client
+	   $ wally-client add_project <project_name>
+	   $ wally-client push <project-name> <feature-dir>
+	
+  See wally-client help for for more (```wally-client --help```)
 
 ## Wally?
 If you walk in to a British fish shop and ask for a wally you'll receive a [pickled gherkin](https://github.com/cucumber/cucumber/wiki/Gherkin).
