@@ -11,8 +11,6 @@ Gem::Specification.new do |s|
   s.summary     = %q{Cucumber feature viewer and navigator}
   s.description = %q{Cucumber feature viewer and navigator}
 
-  s.rubyforge_project = "wally"
-
   s.files         = `git ls-files`.split("\n")
   s.files << "README.md"
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
